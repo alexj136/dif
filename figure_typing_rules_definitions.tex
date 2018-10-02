@@ -1,0 +1,17 @@
+\[\begin{array}{c}
+    \RULE{Typ-I} \quad \TJT{\Gamma}{\DEF{A}{S}}{\TDEC{A}{S}{S}} \qquad
+
+    \RULE{Fld-I} \quad \inference{
+        \TJT{\Gamma}{t}{S}
+    }{
+        \TJT{\Gamma}{\DEF{a}{t}}{\FDEC{a}{S}}
+    } \\[4mm]
+
+    \RULE{AndDef-I} \quad \inference{
+        \TJT{\Gamma}{d_1}{S_1} \quad
+        \TJT{\Gamma}{d_2}{S_2} \quad
+        \DOM{d_1} \cap \DOM{d_2} = \o
+    }{
+        \TJT{\Gamma}{\AGG{d_1}{d_2}}{\AGG{S_1}{S_2}}
+    }
+\end{array}\]

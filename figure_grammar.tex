@@ -1,0 +1,34 @@
+\begin{minipage}[t]{.5\textwidth}\[\begin{array}{r c l l}
+    \multicolumn{4}{l}{\textsc{Terms}}                        \\
+    t & ::= & x.a             & \textit{Selection           } \\
+      &  |  & x               & \textit{Variable            } \\
+      &  |  & x\ y            & \textit{Application         } \\
+      &  |  & \LET{x}{t}{t'}  & \textit{Let-binding         } \\
+      &  |  & \OBJ{x}{S}{d}   & \textit{Object              } \\
+      &  |  & \ABS{x}{S}{t}   & \textit{Abstraction         } \\[3mm]
+    \multicolumn{4}{l}{\textsc{Types}}                        \\
+    S & ::= & \FDEC{a}{S}     & \textit{Field Declaration   } \\
+      &  |  & \AGG{S}{S'}     & \textit{Intersection        } \\
+      &  |  & \REC{x}{S}      & \textit{Recursive type      } \\
+      &  |  & \top            & \textit{Top                 } \\
+      &  |  & \bot            & \textit{Bottom              } \\
+      &  |  & \TDEC{A}{S}{S'} & \textit{Field Declaration   } \\
+      &  |  & x.A             & \textit{Type Projection     } \\
+      &  |  & \DFUN{x}{S}{S'} & \textit{Dependent Function  } \\[3mm]
+\end{array}\]\end{minipage}
+\begin{minipage}[t]{.4\textwidth}\[\begin{array}{r c l l}
+    \multicolumn{4}{l}{\textsc{Definitions}}                  \\
+    d & ::= & \DEF{A}{S}      & \textit{Type Definition     } \\
+      &  |  & \DEF{a}{t}      & \textit{Field Definition    } \\
+      &  |  & \AGG{d}{d'}     & \textit{Aggregate Definition} \\[3mm]
+    \multicolumn{4}{l}{\textsc{Values}} \\
+    v & ::= & \multicolumn{2}{l}{\OBJ{x}{S}{d}
+        \quad | \quad \ABS{x}{S}{t}} \\[3mm]
+    \multicolumn{4}{l}{\textsc{Contexts}} \\
+    e & ::= & \multicolumn{2}{l}{\HOL
+        \quad | \quad \LET{x}{\HOL}{t}
+        \quad | \quad \LET{x}{v}{e}} \\[3mm]
+    \multicolumn{4}{l}{\textsc{Variables   } \quad x, y, ...} \\[3mm]
+    \multicolumn{4}{l}{\textsc{Term Members} \quad a, b, ...} \\[3mm]
+    \multicolumn{4}{l}{\textsc{Type Members} \quad A, B, ...} \\[3mm]
+\end{array}\]\end{minipage}

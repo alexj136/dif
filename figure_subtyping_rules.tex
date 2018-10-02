@@ -1,0 +1,57 @@
+\[\begin{array}{c}
+    \RULE{Top} \quad \SJT{\Gamma}{S}{\top} \qquad
+
+    \RULE{Bot} \quad \SJT{\Gamma}{\bot}{S} \qquad
+
+    \RULE{Refl} \quad \SJT{\Gamma}{S}{S} \\[4mm]
+
+    \RULE{Trans} \quad \inference{
+        \SJT{\Gamma}{S}{U} \quad
+        \SJT{\Gamma}{U}{R}
+    }{
+        \SJT{\Gamma}{S}{R}
+    } \qquad
+
+    \RULE{<:-And} \quad \inference{
+        \SJT{\Gamma}{S}{U} \quad
+        \SJT{\Gamma}{S}{R}
+    }{
+        \SJT{\Gamma}{S}{\AGG{U}{R}}
+    } \\[4mm]
+
+    \RULE{<:-Sel} \quad \inference{
+        \TJT{\Gamma}{x}{\TDEC{A}{S}{U}}
+    }{
+        \SJT{\Gamma}{S}{x.A}
+    } \qquad
+
+    \RULE{Sel-<:} \quad \inference{
+        \TJT{\Gamma}{x}{\TDEC{A}{S}{U}}
+    }{
+        \SJT{\Gamma}{x.A}{U}
+    } \\[4mm]
+
+    \RULE{All-<:-All} \quad \inference{
+        \SJT{\Gamma}{S_2}{S_1} \quad
+        \SJT{\Gamma, x: S_2}{U_1}{U_2}
+    }{
+        \SJT{\Gamma}{\DFUN{x}{S_1}{U_1}}{\DFUN{x}{S_2}{U_2}}
+    } \\[4mm]
+
+    \RULE{Typ-<:-Typ} \quad \inference{
+        \SJT{\Gamma}{S_2}{S_1} \quad
+        \SJT{\Gamma}{U_1}{U_2} \quad
+    }{
+        \SJT{\Gamma}{\TDEC{A}{S_1}{U_1}}{\TDEC{A}{S_2}{U_2}}
+    } \\[4mm]
+
+    \RULE{And$_1$-<:} \quad \SJT{\Gamma}{\AGG{S}{U}}{S} \qquad
+
+    \RULE{And$_2$-<:} \quad \SJT{\Gamma}{\AGG{S}{U}}{U} \\[4mm]
+
+    \RULE{Fld-<:-Fld} \quad \inference{
+        \SJT{\Gamma}{S}{U}
+    }{
+        \SJT{\Gamma}{\FDEC{a}{S}}{\FDEC{a}{U}}
+    }
+\end{array}\]

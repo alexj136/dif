@@ -1,0 +1,26 @@
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{amsmath}
+\interdisplaylinepenalty=2500
+\usepackage{amssymb}
+\usepackage{amsthm} % theorem & proof environments
+\usepackage{stmaryrd} % \llbracket and \rrbracket in math mode
+\usepackage{mathrsfs} % for mathscr
+\usepackage{semantic} % for \inference
+\usepackage{units} % for \nicefrac and therefore \SUB
+\usepackage{mathtools} % for \mathclap and therefore \EQDEF
+\usepackage{scalerel} % for \scaleobj
+\usepackage{latexsym} % for prettier \leadsto
+\usepackage{xcolor} % for \colour to work
+\usepackage{multirow} % for \multirow
+\usepackage[hidelinks]{hyperref} % for \url, but without highlights
+
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{--}
+\renewcommand{\labelitemiii}{--}
+\renewcommand{\labelitemiv}{--}
+
+\theoremstyle{definition}
+\newtheorem{THEOREM}{\textsc{Theorem}}
+\newtheorem*{THMNONU}{\textsc{Theorem}}
+\newtheorem{LEMMA}{\textsc{Lemma}}
+\newtheorem{DEFINITION}{\textsc{Definition}}

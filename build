@@ -1,0 +1,16 @@
+#!/bin/bash
+case $@ in
+
+    "")         pdflatex -halt-on-error main.tex &&
+                bibtex main &&
+                pdflatex -halt-on-error main.tex &&
+                pdflatex -halt-on-error main.tex ;;
+
+    "clean")    rm -f *.aux *.log *.bbl *.blg *.pdf *.out ;;
+
+    "watch")    ls *.tex *.dot references.bib | entr ./build
+                reset ;;
+
+    *)          echo "Error. Usage: ./build [ watch | clean ]?"
+
+esac

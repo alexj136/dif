@@ -1,0 +1,63 @@
+\[\begin{array}{c}
+    \RULE{Var} \quad \TJT{\Gamma, x: S, \Gamma'}{x}{S} \qquad
+
+    \RULE{Sub} \quad \inference{
+        \TJT{\Gamma}{t}{S} \quad
+        \SJT{\Gamma}{S}{S'}
+    }{
+        \TJT{\Gamma}{t}{S'}
+    } \\[4mm]
+
+    \RULE{All-I} \quad \inference{
+        \TJT{\Gamma, x: S}{t}{U} \quad
+        x \notin \FV{S}
+    }{
+        \TJT{\Gamma}{\ABS{x}{S}{t}}{\DFUN{x}{S}{U}}
+    } \qquad
+
+    \RULE{All-E} \quad \inference{
+        \TJT{\Gamma}{x}{\DFUN{z}{S}{U}} \quad
+        \TJT{\Gamma}{y}{S}
+    }{
+        \TJT{\Gamma}{x\ y}{\SUB{z}{y}U}
+    } \\[4mm]
+
+    \RULE{Let} \quad \inference{
+        \TJT{\Gamma}{t}{S} \quad
+        \TJT{\Gamma, x: S}{u}{U} \quad
+        x \notin \FV{U}
+    }{
+        \TJT{\Gamma}{\LET{x}{t}{u}}{U}
+    } \qquad
+
+    \RULE{And-I} \quad \inference{
+        \TJT{\Gamma}{x}{S} \quad
+        \TJT{\Gamma}{x}{U}
+    }{
+        \TJT{\Gamma}{x}{\AGG{S}{U}}
+    } \\[4mm]
+
+    \RULE{\{\}-I} \quad \inference{
+        \TJT{\Gamma, x: S}{d}{S}
+    }{
+        \TJT{\Gamma}{\OBJ{x}{S}{d}}{\REC{x}{S}}
+    } \qquad
+
+    \RULE{Fld-E} \quad \inference{
+        \TJT{\Gamma}{x}{\FDEC{a}{S}}
+    }{
+        \TJT{\Gamma}{x.a}{S}
+    } \\[4mm]
+
+    \RULE{Rec-I} \quad \inference{
+        \TJT{\Gamma}{x}{S}
+    }{
+        \TJT{\Gamma}{x}{\REC{x}{S}}
+    } \qquad
+
+    \RULE{Rec-E} \quad \inference{
+        \TJT{\Gamma}{x}{\REC{x}{S}}
+    }{
+        \TJT{\Gamma}{x}{S}
+    }
+\end{array}\]
