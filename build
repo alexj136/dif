@@ -4,7 +4,8 @@ case $@ in
     "")         pdflatex -halt-on-error main.tex &&
                 bibtex main &&
                 pdflatex -halt-on-error main.tex &&
-                pdflatex -halt-on-error main.tex ;;
+                pdflatex -halt-on-error main.tex &&
+                pdflatex -halt-on-error all_figures.tex ;;
 
     "clean")    rm -f *.aux *.log *.bbl *.blg *.pdf *.out ;;
 
