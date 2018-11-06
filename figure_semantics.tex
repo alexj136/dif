@@ -1,10 +1,10 @@
 \[\begin{array}{c}
     \LET{x}{v}{\CTX{e}{x.a}} \rightarrow \LET{x}{v}{\CTX{e}{t}}
         \IF v = \OBJ{x}{S}{...\DEF{a}{t}...} \\[2mm]
-    \LET{x}{v}{\CTX{e}{x y}} \rightarrow \LET{x}{v}{\CTX{e}{\SUB{z}{y}t}}
+    \LET{x_1}{v}{\CTX{e}{x_1\ x_2}} \rightarrow \LET{x_1}{v}{\CTX{e}{\SUB{z}{x_2}t}}
         \IF v = \ABS{z}{S}{t} \\[2mm]
-    \LET{x}{y}{t} \rightarrow \SUB{x}{y}{t} \\[2mm]
-    \LET{x}{\LET{y}{t}{u}}{v} \rightarrow \LET{y}{t}{\LET{x}{u}{v}}
-        \IF y \notin \FN{v} \\[2mm]
+    \LET{x_1}{x_2}{t} \rightarrow \SUB{x_1}{x_2}{t} \\[2mm]
+    \LET{x_1}{\LET{x_2}{t}{u}}{v} \rightarrow \LET{x_2}{t}{\LET{x_1}{u}{v}}
+        \IF x_2 \notin \FN{v} \\[2mm]
     \CTX{e}{t} \rightarrow \CTX{e}{u} \IF t \rightarrow u
 \end{array}\]

@@ -2,7 +2,7 @@
     \multicolumn{4}{l}{\textsc{Terms}}                        \\
     t & ::= & x.a             & \textit{Selection           } \\
       &  |  & x               & \textit{Variable            } \\
-      &  |  & x\ y            & \textit{Application         } \\
+      &  |  & x_1\ x_2        & \textit{Application         } \\
       &  |  & \LET{x}{t}{t'}  & \textit{Let-binding         } \\
       &  |  & \OBJ{x}{S}{d}   & \textit{Object              } \\
       &  |  & \ABS{x}{S}{t}   & \textit{Abstraction         } \\[3mm]
@@ -28,7 +28,11 @@
     e & ::= & \multicolumn{2}{l}{\HOL
         \quad | \quad \LET{x}{\HOL}{t}
         \quad | \quad \LET{x}{v}{e}} \\[3mm]
-    \multicolumn{4}{l}{\textsc{Variables   } \quad x, y, ...} \\[3mm]
-    \multicolumn{4}{l}{\textsc{Term Members} \quad a, b, ...} \\[3mm]
-    \multicolumn{4}{l}{\textsc{Type Members} \quad A, B, ...} \\[3mm]
+    \multicolumn{4}{l}{\textsc{Variables}} \\
+    x & ::= & \multicolumn{2}{l}{\IMP
+        \quad | \quad y} \\[3mm]
+    \multicolumn{4}{l}{\textsc{Explicit Variables} \quad y, y_1, y_2, ...} \\[3mm]
+    \multicolumn{4}{l}{\textsc{Implicit Variable } \quad \IMP     } \\[3mm]
+    \multicolumn{4}{l}{\textsc{Term Members      } \quad a, b, ...} \\[3mm]
+    \multicolumn{4}{l}{\textsc{Type Members      } \quad A, B, ...} \\[3mm]
 \end{array}\]\end{minipage}

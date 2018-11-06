@@ -16,10 +16,10 @@
     } \qquad
 
     \RULE{All-E} \quad \inference{
-        \TJT{\Gamma}{x}{\DFUN{z}{S}{U}} \quad
-        \TJT{\Gamma}{y}{S}
+        \TJT{\Gamma}{x_1}{\DFUN{z}{S}{U}} \quad
+        \TJT{\Gamma}{x_2}{S}
     }{
-        \TJT{\Gamma}{x\ y}{\SUB{z}{y}U}
+        \TJT{\Gamma}{x_1\ x_2}{\SUB{z}{x_2}U}
     } \\[4mm]
 
     \RULE{Let} \quad \inference{
