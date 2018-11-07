@@ -1,5 +1,7 @@
 \[\begin{array}{c}
-    \RULE{Var} \quad \TJT{\Gamma, x: S, \Gamma'}{x}{S} \qquad
+    \RULE{Var-Ex} \quad \TJ{\Gamma, p: S, \Gamma'}{p}{S}{p} \qquad
+
+    \RULE{Var-Im} \quad \TJ{\Gamma, i: S, \Gamma'}{\IMP}{S}{i} \\[4mm]
 
     \RULE{Sub} \quad \inference{
         \TJT{\Gamma}{t}{S} \quad
@@ -16,10 +18,10 @@
     } \qquad
 
     \RULE{All-E} \quad \inference{
-        \TJT{\Gamma}{x_1}{\DFUN{z}{S}{U}} \quad
-        \TJT{\Gamma}{x_2}{S}
+        \TJT{\Gamma}{x}{\DFUN{z}{S}{U}} \quad
+        \TJT{\Gamma}{y}{S}
     }{
-        \TJT{\Gamma}{x_1\ x_2}{\SUB{z}{x_2}U}
+        \TJT{\Gamma}{x\ y}{\SUB{z}{y}U}
     } \\[4mm]
 
     \RULE{Let} \quad \inference{
