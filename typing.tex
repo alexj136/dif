@@ -3,6 +3,32 @@ Figure \ref{typing_rules_terms} gives the typing rules for DIF terms, figure
 \ref{typing_rules_definitions} gives the typing rules for DIF definitions, and
 figure \ref{subtyping_rules} the subtyping rules for DIF.
 
+\subsection{Translation of Types}
+
+\begin{DEFINITION}[Translation of types]
+    \label{TransTy}
+    \begin{align*}
+        \TRANS{a} \                     &= \ a
+            & \TRANS{\REC{x}{S}}        &= \REC{x}{\TRANS{S}}\RED{???}
+            & \TRANS{\TDEC{A}{S}{S'}}   &= \TDEC{A}{\TRANS{S}}{\TRANS{S'}} \\
+        \TRANS{\FDEC{a}{S}}             &= \FDEC{a}{\TRANS{S}}
+            & \TRANS{\top}              &= \top
+            & \TRANS{(x.A)}             &= x.\TRANS{A}                     \\
+        \TRANS{(\AGG{S}{S'})}           &= \AGG{\TRANS{S}}{\TRANS{S'}}
+            & \TRANS{\bot}              &= \bot
+            & \TRANS{(\DFUN{x}{S}{S'})} &= \DFUN{x}{\TRANS{S}}{\TRANS{S'}}
+                \RED{???} \\
+    \end{align*}
+\end{DEFINITION}
+
+\subsection{Typing rules}
+
+\begin{figure}[h]
+    \input{figure_binding_rules}
+    \caption{Binding rules for DIF terms}
+    \label{binding_rules}
+\end{figure}
+
 \begin{figure}[h]
     \input{figure_typing_rules_terms}
     \caption{Typing and translation rules for DIF terms}

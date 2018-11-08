@@ -4,17 +4,18 @@
     \RULE{Var-Im} \quad \TJ{\Gamma, i: S, \Gamma'}{\IMP}{S}{i} \\[4mm]
 
     \RULE{Sub} \quad \inference{
-        \TJT{\Gamma}{t}{S} \quad
+        \TJ{\Gamma}{t}{S}{\HAT{t}} \quad
         \SJT{\Gamma}{S}{S'}
     }{
-        \TJT{\Gamma}{t}{S'}
+        \TJ{\Gamma}{t}{S'}{\HAT{t}}
     } \\[4mm]
 
     \RULE{All-I} \quad \inference{
-        \TJT{\Gamma, x: S}{t}{U} \quad
-        x \notin \FV{S}
+        x \leadsto u \quad
+        \TJ{\Gamma, u: S}{t}{U}{\HAT{t}} \quad
+        \{x, u\} \cap \FV{S} = \o
     }{
-        \TJT{\Gamma}{\ABS{x}{S}{t}}{\DFUN{x}{S}{U}}
+        \TJ{\Gamma}{\ABS{x}{S}{t}}{\DFUN{x}{S}{U}}{\ABS{u}{S}{\HAT{t}}}\RED{???}
     } \qquad
 
     \RULE{All-E} \quad \inference{
