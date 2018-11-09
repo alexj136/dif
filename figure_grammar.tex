@@ -1,20 +1,21 @@
 \begin{minipage}[t]{.5\textwidth}\[\begin{array}{r c l l}
-    \multicolumn{4}{l}{\textsc{Terms}}                        \\
-    t & ::= & x.a             & \textit{Selection           } \\
-      &  |  & x               & \textit{Variable            } \\
-      &  |  & x\ y            & \textit{Application         } \\
-      &  |  & \LET{x}{t}{t'}  & \textit{Let-binding         } \\
-      &  |  & \OBJ{x}{S}{d}   & \textit{Object              } \\
-      &  |  & \ABS{x}{S}{t}   & \textit{Abstraction         } \\[3mm]
-    \multicolumn{4}{l}{\textsc{Types}}                        \\
-    S & ::= & \FDEC{a}{S}     & \textit{Field Declaration   } \\
-      &  |  & \AGG{S}{S'}     & \textit{Intersection        } \\
-      &  |  & \REC{u}{S}      & \textit{Recursive type      } \\
-      &  |  & \top            & \textit{Top                 } \\
-      &  |  & \bot            & \textit{Bottom              } \\
-      &  |  & \TDEC{A}{S}{S'} & \textit{Field Declaration   } \\
-      &  |  & u.A             & \textit{Type Projection     } \\
-      &  |  & \DFUN{u}{S}{S'} & \textit{Dependent Function  } \\[3mm]
+    \multicolumn{4}{l}{\textsc{Terms}}                      \\
+    t & ::= & x.a             & \textit{Selection         } \\
+      &  |  & x               & \textit{Variable          } \\
+      &  |  & x\ y            & \textit{Application       } \\
+      &  |  & \LET{x}{t}{t'}  & \textit{Let-binding       } \\
+      &  |  & \OBJ{x}{S}{d}   & \textit{Object            } \\
+      &  |  & \ABS{x}{S}{t}   & \textit{Abstraction       } \\[3mm]
+    \multicolumn{4}{l}{\textsc{Types}}                      \\
+    S & ::= & \FDEC{a}{S}     & \textit{Field Declaration } \\
+      &  |  & \AGG{S}{S'}     & \textit{Intersection      } \\
+      &  |  & \REC{u}{S}      & \textit{Recursive type    } \\
+      &  |  & \top            & \textit{Top               } \\
+      &  |  & \bot            & \textit{Bottom            } \\
+      &  |  & \TDEC{A}{S}{S'} & \textit{Field Declaration } \\
+      &  |  & u.A             & \textit{Type Projection   } \\
+      &  |  & \DFUN{u}{S}{S'} & \textit{Dependent Function} \\
+      &  |  & \IFUN{u}{S}{S'} & \textit{Implicit Function } \\[3mm]
     \multicolumn{4}{l}{\textsc{Values}} \\
     v & ::= & \multicolumn{2}{l}{\OBJ{x}{S}{d}
         \quad | \quad \ABS{x}{S}{t}} \\[3mm]

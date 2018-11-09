@@ -10,15 +10,15 @@
         \TJ{\Gamma}{t}{S'}{\HAT{t}}
     } \\[4mm]
 
-    \RULE{All-I} \quad \inference{
+    \RULE{All-Ex-I} \quad \inference{
         x \leadsto u \quad
         \TJ{\Gamma, u: S}{t}{U}{\HAT{t}} \quad
         \{x, u\} \cap \FV{S} = \o
     }{
         \TJ{\Gamma}{\ABS{x}{S}{t}}{\DFUN{u}{S}{U}}{\ABS{u}{S}{\HAT{t}}}
-    } \qquad
+    } \\[4mm]
 
-    \RULE{All-E} \quad \inference{
+    \RULE{All-Ex-E} \quad \inference{
         \TJ{\Gamma}{x}{\DFUN{u}{S}{U}}{\HAT{x}} \quad
         \TJ{\Gamma}{y}{S}{\HAT{y}}
     }{
@@ -32,7 +32,7 @@
         x \notin \FV{U}
     }{
         \TJ{\Gamma}{\LET{x}{t}{t'}}{U}{\LET{u}{\HAT{t}}{\HAT{t'}}}
-    } \qquad
+    } \\[4mm]
 
     \RULE{And-I} \quad \inference{
         \TJ{\Gamma}{x}{S}{\HAT{x}} \quad
@@ -64,5 +64,20 @@
         \TJ{\Gamma}{x}{\REC{x}{S}}{\HAT{x}}
     }{
         \TJ{\Gamma}{x}{S}{\HAT{x}}
+    } \\[4mm]
+
+    \RULE{All-Im-I} \quad \inference{
+        u\ \text{fresh} \quad
+        \TJ{\Gamma, u: S}{t}{U}{\HAT{t}} \quad
+        u \notin \FV{S}
+    }{
+        \TJ{\Gamma}{t}{\IFUN{u}{S}{U}}{\ABS{u}{S}{\HAT{t}}}
+    } \\[4mm]
+
+    \RULE{All-Im-E} \quad \inference{
+        \TJ{\Gamma}{x}{\IFUN{u}{S}{U}}{\HAT{x}} \quad
+        \TJ{\Gamma}{\IMP}{S}{v}
+    }{
+        \TJ{\Gamma}{x}{\SUB{u}{v}U}{\HAT{x}\ v}
     }
 \end{array}\]

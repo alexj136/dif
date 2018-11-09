@@ -1,0 +1,12 @@
+\begin{align*}
+    \TRANS{a} \                     &= \ a
+        & \TRANS{\REC{u}{S}}        &= \REC{u}{\TRANS{S}}
+        & \TRANS{\TDEC{A}{S}{S'}}   &= \TDEC{A}{\TRANS{S}}{\TRANS{S'}} \\
+    \TRANS{\FDEC{a}{S}}             &= \FDEC{a}{\TRANS{S}}
+        & \TRANS{\top}              &= \top
+        & \TRANS{(u.A)}             &= u.\TRANS{A}                     \\
+    \TRANS{(\AGG{S}{S'})}           &= \AGG{\TRANS{S}}{\TRANS{S'}}
+        & \TRANS{\bot}              &= \bot
+        & \TRANS{(\DFUN{u}{S}{S'})} &= \DFUN{u}{\TRANS{S}}{\TRANS{S'}} \\
+    & & & & \TRANS{(\IFUN{u}{S}{S'})} &= \DFUN{u}{\TRANS{S}}{\TRANS{S'}} \\
+\end{align*}
