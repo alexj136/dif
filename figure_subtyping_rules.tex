@@ -31,7 +31,7 @@
         \SJT{\Gamma}{x.A}{U}
     } \\[4mm]
 
-    \RULE{All-<:-All} \quad \inference{
+    \RULE{All-<:-All-Ex} \quad \inference{
         \SJT{\Gamma}{S_2}{S_1} \quad
         \SJT{\Gamma, x: S_2}{U_1}{U_2}
     }{
@@ -53,5 +53,12 @@
         \SJT{\Gamma}{S}{U}
     }{
         \SJT{\Gamma}{\FDEC{a}{S}}{\FDEC{a}{U}}
+    } \\[4mm]
+
+    \RULE{All-<:-All-Im} \quad \inference{
+        \SJT{\Gamma}{S_2}{S_1} \quad
+        \SJT{\Gamma, x: S_2}{U_1}{U_2}
+    }{
+        \SJT{\Gamma}{\IFUN{x}{S_1}{U_1}}{\IFUN{x}{S_2}{U_2}}
     }
 \end{array}\]
