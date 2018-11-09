@@ -19,48 +19,50 @@
     } \qquad
 
     \RULE{All-E} \quad \inference{
-        \TJT{\Gamma}{x}{\DFUN{z}{S}{U}} \quad
-        \TJT{\Gamma}{y}{S}
+        \TJ{\Gamma}{x}{\DFUN{u}{S}{U}}{\HAT{x}} \quad
+        \TJ{\Gamma}{y}{S}{\HAT{y}}
     }{
-        \TJT{\Gamma}{x\ y}{\SUB{z}{y}U}
+        \TJ{\Gamma}{x\ y}{\SUB{u}{y}U}{\HAT{x}\ \HAT{y}}
     } \\[4mm]
 
     \RULE{Let} \quad \inference{
-        \TJT{\Gamma}{t}{S} \quad
-        \TJT{\Gamma, x: S}{u}{U} \quad
+        x \leadsto u \quad
+        \TJ{\Gamma}{t}{S}{\HAT{t}} \quad
+        \TJ{\Gamma, u: S}{t'}{U}{\HAT{t'}} \quad
         x \notin \FV{U}
     }{
-        \TJT{\Gamma}{\LET{x}{t}{u}}{U}
+        \TJ{\Gamma}{\LET{x}{t}{t'}}{U}{\LET{u}{\HAT{t}}{\HAT{t'}}}
     } \qquad
 
     \RULE{And-I} \quad \inference{
-        \TJT{\Gamma}{x}{S} \quad
-        \TJT{\Gamma}{x}{U}
+        \TJ{\Gamma}{x}{S}{\HAT{x}} \quad
+        \TJ{\Gamma}{x}{U}{\HAT{x}}
     }{
-        \TJT{\Gamma}{x}{\AGG{S}{U}}
+        \TJ{\Gamma}{x}{\AGG{S}{U}}{\HAT{x}}
     } \\[4mm]
 
     \RULE{\{\}-I} \quad \inference{
-        \TJT{\Gamma, x: S}{d}{S}
+        x \leadsto u \quad
+        \TJ{\Gamma, u: S}{d}{S}{\HAT{d}}
     }{
-        \TJT{\Gamma}{\OBJ{x}{S}{d}}{\REC{x}{S}}
+        \TJ{\Gamma}{\OBJ{x}{S}{d}}{\REC{u}{S}}{\OBJ{u}{S}{\HAT{d}}}
     } \qquad
 
     \RULE{Fld-E} \quad \inference{
-        \TJT{\Gamma}{x}{\FDEC{a}{S}}
+        \TJ{\Gamma}{x}{\FDEC{a}{S}}{\HAT{x}}
     }{
-        \TJT{\Gamma}{x.a}{S}
+        \TJ{\Gamma}{x.a}{S}{\HAT{x}.a}
     } \\[4mm]
 
     \RULE{Rec-I} \quad \inference{
-        \TJT{\Gamma}{x}{S}
+        \TJ{\Gamma}{x}{S}{\HAT{x}}
     }{
-        \TJT{\Gamma}{x}{\REC{x}{S}}
+        \TJ{\Gamma}{x}{\REC{x}{S}}{\HAT{x}}
     } \qquad
 
     \RULE{Rec-E} \quad \inference{
-        \TJT{\Gamma}{x}{\REC{x}{S}}
+        \TJ{\Gamma}{x}{\REC{x}{S}}{\HAT{x}}
     }{
-        \TJT{\Gamma}{x}{S}
+        \TJ{\Gamma}{x}{S}{\HAT{x}}
     }
 \end{array}\]

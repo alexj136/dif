@@ -1,17 +1,18 @@
 \[\begin{array}{c}
-    \RULE{Typ-I} \quad \TJT{\Gamma}{\DEF{A}{S}}{\TDEC{A}{S}{S}} \qquad
+    \RULE{Typ-I} \quad \TJ{\Gamma}{\DEF{A}{S}}{\TDEC{A}{S}{S}}{\DEF{A}{S}}
+    \qquad
 
     \RULE{Fld-I} \quad \inference{
-        \TJT{\Gamma}{t}{S}
+        \TJ{\Gamma}{t}{S}{\HAT{t}}
     }{
-        \TJT{\Gamma}{\DEF{a}{t}}{\FDEC{a}{S}}
+        \TJ{\Gamma}{\DEF{a}{t}}{\FDEC{a}{S}}{\DEF{a}{\HAT{t}}}
     } \\[4mm]
 
     \RULE{AndDef-I} \quad \inference{
-        \TJT{\Gamma}{d_1}{S_1} \quad
-        \TJT{\Gamma}{d_2}{S_2} \quad
+        \TJ{\Gamma}{d_1}{S_1}{\HAT{d_1}} \quad
+        \TJ{\Gamma}{d_2}{S_2}{\HAT{d_2}} \quad
         \DOM{d_1} \cap \DOM{d_2} = \o
     }{
-        \TJT{\Gamma}{\AGG{d_1}{d_2}}{\AGG{S_1}{S_2}}
+        \TJ{\Gamma}{\AGG{d_1}{d_2}}{\AGG{S_1}{S_2}}{\AGG{\HAT{d_1}}{\HAT{d_2}}}
     }
 \end{array}\]
