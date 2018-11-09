@@ -5,7 +5,10 @@ case $@ in
                 bibtex main &&
                 pdflatex -halt-on-error main.tex &&
                 pdflatex -halt-on-error main.tex &&
-                pdflatex -halt-on-error all_figures.tex ;;
+                grep -A 4 -h --no-group-separator "begin{figure" *.tex > \
+                    all-fig-code.tex &&
+                pdflatex -halt-on-error all_figures.tex &&
+                rm all-fig-code.tex ;;
 
     "clean")    rm -f *.aux *.log *.bbl *.blg *.pdf *.out ;;
 
