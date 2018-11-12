@@ -3,11 +3,89 @@
 \subsection{Translation of Types}
 
 \begin{DEFINITION}[Translation of types]
-    Figure \ref{translation} defines translation from DIF types to DOT types.
+    \label{def_translation}
+    Figure \ref{fig_translation} defines translation from DIF types to DOT
+    types.
 \end{DEFINITION}
 
 \begin{figure}[h]
     \input{figure_translation}
     \caption{Translation from DIF types to DOT types}
-    \label{translation}
+    \label{fig_translation}
 \end{figure}
+
+We extend the definition of $\TRANS{(\bullet)}$ pointwise to environments
+$\Gamma$.
+
+\begin{THEOREM}[Type-preserving translation of DIF terms]
+    If $\TJ{\Gamma}{t}{S}{\HAT{t}}$ then
+    $\TJT{\TRANS{\Gamma}}{\HAT{t}}{\TRANS{S}}$.
+\end{THEOREM}
+
+\begin{proof}
+    By induction on typing derivations.
+    \begin{itemize}
+        \item \textbf{Case} $\TJ{\Gamma, p: S, \Gamma'}{p}{S}{p}$
+        \begin{itemize}
+            \item To show: $\TJT{\TRANS{\Gamma, p: S, \Gamma'}}{p}{\TRANS{S}}$
+            \begin{itemize}
+                \item Or by definition \ref{def_translation}, 
+                    $\TJT{\TRANS{\Gamma}, p: \TRANS{S},
+                    \TRANS{\Gamma'}}{p}{\TRANS{S}}$
+            \end{itemize}
+            \item The goal follows immediately from \RULET{Var}.
+        \end{itemize}
+        \item \textbf{Case} $\TJ{\Gamma, i: S, \Gamma'}{\IMP}{S}{i}$
+        \begin{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case} $\TJ{\Gamma}{t}{S'}{\HAT{t}}$
+        \begin{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case}
+            $\TJ{\Gamma}{\ABS{x}{S}{t}}{\DFUN{u}{S}{U}}{\ABS{u}{S}{\HAT{t}}}$
+        \begin{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case} $\TJ{\Gamma}{x\ y}{\SUB{u}{y}U}{\HAT{x}\ \HAT{y}}$
+        \begin{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case}
+            $\TJ{\Gamma}{\LET{x}{t}{t'}}{U}{\LET{u}{\HAT{t}}{\HAT{t'}}}$
+        \begin{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case} $\TJ{\Gamma}{x}{\AGG{S}{U}}{\HAT{x}}$
+        \begin{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case}
+            $\TJ{\Gamma}{\OBJ{x}{S}{d}}{\REC{u}{S}}{\OBJ{u}{S}{\HAT{d}}}$
+        \begin{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case} $\TJ{\Gamma}{x.a}{S}{\HAT{x}.a}$
+        \begin{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case} $\TJ{\Gamma}{x}{\REC{x}{S}}{\HAT{x}}$
+        \begin{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case} $\TJ{\Gamma}{x}{S}{\HAT{x}}$
+        \begin{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case}
+            $\TJ{\Gamma}{t}{\IFUN{u}{S}{U}}{\ABS{u}{S}{\HAT{t}}}$
+        \begin{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case} $\TJ{\Gamma}{x}{\SUB{u}{v}U}{\HAT{x}\ v}$
+        \begin{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+    \end{itemize}
+\end{proof}

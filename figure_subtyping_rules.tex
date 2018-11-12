@@ -1,64 +1,64 @@
 \[\begin{array}{c}
-    \RULE{Top} \quad \SJT{\Gamma}{S}{\top} \qquad
+    \RULE{Top} \quad \SJ{\Gamma}{S}{\top} \qquad
 
-    \RULE{Bot} \quad \SJT{\Gamma}{\bot}{S} \qquad
+    \RULE{Bot} \quad \SJ{\Gamma}{\bot}{S} \qquad
 
-    \RULE{Refl} \quad \SJT{\Gamma}{S}{S} \\[4mm]
+    \RULE{Refl} \quad \SJ{\Gamma}{S}{S} \\[4mm]
 
     \RULE{Trans} \quad \inference{
-        \SJT{\Gamma}{S}{U} \quad
-        \SJT{\Gamma}{U}{R}
+        \SJ{\Gamma}{S}{U} \quad
+        \SJ{\Gamma}{U}{R}
     }{
-        \SJT{\Gamma}{S}{R}
+        \SJ{\Gamma}{S}{R}
     } \qquad
 
     \RULE{<:-And} \quad \inference{
-        \SJT{\Gamma}{S}{U} \quad
-        \SJT{\Gamma}{S}{R}
+        \SJ{\Gamma}{S}{U} \quad
+        \SJ{\Gamma}{S}{R}
     }{
-        \SJT{\Gamma}{S}{\AGG{U}{R}}
+        \SJ{\Gamma}{S}{\AGG{U}{R}}
     } \\[4mm]
 
     \RULE{<:-Sel} \quad \inference{
         \TJT{\Gamma}{x}{\TDEC{A}{S}{U}}
     }{
-        \SJT{\Gamma}{S}{x.A}
+        \SJ{\Gamma}{S}{x.A}
     } \qquad
 
     \RULE{Sel-<:} \quad \inference{
         \TJT{\Gamma}{x}{\TDEC{A}{S}{U}}
     }{
-        \SJT{\Gamma}{x.A}{U}
+        \SJ{\Gamma}{x.A}{U}
     } \\[4mm]
 
     \RULE{All-<:-All-Ex} \quad \inference{
-        \SJT{\Gamma}{S_2}{S_1} \quad
-        \SJT{\Gamma, x: S_2}{U_1}{U_2}
+        \SJ{\Gamma}{S_2}{S_1} \quad
+        \SJ{\Gamma, x: S_2}{U_1}{U_2}
     }{
-        \SJT{\Gamma}{\DFUN{x}{S_1}{U_1}}{\DFUN{x}{S_2}{U_2}}
+        \SJ{\Gamma}{\DFUN{x}{S_1}{U_1}}{\DFUN{x}{S_2}{U_2}}
     } \\[4mm]
 
     \RULE{Typ-<:-Typ} \quad \inference{
-        \SJT{\Gamma}{S_2}{S_1} \quad
-        \SJT{\Gamma}{U_1}{U_2} \quad
+        \SJ{\Gamma}{S_2}{S_1} \quad
+        \SJ{\Gamma}{U_1}{U_2} \quad
     }{
-        \SJT{\Gamma}{\TDEC{A}{S_1}{U_1}}{\TDEC{A}{S_2}{U_2}}
+        \SJ{\Gamma}{\TDEC{A}{S_1}{U_1}}{\TDEC{A}{S_2}{U_2}}
     } \\[4mm]
 
-    \RULE{And$_1$-<:} \quad \SJT{\Gamma}{\AGG{S}{U}}{S} \qquad
+    \RULE{And$_1$-<:} \quad \SJ{\Gamma}{\AGG{S}{U}}{S} \qquad
 
-    \RULE{And$_2$-<:} \quad \SJT{\Gamma}{\AGG{S}{U}}{U} \\[4mm]
+    \RULE{And$_2$-<:} \quad \SJ{\Gamma}{\AGG{S}{U}}{U} \\[4mm]
 
     \RULE{Fld-<:-Fld} \quad \inference{
-        \SJT{\Gamma}{S}{U}
+        \SJ{\Gamma}{S}{U}
     }{
-        \SJT{\Gamma}{\FDEC{a}{S}}{\FDEC{a}{U}}
+        \SJ{\Gamma}{\FDEC{a}{S}}{\FDEC{a}{U}}
     } \\[4mm]
 
     \RULE{All-<:-All-Im} \quad \inference{
-        \SJT{\Gamma}{S_2}{S_1} \quad
-        \SJT{\Gamma, x: S_2}{U_1}{U_2}
+        \SJ{\Gamma}{S_2}{S_1} \quad
+        \SJ{\Gamma, x: S_2}{U_1}{U_2}
     }{
-        \SJT{\Gamma}{\IFUN{x}{S_1}{U_1}}{\IFUN{x}{S_2}{U_2}}
+        \SJ{\Gamma}{\IFUN{x}{S_1}{U_1}}{\IFUN{x}{S_2}{U_2}}
     }
 \end{array}\]
