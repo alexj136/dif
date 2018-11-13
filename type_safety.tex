@@ -3,19 +3,28 @@
 \subsection{Translation of Types}
 
 \begin{DEFINITION}[Translation of types]
-    \label{def_translation}
-    Figure \ref{fig_translation} defines translation from DIF types to DOT
+    \label{translation}
+    Figure \ref{figure_translation} defines translation from DIF types to DOT
     types.
 \end{DEFINITION}
 
 \begin{figure}[h]
     \input{figure_translation}
     \caption{Translation from DIF types to DOT types}
-    \label{fig_translation}
+    \label{figure_translation}
 \end{figure}
 
 We extend the definition of $\TRANS{(\bullet)}$ pointwise to environments
 $\Gamma$.
+
+\begin{LEMMA}[Preservation of subtyping under type translation]
+    \label{pres_subtyping}
+    If $\SJ{\Gamma}{S}{U}$ then $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{U}}$.
+\end{LEMMA}
+
+\begin{proof}
+    \TODOTHIS
+\end{proof}
 
 \begin{THEOREM}[Type-preserving translation of DIF terms]
     If $\TJ{\Gamma}{t}{S}{\HAT{t}}$ then
@@ -25,65 +34,89 @@ $\Gamma$.
 \begin{proof}
     By induction on typing derivations.
     \begin{itemize}
-        \item \textbf{Case} $\TJ{\Gamma, p: S, \Gamma'}{p}{S}{p}$
+        \item \textbf{Case} \RULE{Var-Ex}: $\TJ{\Gamma, p: S, \Gamma'}{p}{S}{p}$
         \begin{itemize}
-            \item To show: $\TJT{\TRANS{\Gamma, p: S, \Gamma'}}{p}{\TRANS{S}}$
+            \item To show: $\TJT{\TRANS{(\Gamma, p: S, \Gamma')}}{p}{\TRANS{S}}$
             \begin{itemize}
-                \item Or by definition \ref{def_translation}, 
+                \item Or by definition \ref{translation}, 
                     $\TJT{\TRANS{\Gamma}, p: \TRANS{S},
                     \TRANS{\Gamma'}}{p}{\TRANS{S}}$
             \end{itemize}
             \item The goal follows immediately from \RULET{Var}.
         \end{itemize}
-        \item \textbf{Case} $\TJ{\Gamma, i: S, \Gamma'}{\IMP}{S}{i}$
+        \item \textbf{Case} \RULE{Var-Im}:
+            $\TJ{\Gamma, i: S, \Gamma'}{\IMP}{S}{i}$
         \begin{itemize}
-            \item \TODOTHIS
+            \item To show: $\TJT{\TRANS{(\Gamma, i: S, \Gamma')}}{i}{\TRANS{S}}$
+            \begin{itemize}
+                \item Or by definition \ref{translation}, 
+                    $\TJT{\TRANS{\Gamma}, i: \TRANS{S},
+                    \TRANS{\Gamma'}}{i}{\TRANS{S}}$
+            \end{itemize}
+            \item The goal follows immediately from \RULET{Var}.
         \end{itemize}
-        \item \textbf{Case} $\TJ{\Gamma}{t}{S'}{\HAT{t}}$
+        \item \textbf{Case} \RULE{Sub}: $\TJ{\Gamma}{t}{S'}{\HAT{t}}$
         \begin{itemize}
-            \item \TODOTHIS
+            \item By inversion of \RULE{Sub}:
+            \begin{itemize}
+                \item $\TJ{\Gamma}{t}{S}{\HAT{t}}$
+                \begin{itemize}
+                    \item And by induction:
+                        $\TJT{\TRANS{\Gamma}}{\HAT{t}}{\TRANS{S}}$
+                \end{itemize}
+                \item $\SJ{\Gamma}{S}{S'}$
+                \begin{itemize}
+                    \item And by lemma \ref{pres_subtyping}:
+                        $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{S'}}$
+                \end{itemize}
+            \end{itemize}
+            \item The goal then follows from \RULET{Sub}.
         \end{itemize}
-        \item \textbf{Case}
+        \item \textbf{Case} \RULE{All-Ex-I}:
             $\TJ{\Gamma}{\ABS{x}{S}{t}}{\DFUN{u}{S}{U}}{\ABS{u}{S}{\HAT{t}}}$
         \begin{itemize}
+            \item To show: $\TJT{\TRANS{\Gamma}}{\ABS{u}{S}{\HAT{t}}}
+                {\TRANS{(\DFUN{u}{S}{U})}}$
             \item \TODOTHIS
         \end{itemize}
-        \item \textbf{Case} $\TJ{\Gamma}{x\ y}{\SUB{u}{y}U}{\HAT{x}\ \HAT{y}}$
+        \item \textbf{Case} \RULE{All-Ex-E}:
+            $\TJ{\Gamma}{x\ y}{\SUB{u}{y}U}{\HAT{x}\ \HAT{y}}$
         \begin{itemize}
             \item \TODOTHIS
         \end{itemize}
-        \item \textbf{Case}
+        \item \textbf{Case} \RULE{Let}:
             $\TJ{\Gamma}{\LET{x}{t}{t'}}{U}{\LET{u}{\HAT{t}}{\HAT{t'}}}$
         \begin{itemize}
             \item \TODOTHIS
         \end{itemize}
-        \item \textbf{Case} $\TJ{\Gamma}{x}{\AGG{S}{U}}{\HAT{x}}$
+        \item \textbf{Case} \RULE{And-I}: $\TJ{\Gamma}{x}{\AGG{S}{U}}{\HAT{x}}$
         \begin{itemize}
             \item \TODOTHIS
         \end{itemize}
-        \item \textbf{Case}
+        \item \textbf{Case} \RULE{\{\}-I}:
             $\TJ{\Gamma}{\OBJ{x}{S}{d}}{\REC{u}{S}}{\OBJ{u}{S}{\HAT{d}}}$
         \begin{itemize}
             \item \TODOTHIS
         \end{itemize}
-        \item \textbf{Case} $\TJ{\Gamma}{x.a}{S}{\HAT{x}.a}$
+        \item \textbf{Case} \RULE{Fld-E}: $\TJ{\Gamma}{x.a}{S}{\HAT{x}.a}$
         \begin{itemize}
             \item \TODOTHIS
         \end{itemize}
-        \item \textbf{Case} $\TJ{\Gamma}{x}{\REC{x}{S}}{\HAT{x}}$
+        \item \textbf{Case} \RULE{Rec-I}: $\TJ{\Gamma}{x}{\REC{x}{S}}{\HAT{x}}$
         \begin{itemize}
             \item \TODOTHIS
         \end{itemize}
-        \item \textbf{Case} $\TJ{\Gamma}{x}{S}{\HAT{x}}$
+        \item \textbf{Case} \RULE{Rec-E}: $\TJ{\Gamma}{x}{S}{\HAT{x}}$
         \begin{itemize}
             \item \TODOTHIS
         \end{itemize}
-        \item \textbf{Case}
+        \item \textbf{Case} \RULE{All-Im-I}:
             $\TJ{\Gamma}{t}{\IFUN{u}{S}{U}}{\ABS{u}{S}{\HAT{t}}}$
         \begin{itemize}
             \item \TODOTHIS
         \end{itemize}
-        \item \textbf{Case} $\TJ{\Gamma}{x}{\SUB{u}{v}U}{\HAT{x}\ v}$
+        \item \textbf{Case} \RULE{All-Im-E}:
+            $\TJ{\Gamma}{x}{\SUB{u}{v}U}{\HAT{x}\ v}$
         \begin{itemize}
             \item \TODOTHIS
         \end{itemize}

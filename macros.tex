@@ -17,19 +17,12 @@
 \newcommand\EQDEF{\stackrel{\mathclap{\normalfont\mbox{def}}}{=}}
 \newcommand{\STRUCT}[2]{#1 \equiv #2}
 
-% Context-free grammars
-\newenvironment{GRAMMAR}{\[\begin{array}{r c l l}}{\end{array}\]}
-\newcommand{\GMLPRO}[3]{#1 & \GMPRO & #2 & \textit{#3} \\[1mm]}
-\newcommand{\GMLPAR}[2]{& \GMPAR & #1 & \textit{#2} \\[1mm]}
-\newcommand\GMPRO{\hspace{3mm} ::= \hspace{3mm}}
-\newcommand\GMPAR{\quad {\big |} \quad}
-
 % Typing rules and judgement helpers
 \newcommand{\RULE}[1]{(\textsc{#1})}
 \newcommand{\RULET}[1]{(\textsc{#1})$_{DOT}$}
 \newcommand{\TJ}[4]{#1 \vdash #2: #3 \leadsto #4}
 \newcommand{\TJT}[3]{#1 \vdash_{DOT} #2: #3}
-\newcommand{\SJ}[4]{#1 \vdash #2 <: #3 \leadsto #4}
+\newcommand{\SJ}[3]{#1 \vdash #2 <: #3}
 \newcommand{\SJT}[3]{#1 \vdash_{DOT} #2 <: #3}
 \newcommand{\HAT}[1]{\widehat{#1}}
 \newcommand{\TRANS}[1]{#1^{*}}
