@@ -26,6 +26,15 @@ $\Gamma$.
     \TODOTHIS
 \end{proof}
 
+\begin{LEMMA}[Preservation of free variables under type translation]
+    \label{pres_fv}
+    For all $S$, $\FV{S} = \FV{\TRANS{S}}$.
+\end{LEMMA}
+
+\begin{proof}
+    Directly from the definition.
+\end{proof}
+
 \begin{THEOREM}[Type-preserving translation of DIF terms]
     If $\TJ{\Gamma}{t}{S}{\HAT{t}}$ then
     $\TJT{\TRANS{\Gamma}}{\HAT{t}}{\TRANS{S}}$.
@@ -72,12 +81,37 @@ $\Gamma$.
             \end{itemize}
             \item The goal then follows from \RULET{Sub}.
         \end{itemize}
-        \item \textbf{Case} \RULE{All-Ex-I}:
-            $\TJ{\Gamma}{\ABS{x}{S}{t}}{\DFUN{u}{S}{U}}{\ABS{u}{S}{\HAT{t}}}$
+        \item \textbf{Case} \RULE{All-Ex-I}: $\TJ{\Gamma}{\ABS{x}{S}{t}}
+            {\DFUN{u}{S}{U}}{\ABS{u}{\TRANS{S}}{\HAT{t}}}$
         \begin{itemize}
-            \item To show: $\TJT{\TRANS{\Gamma}}{\ABS{u}{S}{\HAT{t}}}
+            \item To show: $\TJT{\TRANS{\Gamma}}{\ABS{u}{\TRANS{S}}{\HAT{t}}}
                 {\TRANS{(\DFUN{u}{S}{U})}}$
-            \item \TODOTHIS
+            \begin{itemize}
+                \item Or by definition \ref{translation}:
+                    $\TJT{\TRANS{\Gamma}}{\ABS{u}{\TRANS{S}}{\HAT{t}}}
+                    {\DFUN{u}{\TRANS{S}}{\TRANS{U}}}$
+            \end{itemize}
+            \item By inversion of \RULE{All-Ex-I}:
+            \begin{itemize}
+                \item $x \leadsto u$
+                \begin{itemize}
+                    \item Then either $x = u$ or $u\ \text{fresh}$
+                \end{itemize}
+                \item $\TJ{\Gamma, u: S}{t}{U}{\HAT{t}}$
+                \begin{itemize}
+                    \item Then by induction:
+                        $\TJT{\TRANS{(\Gamma, u: S)}}{\HAT{t}}\TRANS{{U}}$
+                    \item And by definition \ref{translation}:
+                        $\TJT{\TRANS{\Gamma}, u: \TRANS{S}}{\HAT{t}}\TRANS{{U}}$
+                \end{itemize}
+                \item $\{x, u\} \cap \FV{S} = \o$
+                \begin{itemize}
+                    \item Then by lemma \ref{pres_fv},
+                        $\{x, u\} \cap \FV{\TRANS{S}} = \o$, and then $u \notin
+                        \FV{\TRANS{S}}$
+                \end{itemize}
+            \end{itemize}
+            \item The goal then follows from \RULET{All-I}.
         \end{itemize}
         \item \textbf{Case} \RULE{All-Ex-E}:
             $\TJ{\Gamma}{x\ y}{\SUB{u}{y}U}{\HAT{x}\ \HAT{y}}$
