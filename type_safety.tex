@@ -152,16 +152,76 @@ $\Gamma$.
         \item \textbf{Case} \RULE{Let}:
             $\TJ{\Gamma}{\LET{x}{t}{t'}}{U}{\LET{u}{\HAT{t}}{\HAT{t'}}}$
         \begin{itemize}
-            \item \TODOTHIS
+            \item To show:
+                $\TJT{\TRANS{\Gamma}}{\LET{u}{\HAT{t}}{\HAT{t'}}}{\TRANS{U}}$
+            \item By inversion of \RULE{LET}:
+            \begin{itemize}
+                \item $x \leadsto u$
+                \item $\TJ{\Gamma}{t}{S}{\HAT{t}}$
+                \begin{itemize}
+                    \item Then by induction:
+                        $\TJT{\TRANS{\Gamma}}{\HAT{t}}{\TRANS{S}}$
+                \end{itemize}
+                \item $\TJ{\Gamma, u: S}{t'}{U}{\HAT{t'}}$
+                \begin{itemize}
+                    \item Then by induction:
+                        $\TJT{\TRANS{(\Gamma, u: S)}}{\HAT{t'}}{\TRANS{U}}$
+                    \item Then by definition \ref{translation}:
+                        $\TJT{\TRANS{\Gamma}, u: \TRANS{S}}
+                        {\HAT{t'}}{\TRANS{U}}$
+                \end{itemize}
+                \item $x \notin \FV{U}$
+                \begin{itemize}
+                    \item Then by lemma \ref{pres_fv}: $x \notin \FV{\TRANS{U}}$
+                \end{itemize}
+            \end{itemize}
+            \item The goal then follows from \RULET{Let}.
         \end{itemize}
         \item \textbf{Case} \RULE{And-I}: $\TJ{\Gamma}{x}{\AGG{S}{U}}{\HAT{x}}$
         \begin{itemize}
-            \item \TODOTHIS
+            \item To show:
+                $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\TRANS{(\AGG{S}{U})}}$
+            \begin{itemize}
+                \item Or by definition \ref{translation}:
+                    $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\AGG{\TRANS{S}}{\TRANS{U}}}$
+            \end{itemize}
+            \item By inversion of \RULE{And-I}:
+            \begin{itemize}
+                \item $\TJ{\Gamma}{x}{S}{\HAT{x}}$
+                \begin{itemize}
+                    \item Then by induction: 
+                        $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\TRANS{S}}$
+                \end{itemize}
+                \item $\TJ{\Gamma}{x}{U}{\HAT{x}}$
+                \begin{itemize}
+                    \item Then by induction: 
+                        $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\TRANS{U}}$
+                \end{itemize}
+            \end{itemize}
+            \item The goal then follows from \RULET{And-I}.
         \end{itemize}
         \item \textbf{Case} \RULE{\{\}-I}:
             $\TJ{\Gamma}{\OBJ{x}{S}{d}}{\REC{u}{S}}{\OBJ{u}{S}{\HAT{d}}}$
         \begin{itemize}
-            \item \TODOTHIS
+            \item To show: $\TJT{\TRANS{\Gamma}}{\OBJ{u}{S}{\HAT{d}}}
+                {\TRANS{(\REC{u}{S})}}$
+            \begin{itemize}
+                \item Or by definition \ref{translation}:
+                    $\TJT{\TRANS{\Gamma}}{\OBJ{u}{S}{\HAT{d}}}
+                    {\REC{u}{\TRANS{S}}}$
+            \end{itemize}
+            \item By inversion of \RULE{\{\}-I}:
+            \begin{itemize}
+                \item $x \leadsto u$
+                \item $\TJ{\Gamma, u: S}{d}{S}{\HAT{d}}$
+                \begin{itemize}
+                    \item Then by theorem \ref{tp_defs}:
+                        $\TJT{\TRANS{(\Gamma, u: S)}}{\HAT{d}}{\TRANS{S}}$
+                    \item And by definition \ref{translation}:
+                        $\TJT{\TRANS{\Gamma}, u: \TRANS{S}}{\HAT{d}}{\TRANS{S}}$
+                \end{itemize}
+            \end{itemize}
+            \item The goal then follows from \RULET{\{\}-I}.
         \end{itemize}
         \item \textbf{Case} \RULE{Fld-E}: $\TJ{\Gamma}{x.a}{S}{\HAT{x}.a}$
         \begin{itemize}
@@ -186,4 +246,14 @@ $\Gamma$.
             \item \TODOTHIS
         \end{itemize}
     \end{itemize}
+\end{proof}
+
+\begin{THEOREM}[Type-preserving translation of DIF definitions]
+    \label{tp_defs}
+    If $\TJ{\Gamma}{d}{S}{\HAT{d}}$ then
+    $\TJT{\TRANS{\Gamma}}{\HAT{d}}{\TRANS{S}}$.
+\end{THEOREM}
+
+\begin{proof}
+    \TODOTHIS
 \end{proof}
