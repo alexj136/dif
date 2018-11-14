@@ -35,6 +35,15 @@ $\Gamma$.
     Directly from the definition.
 \end{proof}
 
+\begin{LEMMA}[Commutativity of type translation and name substitution]
+    \label{comm_trans_sub}
+    For all $S$, $u$, $v$, $\SUB{u}{v}(\TRANS{S}) = \TRANS{(\SUB{u}{v}S)}$.
+\end{LEMMA}
+
+\begin{proof}
+    \TODOTHIS
+\end{proof}
+
 \begin{THEOREM}[Type-preserving translation of DIF terms]
     If $\TJ{\Gamma}{t}{S}{\HAT{t}}$ then
     $\TJT{\TRANS{\Gamma}}{\HAT{t}}{\TRANS{S}}$.
@@ -116,7 +125,29 @@ $\Gamma$.
         \item \textbf{Case} \RULE{All-Ex-E}:
             $\TJ{\Gamma}{x\ y}{\SUB{u}{y}U}{\HAT{x}\ \HAT{y}}$
         \begin{itemize}
-            \item \TODOTHIS
+            \item To show:
+                $\TJT{\TRANS{\Gamma}}{\HAT{x}\ \HAT{y}}{\TRANS{(\SUB{u}{y}U)}}$
+            \begin{itemize}
+                \item Or by lemma \ref{comm_trans_sub}: $\TJT{\TRANS{\Gamma}}
+                    {\HAT{x}\ \HAT{y}}{\SUB{u}{y}\TRANS{U}}$
+            \end{itemize}
+            \item By inversion of \RULE{All-Ex-E}:
+            \begin{itemize}
+                \item $\TJ{\Gamma}{x}{\DFUN{u}{S}{U}}{\HAT{x}}$
+                \begin{itemize}
+                    \item Then by induction: $\TJT{\TRANS{\Gamma}}
+                        {\HAT{x}}{\TRANS{(\DFUN{u}{S}{U})}}$
+                    \item Then by definition \ref{translation}:
+                        $\TJT{\TRANS{\Gamma}}{\HAT{x}}
+                        {\DFUN{u}{\TRANS{S}}{\TRANS{U}}}$
+                \end{itemize}
+                \item $\TJ{\Gamma}{y}{S}{\HAT{y}}$
+                \begin{itemize}
+                    \item Then by induction:
+                        $\TJT{\TRANS{\Gamma}}{\HAT{y}}{\TRANS{S}}$
+                \end{itemize}
+            \end{itemize}
+            \item The goal then follows from \RULET{All-E}.
         \end{itemize}
         \item \textbf{Case} \RULE{Let}:
             $\TJ{\Gamma}{\LET{x}{t}{t'}}{U}{\LET{u}{\HAT{t}}{\HAT{t'}}}$
