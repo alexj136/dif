@@ -184,14 +184,14 @@
             \end{itemize}
             \item The goal then follows from \RULET{And-I}.
         \end{itemize}
-        \item \textbf{Case} \RULE{\{\}-I}:
-            $\TJ{\Gamma}{\OBJ{x}{S}{d}}{\REC{u}{S}}{\OBJ{u}{S}{\HAT{d}}}$
+        \item \textbf{Case} \RULE{\{\}-I}: $\TJ{\Gamma}
+            {\OBJ{x}{S}{d}}{\REC{u}{S}}{\OBJ{u}{\TRANS{S}}{\HAT{d}}}$
         \begin{itemize}
-            \item To show: $\TJT{\TRANS{\Gamma}}{\OBJ{u}{S}{\HAT{d}}}
+            \item To show: $\TJT{\TRANS{\Gamma}}{\OBJ{u}{\TRANS{S}}{\HAT{d}}}
                 {\TRANS{(\REC{u}{S})}}$
             \begin{itemize}
                 \item Or by definition \ref{translation}:
-                    $\TJT{\TRANS{\Gamma}}{\OBJ{u}{S}{\HAT{d}}}
+                    $\TJT{\TRANS{\Gamma}}{\OBJ{u}{\TRANS{S}}{\HAT{d}}}
                     {\REC{u}{\TRANS{S}}}$
             \end{itemize}
             \item By inversion of \RULE{\{\}-I}:
@@ -248,13 +248,13 @@
                 the premise of Rec-E?}
         \end{itemize}
         \item \textbf{Case} \RULE{All-Im-I}:
-            $\TJ{\Gamma}{t}{\IFUN{u}{S}{U}}{\ABS{u}{S}{\HAT{t}}}$
+            $\TJ{\Gamma}{t}{\IFUN{u}{S}{U}}{\ABS{u}{\TRANS{S}}{\HAT{t}}}$
         \begin{itemize}
-            \item To show: $\TJT{\TRANS{\Gamma}}{\ABS{u}{S}{\HAT{t}}}
+            \item To show: $\TJT{\TRANS{\Gamma}}{\ABS{u}{\TRANS{S}}{\HAT{t}}}
                 {\TRANS{(\IFUN{u}{S}{U})}}$
             \begin{itemize}
                 \item Or by definition \ref{translation}:
-                    $\TJT{\TRANS{\Gamma}}{\ABS{u}{S}{\HAT{t}}}
+                    $\TJT{\TRANS{\Gamma}}{\ABS{u}{\TRANS{S}}{\HAT{t}}}
                     {\IFUN{u}{\TRANS{S}}{\TRANS{U}}}$
             \end{itemize}
             \item By inversion of \RULE{All-Im-I}:
