@@ -225,25 +225,97 @@ $\Gamma$.
         \end{itemize}
         \item \textbf{Case} \RULE{Fld-E}: $\TJ{\Gamma}{x.a}{S}{\HAT{x}.a}$
         \begin{itemize}
-            \item \TODOTHIS
+            \item To show: $\TJT{\TRANS{\Gamma}}{\HAT{x}.a}{\TRANS{S}}$
+            \item By inversion of \RULE{Fld-E}:
+                $\TJ{\Gamma}{x}{\FDEC{a}{S}}{\HAT{x}}$
+            \begin{itemize}
+                \item Then by induction:
+                    $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\TRANS{\FDEC{a}{S}}}$
+                \item And by definition \ref{translation}:
+                    $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\FDEC{a}{\TRANS{S}}}$
+            \end{itemize}
+            \item The goal then follows from \RULET{Fld-E}.
         \end{itemize}
         \item \textbf{Case} \RULE{Rec-I}: $\TJ{\Gamma}{x}{\REC{x}{S}}{\HAT{x}}$
         \begin{itemize}
-            \item \TODOTHIS
+            \item To show: $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\TRANS{\REC{x}{S}}}$
+            \begin{itemize}
+                \item Or by definition \ref{translation}:
+                    $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\REC{x}{\TRANS{S}}}$
+            \end{itemize}
+            \item By inversion of \RULE{Rec-I}: $\TJ{\Gamma}{x}{S}{\HAT{x}}$
+            \begin{itemize}
+                \item Then by induction:
+                    $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\TRANS{S}}$
+            \end{itemize}
+            \item The goal then follows from \RULET{Rec-I}.
         \end{itemize}
         \item \textbf{Case} \RULE{Rec-E}: $\TJ{\Gamma}{x}{S}{\HAT{x}}$
         \begin{itemize}
-            \item \TODOTHIS
+            \item To show: $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\TRANS{S}}$
+            \item By inversion of \RULE{Rec-E}:
+                $\TJ{\Gamma}{x}{\REC{x}{S}}{\HAT{x}}$
+            \begin{itemize}
+                \item Then by definition \ref{translation}:
+                    $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\REC{x}{\TRANS{S}}}$
+            \end{itemize}
+            \item \TODOTHIS \TODO{What to do about using translated or
+                untranslated variable in the type in the conclusion of Rec-I or
+                the premise of Rec-E?}
         \end{itemize}
         \item \textbf{Case} \RULE{All-Im-I}:
             $\TJ{\Gamma}{t}{\IFUN{u}{S}{U}}{\ABS{u}{S}{\HAT{t}}}$
         \begin{itemize}
-            \item \TODOTHIS
+            \item To show: $\TJT{\TRANS{\Gamma}}{\ABS{u}{S}{\HAT{t}}}
+                {\TRANS{(\IFUN{u}{S}{U})}}$
+            \begin{itemize}
+                \item Or by definition \ref{translation}:
+                    $\TJT{\TRANS{\Gamma}}{\ABS{u}{S}{\HAT{t}}}
+                    {\IFUN{u}{\TRANS{S}}{\TRANS{U}}}$
+            \end{itemize}
+            \item By inversion of \RULE{All-Im-I}:
+            \begin{itemize}
+                \item $u\ \text{fresh}$
+                \item $\TJ{\Gamma, u: S}{t}{U}{\HAT{t}}$
+                \begin{itemize}
+                    \item Then by induction:
+                        $\TJT{\TRANS{(\Gamma, u: S)}}{\HAT{t}}{\TRANS{U}}$
+                    \item And by definition \ref{translation}:
+                        $\TJT{\TRANS{\Gamma}, u: \TRANS{S}}{\HAT{t}}{\TRANS{U}}$
+                \end{itemize}
+                \item $u \notin \FV{S}$
+                \begin{itemize}
+                    \item Then by lemma \ref{pres_fv}: $u \notin \FV{\TRANS{S}}$
+                \end{itemize}
+            \end{itemize}
+            \item The goal then follows from \RULET{All-I}.
         \end{itemize}
         \item \textbf{Case} \RULE{All-Im-E}:
             $\TJ{\Gamma}{x}{\SUB{u}{v}U}{\HAT{x}\ v}$
         \begin{itemize}
-            \item \TODOTHIS
+            \item To show:
+                $\TJT{\TRANS{\Gamma}}{\HAT{x}\ v}{\TRANS{(\SUB{u}{v}U)}}$
+            \begin{itemize}
+                \item Or by lemma \ref{comm_trans_sub}:
+                    $\TJT{\TRANS{\Gamma}}{\HAT{x}\ v}{\SUB{u}{v}\TRANS{U}}$
+            \end{itemize}
+            \item By inversion of \RULE{All-Im-E}:
+            \begin{itemize}
+                \item $\TJ{\Gamma}{x}{\IFUN{u}{S}{U}}{\HAT{x}}$
+                \begin{itemize}
+                    \item Then by induction:
+                        $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\TRANS{(\IFUN{u}{S}{U})}}$
+                    \item And by definition \ref{translation}:
+                        $\TJT{\TRANS{\Gamma}}
+                        {\HAT{x}}{\DFUN{u}{\TRANS{S}}{\TRANS{U}}}$
+                \end{itemize}
+                \item $\TJ{\Gamma}{\IMP}{S}{v}$
+                \begin{itemize}
+                    \item Then by induction:
+                        $\TJT{\TRANS{\Gamma}}{v}{\TRANS{S}}$
+                \end{itemize}
+            \end{itemize}
+        \item The goal then follows from \RULET{All-E}.
         \end{itemize}
     \end{itemize}
 \end{proof}
