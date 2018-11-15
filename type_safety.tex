@@ -1,22 +1,5 @@
 \section{Type safety of DIF}
 
-\subsection{Translation of Types}
-
-\begin{DEFINITION}[Translation of types]
-    \label{translation}
-    Figure \ref{figure_translation} defines translation from DIF types to DOT
-    types.
-\end{DEFINITION}
-
-\begin{figure}[h]
-    \input{figure_translation}
-    \caption{Translation from DIF types to DOT types}
-    \label{figure_translation}
-\end{figure}
-
-We extend the definition of $\TRANS{(\bullet)}$ pointwise to environments
-$\Gamma$.
-
 \begin{LEMMA}[Preservation of subtyping under type translation]
     \label{pres_subtyping}
     If $\SJ{\Gamma}{S}{U}$ then $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{U}}$.
