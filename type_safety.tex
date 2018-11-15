@@ -45,6 +45,7 @@ $\Gamma$.
 \end{proof}
 
 \begin{THEOREM}[Type-preserving translation of DIF terms]
+    \label{tp_terms}
     If $\TJ{\Gamma}{t}{S}{\HAT{t}}$ then
     $\TJT{\TRANS{\Gamma}}{\HAT{t}}{\TRANS{S}}$.
 \end{THEOREM}
@@ -320,12 +321,84 @@ $\Gamma$.
     \end{itemize}
 \end{proof}
 
-\begin{THEOREM}[Type-preserving translation of DIF definitions]
+\begin{THEOREM}[Type and domain-preserving translation of DIF definitions]
     \label{tp_defs}
     If $\TJ{\Gamma}{d}{S}{\HAT{d}}$ then
-    $\TJT{\TRANS{\Gamma}}{\HAT{d}}{\TRANS{S}}$.
+    $\TJT{\TRANS{\Gamma}}{\HAT{d}}{\TRANS{S}}$ and $\DOM{d} =
+    \DOM{\HAT{d}}$.
 \end{THEOREM}
 
 \begin{proof}
-    \TODOTHIS
+    By induction on typing derivations.
+    \begin{itemize}
+        \item \textbf{Case} \RULE{Typ-I}:
+            $\TJ{\Gamma}{\DEF{A}{S}}{\TDEC{A}{S}{S}}{\DEF{A}{\TRANS{S}}}$
+        \begin{itemize}
+            \item To show for type preservation: $\TJT{\TRANS{\Gamma}}
+                {\DEF{A}{\TRANS{S}}}{\TRANS{(\TDEC{A}{S}{S})}}$
+            \begin{itemize}
+                \item Or by definition \ref{translation}: $\TJT{\TRANS{\Gamma}}
+                    {\DEF{A}{\TRANS{S}}}{\TDEC{A}{\TRANS{S}}{\TRANS{S}}}$
+            \end{itemize}
+            \item The goal for type preservation follows immediately from
+                \RULET{Typ-I}.
+            \item Domain preservation is immediate from \RULE{Typ-I}.
+        \end{itemize}
+        \item \textbf{Case} \RULE{Fld-I}:
+            $\TJ{\Gamma}{\DEF{a}{t}}{\FDEC{a}{S}}{\DEF{a}{\HAT{t}}}$
+        \begin{itemize}
+            \item To show for type preservation:
+                $\TJT{\TRANS{\Gamma}}{\DEF{a}{\HAT{t}}}{\TRANS{\FDEC{a}{S}}}$
+            \begin{itemize}
+                \item Or by definition \ref{translation}: $\TJT{\TRANS{\Gamma}}
+                    {\DEF{a}{\HAT{t}}}{\FDEC{a}{\TRANS{S}}}$
+            \end{itemize}
+            \item By inversion of \RULE{Fld-I}: $\TJ{\Gamma}{t}{S}{\HAT{t}}$
+            \begin{itemize}
+                \item Then by theorem \ref{tp_terms}:
+                    $\TJT{\TRANS{\Gamma}}{\HAT{t}}{\TRANS{S}}$
+            \end{itemize}
+            \item The goal for type preservation then follows from
+                \RULET{Fld-I}.
+            \item Domain preservation is immediate from \RULE{Fld-I}.
+        \end{itemize}
+        \item \textbf{Case} \RULE{AndDef-I}: $\TJ{\Gamma}
+            {\AGG{d_1}{d_2}}{\AGG{S_1}{S_2}}{\AGG{\HAT{d_1}}{\HAT{d_2}}}$
+        \begin{itemize}
+            \item To show: $\TJT{\TRANS{\Gamma}}
+                {\AGG{\HAT{d_1}}{\HAT{d_2}}}{\TRANS{(\AGG{S_1}{S_2})}}$
+            \begin{itemize}
+                \item Or by definition \ref{translation}:
+                    $\TJT{\TRANS{\Gamma}}{\AGG{\HAT{d_1}}{\HAT{d_2}}}
+                    {\AGG{\TRANS{S_1}}{\TRANS{S_2}}}$
+            \end{itemize}
+            \item By inversion of \RULE{AndDef-I}:
+            \begin{itemize}
+                \item $\TJ{\Gamma}{d_1}{S_1}{\HAT{d_1}}$
+                \begin{itemize}
+                    \item Then by induction:
+                        $\TJT{\TRANS{\Gamma}}{\HAT{d_1}}{\TRANS{S_1}}$ and
+                        $\DOM{d_1} = \DOM{\HAT{d_1}}$
+                \end{itemize}
+                \item $\TJ{\Gamma}{d_2}{S_2}{\HAT{d_2}}$
+                \begin{itemize}
+                    \item Then by induction:
+                        $\TJT{\TRANS{\Gamma}}{\HAT{d_2}}{\TRANS{S_2}}$ and
+                        $\DOM{d_2} = \DOM{\HAT{d_2}}$
+                \end{itemize}
+                \item $\DOM{d_1} \cap \DOM{d_2} = \o$
+                \begin{itemize}
+                    \item Then $\DOM{\HAT{d_1}} \cap \DOM{\HAT{d_2}} = \o$
+                        follows since $\DOM{d_1} = \DOM{\HAT{d_1}}$ and
+                        $\DOM{d_2} = \DOM{\HAT{d_2}}$
+                \end{itemize}
+            \end{itemize}
+            \item The goal for type preservation then follows from
+                \RULE{AndDef-I}.
+            \item Domain preservation holds by induction: if $\DOM{d_1} =
+                \DOM{\HAT{d_1}}$ and $\DOM{d_2} = \DOM{\HAT{d_2}}$ then it
+                follows that $\DOM{\AGG{d_1}{d_2}} =
+                \DOM{\AGG{\HAT{d_1}}{\HAT{d_2}}}$.
+        \end{itemize}
+    \end{itemize}
 \end{proof}
