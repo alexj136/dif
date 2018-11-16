@@ -10,18 +10,22 @@
     \begin{itemize}
         \item \textbf{Case} \RULE{Top}: $\SJ{\Gamma}{S}{\top}$
         \begin{itemize}
+            \item To show: $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{\top}}$
             \item \TODOTHIS
         \end{itemize}
         \item \textbf{Case} \RULE{Bot}: $\SJ{\Gamma}{\bot}{S}$
         \begin{itemize}
+            \item To show: $\SJT{\TRANS{\Gamma}}{\TRANS{\bot}}{\TRANS{S}}$
             \item \TODOTHIS
         \end{itemize}
         \item \textbf{Case} \RULE{Refl}: $\SJ{\Gamma}{S}{S}$
         \begin{itemize}
+            \item To show: $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{S}}$
             \item \TODOTHIS
         \end{itemize}
         \item \textbf{Case} \RULE{Trans}: $\SJ{\Gamma}{S}{R}$
         \begin{itemize}
+            \item To show: $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{R}}$
             \item By inversion of \RULE{Trans}:
             \begin{itemize}
                 \item $\SJ{\Gamma}{S}{U}$
@@ -31,6 +35,8 @@
         \end{itemize}
         \item \textbf{Case} \RULE{<:-And}: $\SJ{\Gamma}{S}{\AGG{U}{R}}$
         \begin{itemize}
+            \item To show:
+                $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{(\AGG{U}{R})}}$
             \item By inversion of \RULE{<:-And}:
             \begin{itemize}
                 \item $\SJ{\Gamma}{S}{U}$
@@ -40,12 +46,14 @@
         \end{itemize}
         \item \textbf{Case} \RULE{<:-Sel}: $\SJ{\Gamma}{S}{x.A}$
         \begin{itemize}
+            \item To show: $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{(x.A)}}$
             \item By inversion of \RULE{<:-Sel}:
                 $\TJT{\Gamma}{x}{\TDEC{A}{S}{U}}$
             \item \TODOTHIS
         \end{itemize}
         \item \textbf{Case} \RULE{Sel-<:}: $\SJ{\Gamma}{x.A}{U}$
         \begin{itemize}
+            \item To show: $\SJT{\TRANS{\Gamma}}{\TRANS{(x.A)}}{\TRANS{U}}$
             \item By inversion of \RULE{Sel-<:}:
                 $\TJT{\Gamma}{x}{\TDEC{A}{S}{U}}$
             \item \TODOTHIS
@@ -53,6 +61,8 @@
         \item \textbf{Case} \RULE{All-<:-All-Ex}:
             $\SJ{\Gamma}{\DFUN{x}{S_1}{U_1}}{\DFUN{x}{S_2}{U_2}}$
         \begin{itemize}
+            \item To show: $\SJT{\TRANS{\Gamma}}
+                {\TRANS{(\DFUN{x}{S_1}{U_1})}}{\TRANS{(\DFUN{x}{S_2}{U_2})}}$
             \item By inversion of \RULE{All-<:-All-Ex}:
             \begin{itemize}
                 \item $\SJ{\Gamma}{S_2}{S_1}$
@@ -63,6 +73,8 @@
         \item \textbf{Case} \RULE{Typ-<:-Typ}:
             $\SJ{\Gamma}{\TDEC{A}{S_1}{U_1}}{\TDEC{A}{S_2}{U_2}}$
         \begin{itemize}
+            \item To show: $\SJT{\TRANS{\Gamma}}
+                {\TRANS{\TDEC{A}{S_1}{U_1}}}{\TRANS{\TDEC{A}{S_2}{U_2}}}$
             \item By inversion of \RULE{Typ-<:-Typ}:
             \begin{itemize}
                 \item $\SJ{\Gamma}{S_2}{S_1}$
@@ -72,21 +84,29 @@
         \end{itemize}
         \item \textbf{Case} \RULE{And$_1$-<:}: $\SJ{\Gamma}{\AGG{S}{U}}{S}$
         \begin{itemize}
+            \item To show:
+                $\SJT{\TRANS{\Gamma}}{\TRANS{(\AGG{S}{U})}}{\TRANS{S}}$
             \item \TODOTHIS
         \end{itemize}
         \item \textbf{Case} \RULE{And$_2$-<:}: $\SJ{\Gamma}{\AGG{S}{U}}{U}$
         \begin{itemize}
+            \item To show:
+                $\SJT{\TRANS{\Gamma}}{\TRANS{(\AGG{S}{U})}}{\TRANS{U}}$
             \item \TODOTHIS
         \end{itemize}
         \item \textbf{Case} \RULE{Fld-<:-Fld}:
             $\SJ{\Gamma}{\FDEC{a}{S}}{\FDEC{a}{U}}$
         \begin{itemize}
+            \item To show:
+                $\SJT{\TRANS{\Gamma}}{\TRANS{\FDEC{a}{S}}}{\TRANS{\FDEC{a}{U}}}$
             \item By inversion of \RULE{Fld-<:-Fld}: $\SJ{\Gamma}{S}{U}$
             \item \TODOTHIS
         \end{itemize}
         \item \textbf{Case} \RULE{All-<:-All-Im}:
             $\SJ{\Gamma}{\IFUN{x}{S_1}{U_1}}{\IFUN{x}{S_2}{U_2}}$
         \begin{itemize}
+            \item To show: $\SJT{\TRANS{\Gamma}}
+                {\TRANS{(\IFUN{x}{S_1}{U_1})}}{\TRANS{(\IFUN{x}{S_2}{U_2})}}$
             \item By inversion of \RULE{All-<:-All-Im}:
             \begin{itemize}
                 \item $\SJ{\Gamma}{S_2}{S_1}$
