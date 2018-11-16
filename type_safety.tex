@@ -11,17 +11,25 @@
         \item \textbf{Case} \RULE{Top}: $\SJ{\Gamma}{S}{\top}$
         \begin{itemize}
             \item To show: $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{\top}}$
-            \item \TODOTHIS
+            \begin{itemize}
+                \item Or by definition \ref{translation}:
+                    $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\top}$
+            \end{itemize}
+            \item The goal follows from \RULET{Top}.
         \end{itemize}
         \item \textbf{Case} \RULE{Bot}: $\SJ{\Gamma}{\bot}{S}$
         \begin{itemize}
             \item To show: $\SJT{\TRANS{\Gamma}}{\TRANS{\bot}}{\TRANS{S}}$
-            \item \TODOTHIS
+            \begin{itemize}
+                \item Or by definition \ref{translation}:
+                    $\SJT{\TRANS{\Gamma}}{\bot}{\TRANS{S}}$
+            \end{itemize}
+            \item The goal follows from \RULET{Bot}.
         \end{itemize}
         \item \textbf{Case} \RULE{Refl}: $\SJ{\Gamma}{S}{S}$
         \begin{itemize}
             \item To show: $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{S}}$
-            \item \TODOTHIS
+            \item The goal is immediate from \RULET{Refl}.
         \end{itemize}
         \item \textbf{Case} \RULE{Trans}: $\SJ{\Gamma}{S}{R}$
         \begin{itemize}
@@ -29,90 +37,192 @@
             \item By inversion of \RULE{Trans}:
             \begin{itemize}
                 \item $\SJ{\Gamma}{S}{U}$
+                \begin{itemize}
+                    \item Then by induction:
+                        $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{U}}$
+                \end{itemize}
                 \item $\SJ{\Gamma}{U}{R}$
+                \begin{itemize}
+                    \item Then by induction:
+                        $\SJT{\TRANS{\Gamma}}{\TRANS{U}}{\TRANS{R}}$
+                \end{itemize}
             \end{itemize}
-            \item \TODOTHIS
+            \item The goal then follows from \RULET{Trans}.
         \end{itemize}
         \item \textbf{Case} \RULE{<:-And}: $\SJ{\Gamma}{S}{\AGG{U}{R}}$
         \begin{itemize}
             \item To show:
                 $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{(\AGG{U}{R})}}$
+            \begin{itemize}
+                \item Or by definition \ref{translation}: $\SJT{\TRANS{\Gamma}}
+                    {\TRANS{S}}{\AGG{\TRANS{U}}{\TRANS{R}}}$
+            \end{itemize}
             \item By inversion of \RULE{<:-And}:
             \begin{itemize}
                 \item $\SJ{\Gamma}{S}{U}$
+                \begin{itemize}
+                    \item Then by induction:
+                        $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{U}}$
+                \end{itemize}
                 \item $\SJ{\Gamma}{S}{R}$
+                \begin{itemize}
+                    \item Then by induction:
+                        $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{R}}$
+                \end{itemize}
             \end{itemize}
-            \item \TODOTHIS
+            \item The goal then holds by \RULET{<:-And}.
         \end{itemize}
-        \item \textbf{Case} \RULE{<:-Sel}: $\SJ{\Gamma}{S}{x.A}$
+        \item \textbf{Case} \RULE{<:-Sel}: $\SJ{\Gamma}{S}{u.A}$
         \begin{itemize}
-            \item To show: $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{(x.A)}}$
+            \item To show: $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{(u.A)}}$
+            \begin{itemize}
+                \item Or by definition \ref{translation}:
+                    $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{u.\TRANS{A}}$
+            \end{itemize}
             \item By inversion of \RULE{<:-Sel}:
-                $\TJT{\Gamma}{x}{\TDEC{A}{S}{U}}$
-            \item \TODOTHIS
+                $\TJ{\Gamma}{u}{\TDEC{A}{S}{U}}{u}$
+            \begin{itemize}
+                \item Then by theorem \ref{tp_terms}:
+                    $\TJT{\TRANS{\Gamma}}{u}{\TRANS{\TDEC{A}{S}{U}}}$
+                \item Then by definition \ref{translation}:
+                    $\TJT{\TRANS{\Gamma}}{u}{\TDEC{A}{\TRANS{S}}{\TRANS{U}}}$
+            \end{itemize}
+            \item The goal then follows from \RULET{<:-Sel}.
         \end{itemize}
-        \item \textbf{Case} \RULE{Sel-<:}: $\SJ{\Gamma}{x.A}{U}$
+        \item \textbf{Case} \RULE{Sel-<:}: $\SJ{\Gamma}{u.A}{U}$
         \begin{itemize}
-            \item To show: $\SJT{\TRANS{\Gamma}}{\TRANS{(x.A)}}{\TRANS{U}}$
+            \item To show: $\SJT{\TRANS{\Gamma}}{\TRANS{(u.A)}}{\TRANS{U}}$
+            \begin{itemize}
+                \item Or by definition \ref{translation}:
+                    $\SJT{\TRANS{\Gamma}}{u.\TRANS{A}}{\TRANS{U}}$
+            \end{itemize}
             \item By inversion of \RULE{Sel-<:}:
-                $\TJT{\Gamma}{x}{\TDEC{A}{S}{U}}$
-            \item \TODOTHIS
+                $\TJ{\Gamma}{u}{\TDEC{A}{S}{U}}{u}$
+            \begin{itemize}
+                \item Then by theorem \ref{tp_terms}:
+                    $\TJT{\TRANS{\Gamma}}{u}{\TRANS{\TDEC{A}{S}{U}}}$
+                \item Then by definition \ref{translation}:
+                    $\TJT{\TRANS{\Gamma}}{u}{\TDEC{A}{\TRANS{S}}{\TRANS{U}}}$
+            \end{itemize}
+            \item The goal then follows from \RULET{Sel-<:}.
         \end{itemize}
         \item \textbf{Case} \RULE{All-<:-All-Ex}:
             $\SJ{\Gamma}{\DFUN{x}{S_1}{U_1}}{\DFUN{x}{S_2}{U_2}}$
         \begin{itemize}
             \item To show: $\SJT{\TRANS{\Gamma}}
                 {\TRANS{(\DFUN{x}{S_1}{U_1})}}{\TRANS{(\DFUN{x}{S_2}{U_2})}}$
+            \begin{itemize}
+                \item Or by definition \ref{translation}:
+                    $\SJT{\TRANS{\Gamma}}{\DFUN{x}{\TRANS{S_1}}{\TRANS{U_1}}}
+                    {\DFUN{x}{\TRANS{S_2}}{\TRANS{U_2}}}$
+            \end{itemize}
             \item By inversion of \RULE{All-<:-All-Ex}:
             \begin{itemize}
                 \item $\SJ{\Gamma}{S_2}{S_1}$
+                \begin{itemize}
+                    \item Then by induction:
+                        $\SJT{\TRANS{\Gamma}}{\TRANS{S_2}}{\TRANS{S_1}}$
+                \end{itemize}
                 \item $\SJ{\Gamma, x: S_2}{U_1}{U_2}$
+                \begin{itemize}
+                    \item Then by induction: $\SJT{\TRANS{(\Gamma, x: S_2)}}
+                        {\TRANS{U_1}}{\TRANS{U_2}}$
+                    \item And by definition \ref{translation}:
+                        $\SJT{\TRANS{\Gamma}, x:
+                        \TRANS{S_2}}{\TRANS{U_1}}{\TRANS{U_2}}$
+                \end{itemize}
             \end{itemize}
-            \item \TODOTHIS
+            \item The goal then follows from \RULET{All-<:-All}.
         \end{itemize}
         \item \textbf{Case} \RULE{Typ-<:-Typ}:
             $\SJ{\Gamma}{\TDEC{A}{S_1}{U_1}}{\TDEC{A}{S_2}{U_2}}$
         \begin{itemize}
             \item To show: $\SJT{\TRANS{\Gamma}}
                 {\TRANS{\TDEC{A}{S_1}{U_1}}}{\TRANS{\TDEC{A}{S_2}{U_2}}}$
+            \begin{itemize}
+                \item Or by definition \ref{translation}:
+                    $\SJT{\TRANS{\Gamma}}{\TDEC{A}{\TRANS{S_1}}{\TRANS{U_1}}}
+                    {\TDEC{A}{\TRANS{S_2}}{\TRANS{U_2}}}$
+            \end{itemize}
             \item By inversion of \RULE{Typ-<:-Typ}:
             \begin{itemize}
                 \item $\SJ{\Gamma}{S_2}{S_1}$
+                \begin{itemize}
+                    \item Then by induction:
+                        $\SJT{\TRANS{\Gamma}}{\TRANS{S_2}}{\TRANS{S_1}}$
+                \end{itemize}
                 \item $\SJ{\Gamma}{U_1}{U_2}$
+                \begin{itemize}
+                    \item Then by induction:
+                        $\SJT{\TRANS{\Gamma}}{\TRANS{U_1}}{\TRANS{U_2}}$
+                \end{itemize}
             \end{itemize}
-            \item \TODOTHIS
+            \item The goal then follows from \RULET{Typ-<:-Typ}.
         \end{itemize}
         \item \textbf{Case} \RULE{And$_1$-<:}: $\SJ{\Gamma}{\AGG{S}{U}}{S}$
         \begin{itemize}
             \item To show:
                 $\SJT{\TRANS{\Gamma}}{\TRANS{(\AGG{S}{U})}}{\TRANS{S}}$
-            \item \TODOTHIS
+            \begin{itemize}
+                \item Or by definition \ref{translation}: $\SJT{\TRANS{\Gamma}}
+                    {\AGG{\TRANS{S}}{\TRANS{U}}}{\TRANS{S}}$
+            \end{itemize}
+            \item The goal follows from \RULET{And$_1$-<:}.
         \end{itemize}
         \item \textbf{Case} \RULE{And$_2$-<:}: $\SJ{\Gamma}{\AGG{S}{U}}{U}$
         \begin{itemize}
             \item To show:
                 $\SJT{\TRANS{\Gamma}}{\TRANS{(\AGG{S}{U})}}{\TRANS{U}}$
-            \item \TODOTHIS
+            \begin{itemize}
+                \item Or by definition \ref{translation}: $\SJT{\TRANS{\Gamma}}
+                    {\AGG{\TRANS{S}}{\TRANS{U}}}{\TRANS{U}}$
+            \end{itemize}
+            \item The goal follows from \RULET{And$_2$-<:}.
         \end{itemize}
         \item \textbf{Case} \RULE{Fld-<:-Fld}:
             $\SJ{\Gamma}{\FDEC{a}{S}}{\FDEC{a}{U}}$
         \begin{itemize}
             \item To show:
                 $\SJT{\TRANS{\Gamma}}{\TRANS{\FDEC{a}{S}}}{\TRANS{\FDEC{a}{U}}}$
+            \begin{itemize}
+                \item Or by definition \ref{translation}:
+                    $\SJT{\TRANS{\Gamma}}{\FDEC{a}{\TRANS{S}}}
+                    {\FDEC{a}{\TRANS{U}}}$
+            \end{itemize}
             \item By inversion of \RULE{Fld-<:-Fld}: $\SJ{\Gamma}{S}{U}$
-            \item \TODOTHIS
+            \begin{itemize}
+                \item Then by induction:
+                    $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{U}}$
+            \end{itemize}
+            \item The goal follows from \RULET{Fld-<:-Fld}.
         \end{itemize}
         \item \textbf{Case} \RULE{All-<:-All-Im}:
             $\SJ{\Gamma}{\IFUN{x}{S_1}{U_1}}{\IFUN{x}{S_2}{U_2}}$
         \begin{itemize}
             \item To show: $\SJT{\TRANS{\Gamma}}
                 {\TRANS{(\IFUN{x}{S_1}{U_1})}}{\TRANS{(\IFUN{x}{S_2}{U_2})}}$
+            \begin{itemize}
+                \item Or by definition \ref{translation}:
+                    $\SJT{\TRANS{\Gamma}}{\DFUN{x}{\TRANS{S_1}}{\TRANS{U_1}}}
+                    {\DFUN{x}{\TRANS{S_2}}{\TRANS{U_2}}}$
+            \end{itemize}
             \item By inversion of \RULE{All-<:-All-Im}:
             \begin{itemize}
                 \item $\SJ{\Gamma}{S_2}{S_1}$
+                \begin{itemize}
+                    \item Then by induction:
+                        $\SJ{\TRANS{\Gamma}}{\TRANS{S_2}}{\TRANS{S_1}}$
+                \end{itemize}
                 \item $\SJ{\Gamma, x: S_2}{U_1}{U_2}$
+                \begin{itemize}
+                    \item Then by induction: $\SJ{\TRANS{(\Gamma, x: S_2)}}
+                        {\TRANS{U_1}}{\TRANS{U_2}}$
+                    \item And by definition \ref{translation}:
+                        $\SJ{\TRANS{\Gamma}, x:
+                        \TRANS{S_2}}{\TRANS{U_1}}{\TRANS{U_2}}$
+                \end{itemize}
             \end{itemize}
-            \item \TODOTHIS
+            \item The goal then follows from \RULET{All-<:-All}.
         \end{itemize}
     \end{itemize}
 \end{proof}

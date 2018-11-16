@@ -20,15 +20,15 @@
     } \\[4mm]
 
     \RULE{<:-Sel} \quad \inference{
-        \TJT{\Gamma}{x}{\TDEC{A}{S}{U}}
+        \TJ{\Gamma}{u}{\TDEC{A}{S}{U}}{u}
     }{
-        \SJ{\Gamma}{S}{x.A}
+        \SJ{\Gamma}{S}{u.A}
     } \qquad
 
     \RULE{Sel-<:} \quad \inference{
-        \TJT{\Gamma}{x}{\TDEC{A}{S}{U}}
+        \TJ{\Gamma}{u}{\TDEC{A}{S}{U}}{u}
     }{
-        \SJ{\Gamma}{x.A}{U}
+        \SJ{\Gamma}{u.A}{U}
     } \\[4mm]
 
     \RULE{All-<:-All-Ex} \quad \inference{
