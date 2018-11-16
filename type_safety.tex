@@ -6,7 +6,95 @@
 \end{LEMMA}
 
 \begin{proof}
-    \TODOTHIS
+    By induction on subtyping derivations.
+    \begin{itemize}
+        \item \textbf{Case} \RULE{Top}: $\SJ{\Gamma}{S}{\top}$
+        \begin{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case} \RULE{Bot}: $\SJ{\Gamma}{\bot}{S}$
+        \begin{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case} \RULE{Refl}: $\SJ{\Gamma}{S}{S}$
+        \begin{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case} \RULE{Trans}: $\SJ{\Gamma}{S}{R}$
+        \begin{itemize}
+            \item By inversion of \RULE{Trans}:
+            \begin{itemize}
+                \item $\SJ{\Gamma}{S}{U}$
+                \item $\SJ{\Gamma}{U}{R}$
+            \end{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case} \RULE{<:-And}: $\SJ{\Gamma}{S}{\AGG{U}{R}}$
+        \begin{itemize}
+            \item By inversion of \RULE{<:-And}:
+            \begin{itemize}
+                \item $\SJ{\Gamma}{S}{U}$
+                \item $\SJ{\Gamma}{S}{R}$
+            \end{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case} \RULE{<:-Sel}: $\SJ{\Gamma}{S}{x.A}$
+        \begin{itemize}
+            \item By inversion of \RULE{<:-Sel}:
+                $\TJT{\Gamma}{x}{\TDEC{A}{S}{U}}$
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case} \RULE{Sel-<:}: $\SJ{\Gamma}{x.A}{U}$
+        \begin{itemize}
+            \item By inversion of \RULE{Sel-<:}:
+                $\TJT{\Gamma}{x}{\TDEC{A}{S}{U}}$
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case} \RULE{All-<:-All-Ex}:
+            $\SJ{\Gamma}{\DFUN{x}{S_1}{U_1}}{\DFUN{x}{S_2}{U_2}}$
+        \begin{itemize}
+            \item By inversion of \RULE{All-<:-All-Ex}:
+            \begin{itemize}
+                \item $\SJ{\Gamma}{S_2}{S_1}$
+                \item $\SJ{\Gamma, x: S_2}{U_1}{U_2}$
+            \end{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case} \RULE{Typ-<:-Typ}:
+            $\SJ{\Gamma}{\TDEC{A}{S_1}{U_1}}{\TDEC{A}{S_2}{U_2}}$
+        \begin{itemize}
+            \item By inversion of \RULE{Typ-<:-Typ}:
+            \begin{itemize}
+                \item $\SJ{\Gamma}{S_2}{S_1}$
+                \item $\SJ{\Gamma}{U_1}{U_2}$
+            \end{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case} \RULE{And$_1$-<:}: $\SJ{\Gamma}{\AGG{S}{U}}{S}$
+        \begin{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case} \RULE{And$_2$-<:}: $\SJ{\Gamma}{\AGG{S}{U}}{U}$
+        \begin{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case} \RULE{Fld-<:-Fld}:
+            $\SJ{\Gamma}{\FDEC{a}{S}}{\FDEC{a}{U}}$
+        \begin{itemize}
+            \item By inversion of \RULE{Fld-<:-Fld}: $\SJ{\Gamma}{S}{U}$
+            \item \TODOTHIS
+        \end{itemize}
+        \item \textbf{Case} \RULE{All-<:-All-Im}:
+            $\SJ{\Gamma}{\IFUN{x}{S_1}{U_1}}{\IFUN{x}{S_2}{U_2}}$
+        \begin{itemize}
+            \item By inversion of \RULE{All-<:-All-Im}:
+            \begin{itemize}
+                \item $\SJ{\Gamma}{S_2}{S_1}$
+                \item $\SJ{\Gamma, x: S_2}{U_1}{U_2}$
+            \end{itemize}
+            \item \TODOTHIS
+        \end{itemize}
+    \end{itemize}
 \end{proof}
 
 \begin{LEMMA}[Preservation of free variables under type translation]
@@ -15,7 +103,7 @@
 \end{LEMMA}
 
 \begin{proof}
-    Directly from the definition.
+    Immediate from definition \ref{translation}.
 \end{proof}
 
 \begin{LEMMA}[Commutativity of type translation and name substitution]
