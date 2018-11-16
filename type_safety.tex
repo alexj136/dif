@@ -220,12 +220,14 @@
             \end{itemize}
             \item The goal then follows from \RULET{Fld-E}.
         \end{itemize}
-        \item \textbf{Case} \RULE{Rec-I}: $\TJ{\Gamma}{x}{\REC{x}{S}}{\HAT{x}}$
+        \item \textbf{Case} \RULE{Rec-I}:
+            $\TJ{\Gamma}{x}{\REC{\HAT{x}}{S}}{\HAT{x}}$
         \begin{itemize}
-            \item To show: $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\TRANS{\REC{x}{S}}}$
+            \item To show:
+                $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\TRANS{\REC{\HAT{x}}{S}}}$
             \begin{itemize}
                 \item Or by definition \ref{translation}:
-                    $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\REC{x}{\TRANS{S}}}$
+                    $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\REC{\HAT{x}}{\TRANS{S}}}$
             \end{itemize}
             \item By inversion of \RULE{Rec-I}: $\TJ{\Gamma}{x}{S}{\HAT{x}}$
             \begin{itemize}
@@ -238,14 +240,14 @@
         \begin{itemize}
             \item To show: $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\TRANS{S}}$
             \item By inversion of \RULE{Rec-E}:
-                $\TJ{\Gamma}{x}{\REC{x}{S}}{\HAT{x}}$
+                $\TJ{\Gamma}{x}{\REC{\HAT{x}}{S}}{\HAT{x}}$
             \begin{itemize}
-                \item Then by definition \ref{translation}:
-                    $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\REC{x}{\TRANS{S}}}$
+                \item Then by induction:
+                    $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\TRANS{\REC{\HAT{x}}{S}}}$
+                \item And by definition \ref{translation}:
+                    $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\REC{\HAT{x}}{\TRANS{S}}}$
             \end{itemize}
-            \item \TODOTHIS \TODO{What to do about using translated or
-                untranslated variable in the type in the conclusion of Rec-I or
-                the premise of Rec-E?}
+            \item The goal then follows from \RULET{Rec-E}.
         \end{itemize}
         \item \textbf{Case} \RULE{All-Im-I}:
             $\TJ{\Gamma}{t}{\IFUN{u}{S}{U}}{\ABS{u}{\TRANS{S}}{\HAT{t}}}$

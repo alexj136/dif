@@ -57,11 +57,11 @@
     \RULE{Rec-I} \quad \inference{
         \TJ{\Gamma}{x}{S}{\HAT{x}}
     }{
-        \TJ{\Gamma}{x}{\REC{x}{S}}{\HAT{x}}
+        \TJ{\Gamma}{x}{\REC{\HAT{x}}{S}}{\HAT{x}}
     } \qquad
 
     \RULE{Rec-E} \quad \inference{
-        \TJ{\Gamma}{x}{\REC{x}{S}}{\HAT{x}}
+        \TJ{\Gamma}{x}{\REC{\HAT{x}}{S}}{\HAT{x}}
     }{
         \TJ{\Gamma}{x}{S}{\HAT{x}}
     } \\[4mm]
