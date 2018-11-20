@@ -356,19 +356,72 @@
         \begin{itemize}
             \item To show: $\SUB{u}{v}(\TRANS{(\AGG{S'}{S''})}) =
                 \TRANS{(\SUB{u}{v}(\AGG{S'}{S''}))}$
-            \item \TODOTHIS
+            \item By definition \ref{translation} on LHS:
+                $\SUB{u}{v}(\AGG{\TRANS{S'}}{\TRANS{S''}}) =
+                \TRANS{(\SUB{u}{v}(\AGG{S'}{S''}))}$
+            \item By definition \ref{substitution} on LHS and RHS: \\
+                $\AGG{(\SUB{u}{v}(\TRANS{S'}))}{(\SUB{u}{v}(\TRANS{S''}))}
+                = \TRANS{(\AGG{(\SUB{u}{v}S')}{(\SUB{u}{v}S'')})}$
+            \item By definition \ref{translation} on RHS: \\
+                $\AGG{(\SUB{u}{v}(\TRANS{S'}))}{(\SUB{u}{v}(\TRANS{S''}))}
+                = \AGG{\TRANS{(\SUB{u}{v}S')}}{\TRANS{(\SUB{u}{v}S'')}}$
+            \item The goal then follows by induction.
         \end{itemize}
-        \item \textbf{Case} $\DFUN{u}{S'}{S''}$
+        \item \textbf{Case} $\DFUN{w}{S'}{S''}$
         \begin{itemize}
-            \item To show: $\SUB{u}{v}(\TRANS{(\DFUN{u}{S'}{S''})}) =
-                \TRANS{(\SUB{u}{v}(\DFUN{u}{S'}{S''}))}$
-            \item \TODOTHIS
+            \item To show: $\SUB{u}{v}(\TRANS{(\DFUN{w}{S'}{S''})}) =
+                \TRANS{(\SUB{u}{v}(\DFUN{w}{S'}{S''}))}$
+            \item By definition \ref{translation} on LHS:
+                $\SUB{u}{v}(\DFUN{w}{\TRANS{S'}}{\TRANS{S''}}) =
+                \TRANS{(\SUB{u}{v}(\DFUN{w}{S'}{S''}))}$
+            \item \textbf{Case} $u = w$
+            \begin{itemize}
+                \item By definition \ref{substitution} on LHS and RHS:
+                    $\DFUN{w}{\TRANS{S'}}{\SUB{u}{v}(\TRANS{S''})} =
+                    \TRANS{(\DFUN{w}{S'}{\SUB{u}{v}S''})}$
+                \item By definition \ref{translation} on RHS: \\
+                    $\DFUN{w}{\TRANS{S'}}{\SUB{u}{v}(\TRANS{S''})} =
+                    \DFUN{w}{\TRANS{S'}}{(\TRANS{(\SUB{u}{v}S'')})}$
+                \item The goal then follows by induction.
+            \end{itemize}
+            \item \textbf{Case} $u \neq w$
+            \begin{itemize}
+                \item By definition \ref{substitution} on LHS and RHS: \\
+                    $\DFUN{w}{\SUB{u}{v}(\TRANS{S'})}{\SUB{u}{v}(\TRANS{S''})} =
+                    \TRANS{(\DFUN{w}{\SUB{u}{v}S'}{\SUB{u}{v}S''})}$
+                \item By definition \ref{translation} on RHS: \\
+                    $\DFUN{w}{\SUB{u}{v}(\TRANS{S'})}{\SUB{u}{v}(\TRANS{S''})} =
+                    \DFUN{w}{\TRANS{(\SUB{u}{v}S')}}{(\TRANS{(\SUB{u}{v}S'')})}$
+                \item The goal then follows by induction.
+            \end{itemize}
         \end{itemize}
         \item \textbf{Case} $\IFUN{u}{S'}{S''}$
         \begin{itemize}
             \item To show: $\SUB{u}{v}(\TRANS{(\IFUN{u}{S'}{S''})}) =
                 \TRANS{(\SUB{u}{v}(\IFUN{u}{S'}{S''}))}$
-            \item \TODOTHIS
+            \item By definition \ref{translation} on LHS:
+                $\SUB{u}{v}(\DFUN{w}{\TRANS{S'}}{\TRANS{S''}}) =
+                \TRANS{(\SUB{u}{v}(\IFUN{w}{S'}{S''}))}$
+            \item \textbf{Case} $u = w$
+            \begin{itemize}
+                \item By definition \ref{substitution} on LHS and RHS:
+                    $\DFUN{w}{\TRANS{S'}}{\SUB{u}{v}(\TRANS{S''})} =
+                    \TRANS{(\IFUN{w}{S'}{\SUB{u}{v}S''})}$
+                \item By definition \ref{translation} on RHS: \\
+                    $\DFUN{w}{\TRANS{S'}}{\SUB{u}{v}(\TRANS{S''})} =
+                    \DFUN{w}{\TRANS{S'}}{(\TRANS{(\SUB{u}{v}S'')})}$
+                \item The goal then follows by induction.
+            \end{itemize}
+            \item \textbf{Case} $u \neq w$
+            \begin{itemize}
+                \item By definition \ref{substitution} on LHS and RHS: \\
+                    $\DFUN{w}{\SUB{u}{v}(\TRANS{S'})}{\SUB{u}{v}(\TRANS{S''})} =
+                    \TRANS{(\IFUN{w}{\SUB{u}{v}S'}{\SUB{u}{v}S''})}$
+                \item By definition \ref{translation} on RHS: \\
+                    $\DFUN{w}{\SUB{u}{v}(\TRANS{S'})}{\SUB{u}{v}(\TRANS{S''})} =
+                    \DFUN{w}{\TRANS{(\SUB{u}{v}S')}}{(\TRANS{(\SUB{u}{v}S'')})}$
+                \item The goal then follows by induction.
+            \end{itemize}
         \end{itemize}
     \end{itemize}
 \end{proof}
