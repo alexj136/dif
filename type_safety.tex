@@ -308,19 +308,49 @@
         \begin{itemize}
             \item To show: $\SUB{u}{v}(\TRANS{\TDEC{A}{S'}{S''}}) =
                 \TRANS{(\SUB{u}{v}\TDEC{A}{S'}{S''})}$
-            \item \TODOTHIS
+            \item By definition \ref{translation} on LHS:
+                $\SUB{u}{v}(\TDEC{A}{\TRANS{S'}}{\TRANS{S''}}) =
+                \TRANS{(\SUB{u}{v}\TDEC{A}{S'}{S''})}$
+            \item By definition \ref{substitution} on LHS and RHS: \\
+                $\TDEC{A}{(\SUB{u}{v}(\TRANS{S'}))}{(\SUB{u}{v}(\TRANS{S''}))}
+                = \TRANS{\TDEC{A}{\SUB{u}{v}S'}{\SUB{u}{v}S''}}$
+            \item By definition \ref{translation} on RHS: \\
+                $\TDEC{A}{(\SUB{u}{v}(\TRANS{S'}))}{(\SUB{u}{v}(\TRANS{S''}))}
+                = \TDEC{A}{\TRANS{(\SUB{u}{v}S')}}{\TRANS{(\SUB{u}{v}S'')}}$
+            \item The goal then follows by induction.
         \end{itemize}
         \item \textbf{Case} $\FDEC{a}{S'}$
         \begin{itemize}
             \item To show: $\SUB{u}{v}(\TRANS{\FDEC{a}{S'}}) =
                 \TRANS{(\SUB{u}{v}\FDEC{a}{S'})}$
-            \item \TODOTHIS
+            \item By definition \ref{translation} on LHS:
+                $\SUB{u}{v}\FDEC{a}{\TRANS{S'}} = \TRANS{(\SUB{u}{v}\FDEC{a}{S'})}$
+            \item By definition \ref{substitution} on LHS and RHS:
+                $\FDEC{a}{\SUB{u}{v}(\TRANS{S'})} =
+                \TRANS{(\FDEC{a}{\SUB{u}{v}S'})}$
+            \item By definition \ref{translation} on RHS:
+                $\FDEC{a}{\SUB{u}{v}(\TRANS{S'})} =
+                \FDEC{a}{\TRANS{(\SUB{u}{v}S')}}$
+            \item The goal then follows by induction.
         \end{itemize}
         \item \textbf{Case} $u.A$
         \begin{itemize}
-            \item To show: $\SUB{u}{v}(\TRANS{(u.A)}) =
-                \TRANS{(\SUB{u}{v}(u.A))}$
-            \item \TODOTHIS
+            \item To show: $\SUB{u}{v}(\TRANS{(w.A)}) =
+                \TRANS{(\SUB{u}{v}(w.A))}$
+            \item By definition \ref{translation} on LHS:
+                $\SUB{u}{v}(w.A) = \TRANS{(\SUB{u}{v}(w.A))}$
+            \item \textbf{Case} $u = w$
+            \begin{itemize}
+                \item By definition \ref{substitution} on LHS and RHS:
+                    $v.A = \TRANS{(v.A)}$
+                \item By definition \ref{translation} on RHS: $v.A = v.A$
+            \end{itemize}
+            \item \textbf{Case} $u \neq w$
+            \begin{itemize}
+                \item By definition \ref{substitution} on LHS and RHS:
+                    $w.A = \TRANS{(w.A)}$
+                \item By definition \ref{translation} on RHS: $w.A = w.A$
+            \end{itemize}
         \end{itemize}
         \item \textbf{Case} $\AGG{S'}{S''}$
         \begin{itemize}
