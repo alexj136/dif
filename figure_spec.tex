@@ -1,0 +1,8 @@
+\[\begin{array}{c}
+    \SPEC{\Gamma, i, j} = \begin{cases}
+        -1   & \IF \SJ{\Gamma}{i}{j} \wedge \neg(\SJ{\Gamma}{j}{i}) \\
+        1    & \IF \neg(\SJ{\Gamma}{i}{j}) \wedge \SJ{\Gamma}{j}{i} \\
+        0    & \IF \SJ{\Gamma}{i}{j} \wedge \SJ{\Gamma}{j}{i} \\
+        \bot & \ \textbf{otherwise}
+    \end{cases}
+\end{array}\]

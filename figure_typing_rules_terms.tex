@@ -1,7 +1,13 @@
 \[\begin{array}{c}
-    \RULE{Var-Ex} \quad \TJ{\Gamma, p: S, \Gamma'}{p}{S}{p} \qquad
+    \RULE{Var-Im} \quad \inference{
+        \exists j \in \DOM{\Gamma \cup \Gamma'} .
+            \TJ{\Gamma, \Gamma'}{\IMP}{S}{j} \Rightarrow
+            \DEPTH{\Gamma, i, j} + \SPEC{\Gamma, i, j} \neq 0
+    }{
+        \TJ{\Gamma, i: S, \Gamma'}{\IMP}{S}{i}
+    } \\[4mm]
 
-    \RULE{Var-Im} \quad \TJ{\Gamma, i: S, \Gamma'}{\IMP}{S}{i} \\[4mm]
+    \RULE{Var-Ex} \quad \TJ{\Gamma, p: S, \Gamma'}{p}{S}{p} \qquad
 
     \RULE{Sub} \quad \inference{
         \TJ{\Gamma}{t}{S}{\HAT{t}} \quad

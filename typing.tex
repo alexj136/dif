@@ -4,6 +4,32 @@ figure \ref{figure_typing_rules_definitions} gives the typing rules for DIF
 definitions, and figure \ref{figure_subtyping_rules} the subtyping rules for
 DIF.
 
+\subsection{The functions \textit{depth} and \textit{spec}}
+
+The function $\DEPTH{\Gamma, i, j}$ decides which variable is more deeply nested
+in the environment $\Gamma$, for purposes of disambiguation of implicit variable
+selection. It returns $-1$ if $i$ is more deeply nested, and $1$ if $j$ is more
+deeply nested. Its formal definition is given in figure \ref{figure_depth}.
+
+\begin{figure}[h]
+    \input{figure_depth}
+    \caption{The \textbf{\textit{depth}} function}
+    \label{figure_depth}
+\end{figure}
+
+The function $\SPEC{\Gamma, i, j}$ decides which variable's type is more
+specific in the environment $\Gamma$, i.e. which type can be instantiated to the
+other by widening or polymorphic parameter instantiation. It returns $-1$ if $i$
+is more specific, $1$ if $j$ is more specific, and if they are equal (i.e. both
+a subtype and a supertype of each other), 0 is returned. Its formal definition
+is given in figure \ref{figure_spec}.
+
+\begin{figure}[h]
+    \input{figure_spec}
+    \caption{The \textbf{\textit{spec}} function}
+    \label{figure_spec}
+\end{figure}
+
 \subsection{Typing rules}
 
 \begin{figure}[h]
