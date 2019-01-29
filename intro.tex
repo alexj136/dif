@@ -11,6 +11,8 @@ Other papers on DOT are \cite{ARO14, AR17, AR16, AMO12}
 
 \subsubsection{The Type Class Pattern}
 
+\hrule
+
 \begin{lstlisting}[mathescape]
 trait Ord[T] {
     def compare(x: A, y: A): Boolean
@@ -25,6 +27,8 @@ implicit def intOrd: Ord[Int] = new Ord[Int] {
 comp(1, 2)
 \end{lstlisting}
 
+\hrule
+
 \begin{lstlisting}[mathescape]
 let ord_package = $\nu$(ord_p) {
     Ord = $\mu$(self: {
@@ -33,8 +37,8 @@ let ord_package = $\nu$(ord_p) {
     })
     comp: $\forall$(t: {A: $\bot$..$\top$})$\forall$(x: t.A, y: t.A)$\forall$$\IMP$(ev: ord_p.Ord$\wedge${A: $\bot$..$\top$})Boolean =
         $\lambda$(t: {A: $\bot$..$\top$})$\lambda$(x: t.A, y: t.A)$\IMP$.compare(x, y)
-in
-let $\IMP$: ord_p.Ord$\wedge${A: $\bot$..Int} = $\mu$(self: {
+} in
+let $\IMP$: ord_package.Ord$\wedge${A: $\bot$..Int} = $\mu$(self: {
         A: $\bot$..Int
         compare: $\forall$(x: self.A, y: self.A)Boolean =
             $\lambda$(x: self.A, y: self.A) x < y
@@ -44,3 +48,5 @@ in
 ord_package.comp(1, 2)
 ...
 \end{lstlisting}
+
+\hrule

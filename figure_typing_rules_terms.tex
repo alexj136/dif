@@ -1,10 +1,10 @@
 \[\begin{array}{c}
     \RULE{Var-Im} \quad \inference{
-        \exists j \in \DOM{\Gamma \cup \Gamma'} .
-            \TJ{\Gamma, \Gamma'}{\IMP}{S}{j} \Rightarrow
-            \DEPTH{\Gamma, i, j} + \SPEC{\Gamma, i, j} \neq 0
+        \forall j \in \DOM{\Gamma - i} .
+            \TJ{\Gamma - i}{\IMP}{S}{j} \Rightarrow
+            \DEPTH{\Gamma, i, j} + \SPEC{\Gamma, i, j} < 0
     }{
-        \TJ{\Gamma, i: S, \Gamma'}{\IMP}{S}{i}
+        \TJ{\Gamma}{\IMP}{S}{i}
     } \\[4mm]
 
     \RULE{Var-Ex} \quad \TJ{\Gamma, p: S, \Gamma'}{p}{S}{p} \qquad
