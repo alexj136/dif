@@ -11,6 +11,12 @@ Other papers on DOT are \cite{ARO14, AR17, AR16, AMO12}
 
 \subsubsection{The Type Class Pattern}
 
+The type class pattern \cite{OBLB18} can be implemented in DIF, and maps more
+closely to the type class pattern as is used in Scala. The example leverages
+DOT's path-dependency, which exhibits parametric polymorphism by passing
+objects with type members. The \emph{dictionary passing} \cite{K88, WB89} of
+languages with type classes can then be implemented with implicit functions.
+
 \begin{lstlisting}[mathescape]
 trait Ord[T] {
     def compare(x: A, y: A): Boolean
