@@ -1,7 +1,8 @@
 \[\begin{array}{c}
     \RULE{Var-Im} \quad \inference{
-        \forall j \in \DOM{\Gamma - i} .
-            \TJ{\Gamma - i}{\IMP}{S}{j} \Rightarrow
+        \Gamma = \Gamma_1, i: S, \Gamma_2 \quad
+        \forall j \neq i \in \DOM{\Gamma} .
+            \TJ{\Gamma}{\IMP}{S}{j} \Rightarrow
             \DEPTH{\Gamma, i, j} + \SPEC{\Gamma, i, j} < 0
     }{
         \TJ{\Gamma}{\IMP}{S}{i}
