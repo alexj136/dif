@@ -42,8 +42,8 @@ let ord_package = $\nu$(ord_p) {
     comp: $\forall$(t: {A: $\bot$..$\top$})$\forall$(x: t.A, y: t.A)$\forall$$\IMP$(ev: ord_p.Ord$\wedge${A: $\bot$..$\top$})Boolean =
         $\lambda$(t: {A: $\bot$..$\top$})$\lambda$(x: t.A, y: t.A)$\IMP$.compare(x, y)
 } in
-let $\IMP$: ord_package.Ord$\wedge${A: $\bot$..Int} = $\mu$(self: {
-        A: $\bot$..Int
+let $\IMP$: ord_package.Ord$\wedge${A: Int..Int} = $\nu$(self: {
+        A = Int
         compare: $\forall$(x: self.A, y: self.A)Boolean =
             $\lambda$(x: self.A, y: self.A) x < y
     })

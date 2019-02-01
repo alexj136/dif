@@ -4,8 +4,28 @@
 
 \subsection{Typing for Type Class example}
 
-$\TJ{}{\LET{\texttt{ord\_package}}{\OBJ{\texttt{ord\_p}}{\TODOTHIS}{
-    \{\texttt{Ord} = \REC{\texttt{self}}{\{A: \bot..\top; \texttt{compare}:
-    \DFUN{x}{\texttt{self}.A}{\DFUN{y}{\texttt{self}.A}{\texttt{Boolean}}}
-    \}}\}} \\
-}{\TODOTHIS}}{\texttt{Boolean}}{\TODOTHIS}$
+$\TJ{}{
+    \LET{\texttt{ord\_package}}{
+        \OBJ{\texttt{ord\_p}}{\TODOTHIS}{
+        \{\texttt{Ord} = \REC{\texttt{self}}{\{A: \bot..\top; \texttt{compare}:
+        \DFUN{x}{\texttt{self}.A}{\DFUN{y}{\texttt{self}.A}{\BOOL}}
+        \}} ; \\
+        \texttt{comp}: \DFUN{t}{\TDEC{A}{\bot}{\top}}{\DFUN{x}{t.A}{
+            \DFUN{y}{t.A}{\IFUN{ev}{\texttt{ord\_p.Ord}\wedge
+                \TDEC{A}{\bot}{\top}}{\BOOL}}}} = \\
+            \ABS{t}{\TDEC{A}{\bot}{\top}}{\ABS{x}{t.A}{\ABS{y}{t.A}{
+                \IMP.\texttt{compare}(x)(y)}}}
+        \}} \\
+    }{
+        \LET{\IMP: \texttt{ord\_package.Ord}\wedge\TDEC{A}{\bot}{\INT}}{
+            \OBJ{\texttt{self}}{\TODOTHIS}{
+                \DEF{A}{\INT};
+                \texttt{compare}: \DFUN{x}{\texttt{self}.A}{
+                        \DFUN{y}{\texttt{self}.A}{\BOOL}} =
+                    \ABS{x}{\texttt{self}.A}{\ABS{y}{\texttt{self}.A}{x < y}}
+            }
+        }{
+            \texttt{ord\_package.comp}(1, 2)
+        }
+    }
+}{\BOOL}{\TODOTHIS}$
