@@ -1,11 +1,100 @@
 \section{Introduction}
 
-Here we extend the DOT calculus \cite{AGORS16} with implicit functions as in
-\cite{OBLB18}. We term the resulting calculus DIF (DOT with Implicit Functions).
+\subsection{Implicit functions}
+Modularity, a core concept in software engineering, is greatly aided by
+parameterisation of programs. Parameterisation has dual facets: supplying and
+consuming a parameter.  A key tension in large-scale software engineering is
+between \emph{explicit} (e.g.~pure functional programming), and \emph{implicit}
+parameterisation (e.g.~global state).  The former enables local reasoning but
+can lead to repetitive supply of parameters.  Here is a simple example of the
+problem:
 
-\subsection{Related work}
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[mathescape]
+    def compare(x: Int, y: Int,
+            comparator: Int => Int => Boolean): Boolean =
+        comparator(x)(y)
+    ...
+    compare(3, 4, <=)
+    ...
+    compare(17, 12, <=)
+    ...
+\end{lstlisting}
+\end{minipage}
 
-Other papers on DOT are \cite{ARO14, AR17, AR16, AMO12}
+Repeatedly passing functions like \texttt{<=} which are unlikely to change
+frequently, is tedious, and impedes readability of large code bases. Default
+parameters  are an early proposal for mediating this tension in a type-safe way.
+The key idea is to annotate function arguments with their default value, to be
+used whenever an invocation does not supply an argument:
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[mathescape]
+    def compare(x: Int, y: Int,
+            comparator: Int => Int => Boolean = <=): Boolean =
+        comparator(x)(y)
+    ...
+    compare(3, 4)
+    ...
+    compare(17, 12)
+    ...
+\end{lstlisting}
+\end{minipage}
+
+The compiler synthesises $\texttt{compare(3, 4, <=)}$ from $\texttt{compare(3,
+4)}$, and $\texttt{compare(17, 12, <=)}$ from $\texttt{compare(17, 12)}$.
+Default parameters have a key disadvantage: the default value is hard-coded at
+the callee, and cannot be context dependent. Implicit arguments, a strict
+generalisation of default parameters, were pioneered in Haskell \cite{LLMS00},
+and popularised as well as refined  in Scala \cite{OBLB18}: they separate the
+\emph{callee's declaration} that an argument can be elided, from the
+\emph{caller's choice} of elided values, allowing the latter to be context
+dependent.
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[mathescape]
+    def compare(x: Int, y: Int,
+            implicit comparator: Int => Int => Boolean): Boolean =
+        comparator(x)(y)
+    ...
+    let implicit cmp = <= in
+        compare(3, 4)
+    ...
+    let implicit cmp = >  in
+        compare(17, 12)
+    ...
+\end{lstlisting}
+\end{minipage}
+
+In this example $\texttt{compare(3, 4)}$ is rewritten as above, but
+$\texttt{compare(17, 12)}$ becomes $\texttt{compare(17, 12, >)}$, i.e.~a
+different implicit argument is synthesised. The disambiguation between several
+providers of implicit arguments happens at compile-time using type and scope
+information. Programs where elided arguments cannot be disambiguated at
+compile-time are rejected as ill-formed. Hence type-safety is not compromised.
+
+\subsection{Dependent Object Types (DOT)}
+
+DOT is a calculus intended as a step towards a theoretical foundation for the
+programming language Scala and its type system \cite{AMO12}. DOT models a
+restricted subset of Scala -- the base-calculus includes Scala's key features
+from a type theory perspective, such as path-dependency and abstract type
+members. Omitted are features of Scala that are less important from this
+perspective, such as traits, classes and inheritance.
+
+Other papers on DOT are \cite{ARO14, AR17, AR16}
+
+\subsection{Dependent object types with Implicit Functions (DIF)}
+
+The type safety of implicit functions in Scala has been evidenced by the
+type-safe integration of implicit functions into lambda calculus \cite{OBLB18},
+but this evidence could be further strengthened by their type-safe integration
+into DOT, a calculus much more closely related to Scala. In the remainder of
+this paper, we do exactly this -- we present DIF, a type-safe integration of
+implicit functions into DOT. We demonstrate that the type class patter, a
+typical use case of implicit functions in Scala, can be translated typably into
+DIF. DIF is shown to be type-safe by translation into the DOT calculus of
+\cite{AGORS16}.
 
 \subsection{Examples}
 
@@ -17,6 +106,7 @@ DOT's path-dependency, which exhibits parametric polymorphism by passing
 objects with type members. The \emph{dictionary passing} \cite{K88, WB89} of
 languages with type classes can then be implemented with implicit functions.
 
+\begin{minipage}{\textwidth}
 \begin{lstlisting}[mathescape]
 trait Ord[T] {
     def compare(x: A, y: A): Boolean
@@ -30,9 +120,11 @@ implicit def intOrd: Ord[Int] = new Ord[Int] {
 
 comp(1, 2)
 \end{lstlisting}
+\end{minipage}
 
 \hrule
 
+\begin{minipage}{\textwidth}
 \begin{lstlisting}[mathescape]
 let ord_package = $\nu$(ord_p) {
     Ord = $\mu$(self: {
@@ -52,3 +144,4 @@ in
 ord_package.comp(1, 2)
 ...
 \end{lstlisting}
+\end{minipage}
