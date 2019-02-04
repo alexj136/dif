@@ -57,11 +57,11 @@ dependent.
             implicit comparator: Int => Int => Boolean): Boolean =
         comparator(x)(y)
     ...
-    let implicit cmp = <= in
-        compare(3, 4)
+    implicit val cmp = <=
+    compare(3, 4)
     ...
-    let implicit cmp = >  in
-        compare(17, 12)
+    implicit val cmp = >
+    compare(17, 12)
     ...
 \end{lstlisting}
 \end{minipage}
