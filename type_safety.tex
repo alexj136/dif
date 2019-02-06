@@ -1,5 +1,22 @@
 \section{Type safety of DIF}
 
+We show the type safety of DIF by translation into DOT. Given an environment
+$\Gamma$, a DIF term $t$, a type $S$ and a DOT term $\HAT{t}$, we show that the
+judgement $\TJ{\Gamma}{t}{S}{\HAT{t}}$ implies the judgement
+$\TJT{\TRANS{\Gamma}}{\HAT{t}}{\TRANS{S}}$. In other words, if a DOT term is
+typable under $\Gamma$ with type $S$, and translates to $\HAT{t}$, then
+$\HAT{t}$ is typable in DOT under the translation of $\Gamma$ with the
+translation of the type $S$. The same property also holds for definitions, i.e.
+$\TJ{\Gamma}{d}{S}{\HAT{d}} \Rightarrow
+\TJT{\TRANS{\Gamma}}{\HAT{d}}{\TRANS{S}}$. We call this property \emph{type
+preserving translation}. The type safety of DIF depends upon the type safety of
+DOT, via type preserving translation.
+
+Theorems \ref{tp_terms} and \ref{tp_defs} show type preserving translation for
+terms and definitions respectively. We also include some auxiliary lemmas, such
+as lemma \ref{pres_subtyping}, which shows that subtyping is preserved by the
+translation from DIF types to DOT types.
+
 \begin{LEMMA}[Preservation of subtyping under type translation]
     \label{pres_subtyping}
     If $\SJ{\Gamma}{S}{U}$ then $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{U}}$.
