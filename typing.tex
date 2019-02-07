@@ -5,6 +5,33 @@ judgements in DIF are 4-place: $\TJ{\Gamma}{t}{S}{\HAT{t}}$. This judgement can
 be read: under environment $\Gamma$, the DIF term $t$ has type $S$, and
 translated to the DOT term $\HAT{t}$.
 
+\subsection{Translation of Types}
+
+We define the function $\TRANS{(\bullet)}$, which translates DIF types into DOT types. DIF types differ from DOT types only in the inclusion of the type for implicit functions $\IFUN{u}{S}{S'}$. The translation simply erases occurrences of $\IMP$, translating implicit functions into explicit functions.
+
+\begin{DEFINITION}[Translation of types]
+    \label{translation}
+    Figure \ref{figure_translation} defines translation from DIF types to DOT
+    types.
+\end{DEFINITION}
+
+\begin{figure}[h]
+    \input{figure_translation}
+    \caption{Translation from DIF types to DOT types}
+    \label{figure_translation}
+\end{figure}
+
+We extend the definition of $\TRANS{(\bullet)}$ pointwise to environments
+$\Gamma$.
+
+\subsection{Type substitution}
+
+\begin{DEFINITION}[Name substitution on types]
+    \label{substitution}
+    We define capture-avoiding substitution of names within types, written
+    $\SUB{u}{v}S$, in the usual way.
+\end{DEFINITION}
+
 \subsection{The functions \textit{depth} and \textit{spec}}
 
 The function $\DEPTH{\Gamma, i, j}$ decides which variable is more deeply nested
@@ -51,24 +78,24 @@ rule \RULE{Bind-Ex} leaves explicit variable bindings unchanged.
 \end{figure}
 
 Figure \ref{figure_typing_rules_terms} gives the binding rules for DIF terms.
-Most rules are identical to their corresponding rules in DOT, when ignoring the
-translation part of typing judgements ($\leadsto \HAT{t}$). The typing rules
-with differ slightly from their DOT counterparts in that they have binding
-judgements in their premises. The rules \RULE{Var-Ex}, \RULE{All-Ex-I} and
-\RULE{All-Ex-E} are analogous to the rules \RULET{Var}, \RULET{All-I} and
-\RULET{All-E} respectively. The rule \RULE{All-Im-I} types introduction of
-implicit functions, introducing an (explicit) abstraction to the translation.
-The rule \RULE{All-Im-E} types implicit function elimination, inserting an
-implicit variable of suitable type as an argument to the implicit function.
-Finally \RULE{Var-Im} types the implicit query, replacing them with a chosen
-implicit variable in the translation. This rule also performs
-\emph{disambiguation}, where more than one implicit variable is of suitable
-type. Disambiguation follows the same process as Scala (as specified in
-\cite{OBLB18}). We prefer more deeply nested implicit variables over less deeply
-nested ones, and implicit variables with more specific types over ones with more
-general types. Where we have a choice between two variables, one of which is
-more deeply nested and the other a more specific type, we reject the program as
-ambiguous.
+Most rules are identical to their corresponding rules in DOT (specifically in
+\cite{AGORS16}), when ignoring the translation part of typing judgements
+($\leadsto \HAT{t}$). The typing rules with differ slightly from their DOT
+counterparts in that they have binding judgements in their premises. The rules
+\RULE{Var-Ex}, \RULE{All-Ex-I} and \RULE{All-Ex-E} are analogous to the rules
+\RULET{Var}, \RULET{All-I} and \RULET{All-E} respectively. The rule
+\RULE{All-Im-I} types introduction of implicit functions, introducing an
+(explicit) abstraction to the translation. The rule \RULE{All-Im-E} types
+implicit function elimination, inserting an implicit variable of suitable type
+as an argument to the implicit function. Finally \RULE{Var-Im} types the
+implicit query, replacing them with a chosen implicit variable in the
+translation. This rule also performs \emph{disambiguation}, where more than one
+implicit variable is of suitable type. Disambiguation follows the same process
+as Scala (as specified in \cite{OBLB18}). We prefer more deeply nested implicit
+variables over less deeply nested ones, and implicit variables with more
+specific types over ones with more general types. Where we have a choice
+between two variables, one of which is more deeply nested and the other a more
+specific type, we reject the program as ambiguous.
 
 \begin{figure}[h]
     \input{figure_typing_rules_terms}
@@ -77,7 +104,8 @@ ambiguous.
 \end{figure}
 
 Figure \ref{figure_typing_rules_definitions} gives the typing rules for DIF
-definitions.
+definitions. These are again very similar to the typing rules for DOT
+defintions, and in each case the translations are homomorphic.
 
 \begin{figure}[h]
     \input{figure_typing_rules_definitions}
@@ -86,35 +114,13 @@ definitions.
 \end{figure}
 
 Figure \ref{figure_subtyping_rules} gives the subtyping rules for DIF terms and
-definitions.
+definitions. These are yet again very similar to the subtyping rules in DOT.
+The exception is the rule \RULE{All-<:-All-Im}, which makes explicit functions
+a subtype of implicit functions. This allows the passing of arguments
+explicitly to an implicit function, which is an important aspect of implicit functions in Scala.
 
 \begin{figure}[h]
     \input{figure_subtyping_rules}
     \caption{Subtyping rules for DIF}
     \label{figure_subtyping_rules}
 \end{figure}
-
-\subsection{Translation of Types}
-
-\begin{DEFINITION}[Translation of types]
-    \label{translation}
-    Figure \ref{figure_translation} defines translation from DIF types to DOT
-    types.
-\end{DEFINITION}
-
-\begin{figure}[h]
-    \input{figure_translation}
-    \caption{Translation from DIF types to DOT types}
-    \label{figure_translation}
-\end{figure}
-
-We extend the definition of $\TRANS{(\bullet)}$ pointwise to environments
-$\Gamma$.
-
-\subsection{Type substitution}
-
-\begin{DEFINITION}[Name substitution on types]
-    \label{substitution}
-    We define capture-avoiding substitution of names within types, written
-    $\SUB{u}{v}S$, in the usual way.
-\end{DEFINITION}
