@@ -73,12 +73,6 @@ providers of implicit arguments happens at compile-time using type and scope
 information. Programs where elided arguments cannot be disambiguated at
 compile-time are rejected as ill-formed. Hence type-safety is not compromised.
 
-\subsection{Path-dependent Types}
-\TODOTHIS
-
-\subsection{Abstract Type Members}
-\TODOTHIS
-
 \subsection{Dependent Object Types (DOT)}
 
 DOT is a calculus intended as a step towards a theoretical foundation for the
@@ -89,6 +83,21 @@ members. Omitted are features of Scala that are less important from this
 perspective, such as traits, classes and inheritance.
 
 Other papers on DOT are \cite{ARO14, AR17, AR16}
+
+\subsection{Abstract Type Members}
+
+Abstract type members are a feature of DOT dependent on DOT's object-based
+nature. Abstract type members allow types to be members of objects (and their
+types), named with labels. The labels can correspond to more or less specific
+types via upper and lower bound syntax. We write $\TDEC{A}{S}{S'}$ to denote an
+object with a type member $A$, whose lower bound is $S$ and upper bound is
+$S'$. We can define a completely abstract type member by using $\bot$ and
+$\top$ as lower and upper bounds respectively. Conversely we can define a fully
+specified type member by using a single specified type as both the lower and
+upper bound.
+
+\subsection{Path-dependent Types}
+\TODOTHIS
 
 \subsection{Dependent object types with Implicit Functions (DIF)}
 

@@ -8,7 +8,12 @@ case $@ in
                 grep -A 4 -h --no-group-separator "begin{figure" *.tex > \
                     all-fig-code.tex &&
                 pdflatex -halt-on-error all_figures.tex &&
-                rm all-fig-code.tex ;;
+                rm all-fig-code.tex &&
+                # Do a word count
+                printf "Word count " &&
+                pdftotext main.pdf &&
+                wc -w main.txt &&
+                rm main.txt ;;
 
     "clean")    rm -f *.aux *.log *.bbl *.blg *.pdf *.out ;;
 
