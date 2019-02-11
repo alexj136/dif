@@ -97,7 +97,24 @@ specified type member by using a single specified type as both the lower and
 upper bound.
 
 \subsection{Path-dependent Types}
-\TODOTHIS
+Path-dependent types are a restricted form of dependent types that retain decidability \TODO{citation}. Instead of allowing arbitrary computations over values in types, objects with type members are the only values allowed, and  selection of type members is the only permitted operation on those objects. This
+selection is decidable \TODO{citation}. Path-dependent types with function arrows can be used to recover Hindley-Damas-Milner style polymorphism despite the absence of type variables, via the passing of an object with a type member. Consider the function \texttt{id} in an ML-like language with Hindley-Damas-Milner polymorphism as below:
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[mathescape]
+    id : $\forall$a. a $\rightarrow$ a
+    id x = x
+\end{lstlisting}
+\end{minipage}
+
+We can rewrite this in DOT as below, with an additional parameter used to pass the type of the parameter x:
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[mathescape]
+    id : $\forall$(u: {A: S}) $\forall$(v: u.A) u.A
+    id = $\lambda$(u: {A: S}) $\lambda$(x: u.A) x
+\end{lstlisting}
+\end{minipage}
 
 \subsection{Dependent object types with Implicit Functions (DIF)}
 
@@ -109,7 +126,7 @@ this paper, we do exactly this -- we present DIF, a type-safe integration of
 implicit functions into DOT. We demonstrate that the type class patter, a
 typical use case of implicit functions in Scala, can be translated typably into
 DIF. DIF is shown to be type-safe by translation into the DOT calculus of
-\cite{AGORS16}.
+\cite{AGORS16}. Combined with Hindley-Damas-Milner style parametric polymorphism recovered in DOT via path-dependent types, implicit functions can be used to recover ad-hoc polymorphism in DOT via the type class pattern.
 
 \subsection{Examples}
 

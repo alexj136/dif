@@ -12,7 +12,7 @@ case $@ in
                 # Do a word count
                 printf "Word count " &&
                 pdftotext main.pdf &&
-                wc -w main.txt &&
+                wc -w main.txt | awk '{print $1}' &&
                 rm main.txt ;;
 
     "clean")    rm -f *.aux *.log *.bbl *.blg *.pdf *.out ;;
