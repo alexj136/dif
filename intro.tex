@@ -97,8 +97,17 @@ specified type member by using a single specified type as both the lower and
 upper bound.
 
 \subsection{Path-dependent Types}
-Path-dependent types are a restricted form of dependent types that retain decidability \TODO{citation}. Instead of allowing arbitrary computations over values in types, objects with type members are the only values allowed, and  selection of type members is the only permitted operation on those objects. This
-selection is decidable \TODO{citation}. Path-dependent types with function arrows can be used to recover Hindley-Damas-Milner style polymorphism despite the absence of type variables, via the passing of an object with a type member. Consider the function \texttt{id} in an ML-like language with Hindley-Damas-Milner polymorphism as below:
+Path-dependent types are a restricted form of dependent types that retain
+decidability \cite{AGORS16}. Instead of allowing arbitrary computations over
+values in types, objects with type members are the only values allowed, and
+selection of type members is the only permitted operation on those objects.
+This restriction allows path-dependent types to retain decidabililty.
+
+Path-dependent types with function arrows can be used to recover
+Hindley-Damas-Milner style polymorphism despite the absence of type variables,
+via the passing of an object with a type member \cite{AGORS16}. Consider the
+function \texttt{id} in an ML-like language with Hindley-Damas-Milner
+polymorphism as below:
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[mathescape]
