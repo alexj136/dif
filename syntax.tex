@@ -1,8 +1,30 @@
 \section{The Language DIF}
-Figure \ref{figure_grammar} gives the syntax of DIF.
+Figure \ref{figure_grammar} gives the syntax of DIF. The syntax is similar to
+that of DOT in \cite{AGORS16}, with the addition of constructs related to
+implicit functions. We add a new type $\IFUN{u}{S}{S'}$ which represents an
+implicit (path-dependent) function from $S$ to $S'$. We also add the implicit
+query $\IMP$, the analogue to Scala's \texttt{implicitly[T]}. Occurrences of
+$\IMP$ are \emph{resolved} into variables by our typing and translation rules.
+The variable that replaces a given occurrence of $\IMP$ is chosen from
+candidate implicit variables, which are bound by let constructs, where $\IMP$
+is the variable name, i.e. $\LET{\IMP}{...}{...}$.
+
+Note that we make a distinction between two sets of variable names. The first,
+variables with implicit query, ranged over by $x, y$ is the set of variable
+names with the implicit query. The second set, variables, ranged over by $u, v$
+is the set of variables, where $\IMP$ is not allowed. At the term level,
+anywhere we can write a variable name, we could also write an implicit query,
+so we use $x$ in the grammar of terms. At the type level, however, implicit
+queries are not allowed in names, and we therefore use $u$ for names in the
+grammar of types.
 
 \begin{figure}[h]
     \input{figure_grammar}
     \caption{Grammar of DIF}
     \label{figure_grammar}
 \end{figure}
+
+We do not define a semantics of DIF directly. Instead we define a type-based
+translation from DIF programs to DOT programs, and the meaning of a DIF program
+is therefore given by its typed translation into a DOT program. This
+translation is the topic of section \ref{typing}.
