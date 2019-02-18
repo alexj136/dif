@@ -42,13 +42,14 @@ used whenever an invocation does not supply an argument:
 \end{minipage}
 
 The compiler synthesises $\texttt{compare(3, 4, <=)}$ from $\texttt{compare(3,
-4)}$, and $\texttt{compare(17, 12, <=)}$ from $\texttt{compare(17, 12)}$.
-Default parameters have a key disadvantage: the default value is hard-coded at
-the callee, and cannot be context dependent. Implicit arguments, a strict
-generalisation of default parameters, were pioneered in Haskell \cite{LLMS00},
-and popularised as well as refined  in Scala \cite{OBLB18}: they separate the
-\emph{callee's declaration} that an argument can be elided, from the
-\emph{caller's choice} of elided values, allowing the latter to be context
+4)}$, and $\texttt{compare(17, 12, <=)}$ from $\texttt{compare(17, 12)}$. The
+missing argument indicates to the compiler that the default $\texttt{<=}$ should
+be used. Default parameters have a key disadvantage: the default value is
+hard-coded at the callee, and cannot be context dependent. Implicit arguments, a
+strict generalisation of default parameters, were pioneered in Haskell
+\cite{LLMS00}, and popularised as well as refined  in Scala \cite{OBLB18}: they
+separate the \emph{callee's declaration} that an argument can be elided, from
+the \emph{caller's choice} of elided values, allowing the latter to be context
 dependent.
 
 \begin{minipage}{\linewidth}
