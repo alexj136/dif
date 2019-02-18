@@ -81,26 +81,52 @@ programming language Scala and its type system \cite{AMO12}. DOT models a
 restricted subset of Scala -- the base-calculus includes Scala's key features
 from a type theory perspective, such as path-dependency and abstract type
 members. Omitted are features of Scala that are less important from this
-perspective, such as traits, classes and inheritance.
+perspective, such as traits, classes and inheritance. We now look briefly at two
+important features of DOT.
 
-\subsection{Abstract Type Members}
+\paragraph{Abstract Type Members}
 
-Abstract type members are a feature of DOT dependent on DOT's object-based
-nature. Abstract type members allow types to be members of objects (and their
-types), named with labels. The labels can correspond to more or less specific
-types via upper and lower bound syntax. We write $\TDEC{A}{S}{S'}$ to denote an
-object with a type member $A$, whose lower bound is $S$ and upper bound is
-$S'$. We can define a completely abstract type member by using $\bot$ and
-$\top$ as lower and upper bounds respectively. Conversely we can define a fully
-specified type member by using a single specified type as both the lower and
-upper bound.
+Abstract type members are a feature of Scala that allow for generic programming.
+A trait may declare an abstract type member, and define methods over that type.
+Below is a trait \texttt{A} with an abstract type member \texttt{B}. The trait
+also contains a method member \texttt{consumeB} that consumes a value of type
+\texttt{B}.
 
-\subsection{Path-dependent Types}
-Path-dependent types are a restricted form of dependent types that retain
-decidability \cite{AGORS16}. Instead of allowing arbitrary computations over
-values in types, objects with type members are the only values allowed, and
-selection of type members is the only permitted operation on those objects.
-This restriction allows path-dependent types to retain decidabililty.
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[mathescape]
+    trait A {
+        type B
+        def consumeB(b: B): String
+    }
+\end{lstlisting}
+\end{minipage}
+
+\noindent Any object may then declare itself a subtype of \texttt{A}, and
+provide a concrete type in place of the abstract type member. Such an object may
+implement method members over that type:
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[mathescape]
+    object C extends A {
+        type B = Int
+        def consumeB(b: Int): String = b.toString
+    }
+\end{lstlisting}
+\end{minipage}
+
+\noindent Like Scala, DOT also includes abstract type members. We write
+$\TDEC{A}{S}{S'}$ to denote an object with a type member $A$, whose lower bound
+is $S$ and upper bound is $S'$. Scala's syntax \texttt{type T = U} is equivalent
+to DOT's $\TDEC{T}{U}{U}$. We can define a completely abstract type member by
+using $\bot$ and $\top$ as lower and upper bounds respectively. Conversely we
+can define a fully specified type member by using a single specified type as
+both the lower and upper bound.
+
+\paragraph{Path-dependent Types}
+Path-dependent types are a restricted form of dependent types \cite{AGORS16}.
+Instead of allowing arbitrary computations over values in types, objects with
+type members are the only values allowed, and selection of type members is the
+only permitted operation on those objects.
 
 Path-dependent types with function arrows can be used to recover
 Hindley-Damas-Milner style polymorphism despite the absence of type variables,
@@ -134,17 +160,18 @@ this paper, we do exactly this -- we present DIF, a type-safe integration of
 implicit functions into DOT. We demonstrate that the type class patter, a
 typical use case of implicit functions in Scala, can be translated typably into
 DIF. DIF is shown to be type-safe by translation into the DOT calculus of
-\cite{AGORS16}. Combined with Hindley-Damas-Milner style parametric polymorphism recovered in DOT via path-dependent types, implicit functions can be used to recover ad-hoc polymorphism in DOT via the type class pattern.
+\cite{AGORS16}. Combined with Hindley-Damas-Milner style parametric polymorphism
+recovered in DOT via path-dependent types, implicit functions can be used to
+recover ad-hoc polymorphism in DOT via the type class pattern.
 
-\subsection{Examples}
+\paragraph{Type classes} Type classes \cite{K88, WB89} are a mechanism to allow
+ad-hoc polymorphism in languages with parametric polymorphism. \TODO{more}
 
-\subsubsection{The Type Class Pattern}
-
-The type class pattern \cite{OBLB18} can be implemented in DIF, and maps more
-closely to the type class pattern as is used in Scala. The example leverages
-DOT's path-dependency, which exhibits parametric polymorphism by passing
-objects with type members. The \emph{dictionary passing} \cite{K88, WB89} of
-languages with type classes can then be implemented with implicit functions.
+\paragraph{Example} The type class pattern \cite{OBLB18} can be implemented in
+DIF, and maps more closely to the type class pattern as is used in Scala. The
+example leverages DOT's path-dependency, which exhibits parametric polymorphism
+by passing objects with type members. The \emph{dictionary passing} of languages
+with type classes can then be implemented with implicit functions.
 
 \begin{minipage}{\textwidth}
 \begin{lstlisting}[mathescape]
