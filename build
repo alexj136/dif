@@ -5,10 +5,6 @@ case $1 in
                 bibtex main &&
                 pdflatex -halt-on-error main.tex &&
                 pdflatex -halt-on-error main.tex &&
-                grep -A 4 -h --no-group-separator "begin{figure" *.tex > \
-                    all-fig-code.tex &&
-                pdflatex -halt-on-error all_figures.tex &&
-                rm all-fig-code.tex &&
                 # Do a word count
                 printf "Word count " &&
                 pdftotext main.pdf &&

@@ -1,4 +1,4 @@
-\[\begin{array}{c}
+\begin{minipage}{\textwidth} \[\begin{array}{c}
     \RULE{Var-Im} \quad \inference{
         i \in \DOM{\Gamma} \quad
         \forall j \in \DOM{\Gamma}, j \neq i.
@@ -15,6 +15,13 @@
         \SJ{\Gamma}{S}{S'}
     }{
         \TJ{\Gamma}{t}{S'}{\HAT{t}}
+    } \qquad
+
+    \RULE{And-I} \quad \inference{
+        \TJ{\Gamma}{x}{S}{\HAT{x}} \quad
+        \TJ{\Gamma}{x}{U}{\HAT{x}}
+    }{
+        \TJ{\Gamma}{x}{\AGG{S}{U}}{\HAT{x}}
     } \\[4mm]
 
     \RULE{All-Ex-I} \quad \inference{
@@ -23,7 +30,7 @@
         \{x, u\} \cap \FV{S} = \o
     }{
         \TJ{\Gamma}{\ABS{x}{S}{t}}{\DFUN{u}{S}{U}}{\ABS{u}{\TRANS{S}}{\HAT{t}}}
-    } \\[4mm]
+    } \qquad
 
     \RULE{All-Ex-E} \quad \inference{
         \TJ{\Gamma}{x}{\DFUN{u}{S}{U}}{\HAT{x}} \quad
@@ -39,13 +46,12 @@
         x \notin \FV{U}
     }{
         \TJ{\Gamma}{\LET{x}{t}{t'}}{U}{\LET{u}{\HAT{t}}{\HAT{t'}}}
-    } \\[4mm]
+    } \qquad
 
-    \RULE{And-I} \quad \inference{
-        \TJ{\Gamma}{x}{S}{\HAT{x}} \quad
-        \TJ{\Gamma}{x}{U}{\HAT{x}}
+    \RULE{Rec-I} \quad \inference{
+        \TJ{\Gamma}{x}{S}{\HAT{x}}
     }{
-        \TJ{\Gamma}{x}{\AGG{S}{U}}{\HAT{x}}
+        \TJ{\Gamma}{x}{\REC{\HAT{x}}{S}}{\HAT{x}}
     } \\[4mm]
 
     \RULE{\{\}-I} \quad \inference{
@@ -59,12 +65,6 @@
         \TJ{\Gamma}{x}{\FDEC{a}{S}}{\HAT{x}}
     }{
         \TJ{\Gamma}{x.a}{S}{\HAT{x}.a}
-    } \\[4mm]
-
-    \RULE{Rec-I} \quad \inference{
-        \TJ{\Gamma}{x}{S}{\HAT{x}}
-    }{
-        \TJ{\Gamma}{x}{\REC{\HAT{x}}{S}}{\HAT{x}}
     } \qquad
 
     \RULE{Rec-E} \quad \inference{
@@ -79,7 +79,7 @@
         u \notin \FV{S}
     }{
         \TJ{\Gamma}{t}{\IFUN{u}{S}{U}}{\ABS{u}{\TRANS{S}}{\HAT{t}}}
-    } \\[4mm]
+    } \qquad
 
     \RULE{All-Im-E} \quad \inference{
         \TJ{\Gamma}{x}{\IFUN{u}{S}{U}}{\HAT{x}} \quad
@@ -87,4 +87,4 @@
     }{
         \TJ{\Gamma}{x}{\SUB{u}{v}U}{\HAT{x}\ v}
     }
-\end{array}\]
+\end{array}\] \end{minipage}

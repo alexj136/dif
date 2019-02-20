@@ -1,12 +1,7 @@
 \begin{align*}
-    \TRANS{x} \                     &= \ x
-        & \TRANS{\REC{u}{S}}        &= \REC{u}{\TRANS{S}}
-        & \TRANS{\TDEC{A}{S}{S'}}   &= \TDEC{A}{\TRANS{S}}{\TRANS{S'}} \\
-    \TRANS{\FDEC{a}{S}}             &= \FDEC{a}{\TRANS{S}}
-        & \TRANS{\top}              &= \top
-        & \TRANS{(u.A)}             &= u.A \\
-    \TRANS{(\AGG{S}{S'})}           &= \AGG{\TRANS{S}}{\TRANS{S'}}
-        & \TRANS{\bot}              &= \bot
-        & \TRANS{(\DFUN{u}{S}{S'})} &= \DFUN{u}{\TRANS{S}}{\TRANS{S'}} \\
-    & & & & \TRANS{(\IFUN{u}{S}{S'})} &= \DFUN{u}{\TRANS{S}}{\TRANS{S'}} \\
+    \TRANS{x} \           &= \ x                         & \TRANS{\bot}              &= \bot                            \\
+    \TRANS{\FDEC{a}{S}}   &= \FDEC{a}{\TRANS{S}}         & \TRANS{\TDEC{A}{S}{S'}}   &= \TDEC{A}{\TRANS{S}}{\TRANS{S'}} \\
+    \TRANS{(\AGG{S}{S'})} &= \AGG{\TRANS{S}}{\TRANS{S'}} & \TRANS{(u.A)}             &= u.A                             \\
+    \TRANS{\REC{u}{S}}    &= \REC{u}{\TRANS{S}}          & \TRANS{(\DFUN{u}{S}{S'})} &= \DFUN{u}{\TRANS{S}}{\TRANS{S'}} \\
+    \TRANS{\top}          &= \top                        & \TRANS{(\IFUN{u}{S}{S'})} &= \DFUN{u}{\TRANS{S}}{\TRANS{S'}}
 \end{align*}

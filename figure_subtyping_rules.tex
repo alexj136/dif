@@ -1,23 +1,23 @@
-\[\begin{array}{c}
+\begin{minipage}{\textwidth} \[\begin{array}{c}
     \RULE{Top} \quad \SJ{\Gamma}{S}{\top} \qquad
 
     \RULE{Bot} \quad \SJ{\Gamma}{\bot}{S} \qquad
 
-    \RULE{Refl} \quad \SJ{\Gamma}{S}{S} \\[4mm]
+    \RULE{Refl} \quad \SJ{\Gamma}{S}{S} \qquad
 
     \RULE{Trans} \quad \inference{
         \SJ{\Gamma}{S}{U} \quad
         \SJ{\Gamma}{U}{R}
     }{
         \SJ{\Gamma}{S}{R}
-    } \qquad
+    } \\[4mm]
 
     \RULE{<:-And} \quad \inference{
         \SJ{\Gamma}{S}{U} \quad
         \SJ{\Gamma}{S}{R}
     }{
         \SJ{\Gamma}{S}{\AGG{U}{R}}
-    } \\[4mm]
+    } \qquad
 
     \RULE{<:-Sel} \quad \inference{
         \TJ{\Gamma}{u}{\TDEC{A}{S}{U}}{u}
@@ -36,7 +36,7 @@
         \SJ{\Gamma, x: S_2}{U_1}{U_2}
     }{
         \SJ{\Gamma}{\DFUN{x}{S_1}{U_1}}{\DFUN{x}{S_2}{U_2}}
-    } \\[4mm]
+    } \qquad
 
     \RULE{Typ-<:-Typ} \quad \inference{
         \SJ{\Gamma}{S_2}{S_1} \quad
@@ -47,7 +47,7 @@
 
     \RULE{And$_1$-<:} \quad \SJ{\Gamma}{\AGG{S}{U}}{S} \qquad
 
-    \RULE{And$_2$-<:} \quad \SJ{\Gamma}{\AGG{S}{U}}{U} \\[4mm]
+    \RULE{And$_2$-<:} \quad \SJ{\Gamma}{\AGG{S}{U}}{U} \qquad
 
     \RULE{Fld-<:-Fld} \quad \inference{
         \SJ{\Gamma}{S}{U}
@@ -61,4 +61,4 @@
     }{
         \SJ{\Gamma}{\IFUN{x}{S_1}{U_1}}{\IFUN{x}{S_2}{U_2}}
     }
-\end{array}\]
+\end{array}\] \end{minipage}
