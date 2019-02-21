@@ -178,8 +178,27 @@ the Scala community, use in Akka etc}
 \paragraph{Type classes} Type classes \cite{K88, WB89} are a mechanism to allow
 ad-hoc polymorphism in languages with parametric polymorphism. Parametrically
 polymorphic type variables may be \emph{constrained}, such that they can only be
-instantiated by types over which a user-defined set of functions exist.
-\TODOTHIS
+instantiated by types over which a user-defined set of functions exist. Further
+functions can then be defined over all types for which the set of functions are
+defined. A typical example of a type class is \texttt{Show}. Note that for this
+example we use Haskell-style listings, as Haskell is the most well-known
+language with type classes. In a single program, we might want to use a
+function \texttt{print} to print values over many different types, for example
+we might want to write \texttt{print 1}, \texttt{print True} and \texttt{print
+[1, 2]} in the same program. To acheive this with type classes, we give
+\texttt{print} the following signature:
+
+\begin{lstlisting}[mathescape]
+    print :: Show a => a -> IO ()
+\end{lstlisting}
+
+\noindent This signature tells us that where \texttt{a} is a type in the
+\texttt{Show} type class, \texttt{print} takes an \texttt{a} and returns
+\texttt{IO ()} (in Haskell, \texttt{()} is the unit type and the type
+constructor \texttt{IO} represents a type obtained as a result of performing
+IO).
+
+\TODO{More on Type classes}
 
 \paragraph{Example} The type class pattern \cite{OBLB18} can be implemented in
 DIF, and maps more closely to the type class pattern as is used in Scala. The
@@ -200,8 +219,9 @@ pattern adapted for DIF.
     implicit def intOrd: Ord[Int] = new Ord[Int] {
         def compare(x: Int, y: Int): Boolean = a < b
     }
-
+    ...
     comp(1, 2)
+    ...
 \end{lstlisting}
 \caption*{\textbf{Example 1.} The type class pattern in Scala}
 \end{figure*}
