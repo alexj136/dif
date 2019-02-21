@@ -501,11 +501,11 @@
                     \item And by definition \ref{translation}:
                         $\TJT{\TRANS{\Gamma}, u: \TRANS{S}}{\HAT{t}}\TRANS{{U}}$
                 \end{itemize}
-                \item $\{x, u\} \cap \FV{S} = \o$
+                \item $\{x, u\} \cap \FV{S} = \emptyset$
                 \begin{itemize}
                     \item Then by lemma \ref{pres_fv},
-                        $\{x, u\} \cap \FV{\TRANS{S}} = \o$, and then $u \notin
-                        \FV{\TRANS{S}}$
+                        $\{x, u\} \cap \FV{\TRANS{S}} = \emptyset$, and then $u
+                        \notin \FV{\TRANS{S}}$
                 \end{itemize}
             \end{itemize}
             \item The goal then follows from \RULET{All-I}.
@@ -775,11 +775,11 @@
                         $\TJT{\TRANS{\Gamma}}{\HAT{d_2}}{\TRANS{S_2}}$ and
                         $\DOM{d_2} = \DOM{\HAT{d_2}}$
                 \end{itemize}
-                \item $\DOM{d_1} \cap \DOM{d_2} = \o$
+                \item $\DOM{d_1} \cap \DOM{d_2} = \emptyset$
                 \begin{itemize}
-                    \item Then $\DOM{\HAT{d_1}} \cap \DOM{\HAT{d_2}} = \o$
-                        follows since $\DOM{d_1} = \DOM{\HAT{d_1}}$ and
-                        $\DOM{d_2} = \DOM{\HAT{d_2}}$
+                    \item Then $\DOM{\HAT{d_1}} \cap \DOM{\HAT{d_2}} =
+                        \emptyset$ follows since $\DOM{d_1} = \DOM{\HAT{d_1}}$
+                        and $\DOM{d_2} = \DOM{\HAT{d_2}}$
                 \end{itemize}
             \end{itemize}
             \item The goal for type preservation then follows from

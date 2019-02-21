@@ -1,12 +1,12 @@
 \[\begin{array}{c}
     \DEPTH{\Gamma, i, j} =
         \begin{cases}
-            -1   & \IF \Gamma = \Gamma_1, i: S_1, \Gamma_2, j: S_2, \Gamma_3
-                \wedge \{i, j\} \cap \DOM{\Gamma_1 \cup \Gamma_2 \cup \Gamma_3}
-                \neq \o \\
-            1    & \IF \Gamma = \Gamma_1, j: S_1, \Gamma_2, i: S_2, \Gamma_3
-                \wedge \{i, j\} \cap \DOM{\Gamma_1 \cup \Gamma_2 \cup \Gamma_3}
-                \neq \o \\
+            -1   & \IF \Gamma = \Gamma_1, i: S_1, \Gamma_2, j: S_2, \Gamma_3 \\
+                 & \wedge \{i, j\} \cap \DOM{\Gamma_1 \cup \Gamma_2 \cup
+                   \Gamma_3} \neq \emptyset \\
+            1    & \IF \Gamma = \Gamma_1, j: S_1, \Gamma_2, i: S_2, \Gamma_3 \\
+                 & \wedge \{i, j\} \cap \DOM{\Gamma_1 \cup \Gamma_2 \cup
+                   \Gamma_3} \neq \emptyset \\
             \bot & \ \textbf{otherwise}
         \end{cases}
 \end{array}\]

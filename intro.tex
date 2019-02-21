@@ -11,14 +11,14 @@ problem:
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[mathescape]
-    def compare(x: Int, y: Int,
-            comparator: Int => Int => Boolean): Boolean =
-        comparator(x)(y)
-    ...
-    compare(3, 4, <=)
-    ...
-    compare(17, 12, <=)
-    ...
+def compare(x: Int, y: Int, comparator:
+    Int => Int => Boolean): Boolean =
+  comparator(x)(y)
+...
+compare(3, 4, <=)
+...
+compare(17, 12, <=)
+...
 \end{lstlisting}
 \end{minipage}
 
@@ -30,14 +30,14 @@ used whenever an invocation does not supply an argument:
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[mathescape]
-    def compare(x: Int, y: Int,
-            comparator: Int => Int => Boolean = <=): Boolean =
-        comparator(x)(y)
-    ...
-    compare(3, 4)
-    ...
-    compare(17, 12)
-    ...
+def compare(x: Int, y: Int, comparator:
+    Int => Int => Boolean = <=): Boolean =
+  comparator(x)(y)
+...
+compare(3, 4)
+...
+compare(17, 12)
+...
 \end{lstlisting}
 \end{minipage}
 
@@ -54,16 +54,17 @@ dependent.
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[mathescape]
-    def compare(x: Int, y: Int,
-            implicit comparator: Int => Int => Boolean): Boolean =
-        comparator(x)(y)
-    ...
-    implicit val cmp = <=
-    compare(3, 4)
-    ...
-    implicit val cmp = >
-    compare(17, 12)
-    ...
+def compare(x: Int, y: Int,
+    implicit comparator:
+    Int => Int => Boolean): Boolean =
+  comparator(x)(y)
+...
+implicit val cmp = <=
+compare(3, 4)
+...
+implicit val cmp = >
+compare(17, 12)
+...
 \end{lstlisting}
 \end{minipage}
 
@@ -94,10 +95,10 @@ also contains a method member \texttt{consumeB} that consumes a value of type
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[mathescape]
-    trait A {
-        type B
-        def consumeB(b: B): String
-    }
+trait A {
+    type B
+    def consumeB(b: B): String
+}
 \end{lstlisting}
 \end{minipage}
 
@@ -107,10 +108,11 @@ implement method members over that type:
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[mathescape]
-    object C extends A {
-        type B = Int
-        def consumeB(b: Int): String = b.toString
-    }
+object C extends A {
+    type B = Int
+    def consumeB(b: Int): String =
+      b.toString
+}
 \end{lstlisting}
 \end{minipage}
 
@@ -171,47 +173,46 @@ ad-hoc polymorphism in languages with parametric polymorphism. \TODO{more}
 DIF, and maps more closely to the type class pattern as is used in Scala. The
 example leverages DOT's path-dependency, which exhibits parametric polymorphism
 by passing objects with type members. The \emph{dictionary passing} of languages
-with type classes can then be implemented with implicit functions.
+with type classes can then be implemented with implicit functions. Example 1
+shows the type class pattern in Scala, and example 2 shows the type class
+pattern adapted for DIF.
 
-\begin{minipage}{\textwidth}
+\begin{figure*}[h]
 \begin{lstlisting}[mathescape]
-trait Ord[T] {
-    def compare(x: A, y: A): Boolean
-}
+    trait Ord[T] {
+        def compare(x: A, y: A): Boolean
+    }
 
-def comp[T](x: A, y: A)(implicit ev: Ord[T]): Boolean = ev.compare(x, y)
+    def comp[T](x: A, y: A)(implicit ev: Ord[T]): Boolean = ev.compare(x, y)
 
-implicit def intOrd: Ord[Int] = new Ord[Int] {
-    def compare(x: Int, y: Int): Boolean = a < b
-}
+    implicit def intOrd: Ord[Int] = new Ord[Int] {
+        def compare(x: Int, y: Int): Boolean = a < b
+    }
 
-comp(1, 2)
+    comp(1, 2)
 \end{lstlisting}
-\center{Example: the type class pattern in Scala}
-\end{minipage}
+\caption*{\textbf{Example 1.} The type class pattern in Scala}
+\end{figure*}
 
-\vspace{2mm}
-\hrule
-
-\begin{minipage}{\textwidth}
+\begin{figure*}[h]
 \begin{lstlisting}[mathescape]
-let ord_package = $\nu$(ord_p) {
-    Ord = $\mu$(self: {
-        A: $\bot$..$\top$
-        compare: $\forall$(x: self.A, y: self.A)Boolean
-    })
-    comp: $\forall$(t: {A: $\bot$..$\top$})$\forall$(x: t.A, y: t.A)$\forall$$\IMP$(ev: ord_p.Ord$\wedge${A: $\bot$..$\top$})Boolean =
-        $\lambda$(t: {A: $\bot$..$\top$})$\lambda$(x: t.A, y: t.A)$\IMP$.compare(x, y)
-} in
-let $\IMP$: ord_package.Ord$\wedge${A: Int..Int} = $\nu$(self: {
-        A = Int
-        compare: $\forall$(x: self.A, y: self.A)Boolean =
-            $\lambda$(x: self.A, y: self.A) x < y
-    })
-in
-...
-ord_package.comp(1, 2)
-...
+    let ord_package = $\nu$(ord_p) {
+        Ord = $\mu$(self: {
+            A: $\bot$..$\top$
+            compare: $\forall$(x: self.A, y: self.A)Boolean
+        })
+        comp: $\forall$(t: {A: $\bot$..$\top$})$\forall$(x: t.A, y: t.A)$\forall$$\IMP$(ev: ord_p.Ord$\wedge${A: $\bot$..$\top$})Boolean =
+            $\lambda$(t: {A: $\bot$..$\top$})$\lambda$(x: t.A, y: t.A)$\IMP$.compare(x, y)
+    } in
+    let $\IMP$: ord_package.Ord$\wedge${A: Int..Int} = $\nu$(self: {
+            A = Int
+            compare: $\forall$(x: self.A, y: self.A)Boolean =
+                $\lambda$(x: self.A, y: self.A) x < y
+        })
+    in
+    ...
+    ord_package.comp(1, 2)
+    ...
 \end{lstlisting}
-\center{Example: the type class pattern in DIF}
-\end{minipage}
+\caption*{\textbf{Example 2.} The type class pattern in DIF}
+\end{figure*}

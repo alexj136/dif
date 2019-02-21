@@ -27,7 +27,7 @@
     \RULE{All-Ex-I} \quad \inference{
         x \leadsto u \quad
         \TJ{\Gamma, u: S}{t}{U}{\HAT{t}} \quad
-        \{x, u\} \cap \FV{S} = \o
+        \{x, u\} \cap \FV{S} = \emptyset
     }{
         \TJ{\Gamma}{\ABS{x}{S}{t}}{\DFUN{u}{S}{U}}{\ABS{u}{\TRANS{S}}{\HAT{t}}}
     } \qquad
