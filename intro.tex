@@ -22,11 +22,11 @@ compare(17, 12)(<=)
 \end{lstlisting}
 \end{minipage}
 
-Repeatedly passing functions like \texttt{<=} which are unlikely to change
-frequently, is tedious, and impedes readability of large code bases. Default
-parameters  are an early proposal for mediating this tension in a type-safe way.
-The key idea is to annotate function arguments with their default value, to be
-used whenever an invocation does not supply an argument:
+\noindent Repeatedly passing functions like \texttt{<=} which are unlikely to
+change frequently, is tedious, and impedes readability of large code bases.
+Default parameters  are an early proposal for mediating this tension in a
+type-safe way. The key idea is to annotate function arguments with their
+default value, to be used whenever an invocation does not supply an argument:
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[mathescape]
@@ -41,21 +41,20 @@ compare(17, 12)
 \end{lstlisting}
 \end{minipage}
 
-The compiler synthesises $\texttt{compare(3, 4)(<=)}$ from $\texttt{compare(3,
-4)}$, and $\texttt{compare(17, 12)(<=)}$ from $\texttt{compare(17, 12)}$. The
-missing argument indicates to the compiler that the default $\texttt{<=}$ should
-be used. Default parameters have a key disadvantage: the default value is
-hard-coded at the callee, and cannot be context dependent. Implicit arguments, a
-strict generalisation of default parameters, were pioneered in Haskell
-\cite{LLMS00}, and popularised as well as refined  in Scala \cite{OBLB18}: they
-separate the \emph{callee's declaration} that an argument can be elided, from
-the \emph{caller's choice} of elided values, allowing the latter to be context
-dependent.
+\noindent The compiler synthesises $\texttt{compare(3, 4)(<=)}$ from
+$\texttt{compare(3, 4)}$, and $\texttt{compare(17, 12)(<=)}$ from
+$\texttt{compare(17, 12)}$. The missing argument indicates to the compiler that
+the default $\texttt{<=}$ should be used. Default parameters have a key
+disadvantage: the default value is hard-coded at the callee, and cannot be
+context dependent. Implicit arguments, a strict generalisation of default
+parameters, were pioneered in Haskell \cite{LLMS00}, and popularised as well as
+refined  in Scala \cite{OBLB18}: they separate the \emph{callee's declaration}
+that an argument can be elided, from the \emph{caller's choice} of elided
+values, allowing the latter to be context dependent.
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[mathescape]
-def compare(x: Int, y: Int)(
-    implicit comparator:
+def compare(x: Int, y: Int)(implicit comparator:
     Int => Int => Boolean): Boolean =
   comparator(x)(y)
 ...
@@ -68,7 +67,7 @@ compare(17, 12)
 \end{lstlisting}
 \end{minipage}
 
-In this example $\texttt{compare(3, 4)}$ is rewritten as above, but
+\noindent In this example $\texttt{compare(3, 4)}$ is rewritten as above, but
 $\texttt{compare(17, 12)}$ becomes $\texttt{compare(17, 12)(>)}$, i.e.~a
 different implicit argument is synthesised. The disambiguation between several
 providers of implicit arguments happens at compile-time using type and scope
@@ -187,7 +186,6 @@ function \texttt{print} to print values over many different types, for example
 we might want to write \texttt{print 1}, \texttt{print True} and \texttt{print
 [1, 2]} in the same program. To acheive this with type classes, we give
 \texttt{print} the following signature:
-
 \begin{lstlisting}[mathescape]
     print :: Show a => a -> IO ()
 \end{lstlisting}
