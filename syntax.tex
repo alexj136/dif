@@ -7,7 +7,7 @@ query $\IMP$, the analogue to Scala's \texttt{implicitly[T]}. Occurrences of
 $\IMP$ are \emph{resolved} into variables by our typing and translation rules.
 The variable that replaces a given occurrence of $\IMP$ is chosen from
 candidate implicit variables, which are bound by let constructs, where $\IMP$
-is the variable name, i.e. $\LET{\IMP}{...}{...}$.
+is the variable name, i.e. $\LET{\IMP}{t}{t'}$.
 
 Note that we make a distinction between two sets of variable names. The first,
 variables with implicit query, ranged over by $x, y$ is the set of variable

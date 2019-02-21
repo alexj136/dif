@@ -11,13 +11,13 @@ problem:
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[mathescape]
-def compare(x: Int, y: Int, comparator:
+def compare(x: Int, y: Int)(comparator:
     Int => Int => Boolean): Boolean =
   comparator(x)(y)
 ...
-compare(3, 4, <=)
+compare(3, 4)(<=)
 ...
-compare(17, 12, <=)
+compare(17, 12)(<=)
 ...
 \end{lstlisting}
 \end{minipage}
@@ -30,7 +30,7 @@ used whenever an invocation does not supply an argument:
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[mathescape]
-def compare(x: Int, y: Int, comparator:
+def compare(x: Int, y: Int)(comparator:
     Int => Int => Boolean = <=): Boolean =
   comparator(x)(y)
 ...
@@ -41,8 +41,8 @@ compare(17, 12)
 \end{lstlisting}
 \end{minipage}
 
-The compiler synthesises $\texttt{compare(3, 4, <=)}$ from $\texttt{compare(3,
-4)}$, and $\texttt{compare(17, 12, <=)}$ from $\texttt{compare(17, 12)}$. The
+The compiler synthesises $\texttt{compare(3, 4)(<=)}$ from $\texttt{compare(3,
+4)}$, and $\texttt{compare(17, 12)(<=)}$ from $\texttt{compare(17, 12)}$. The
 missing argument indicates to the compiler that the default $\texttt{<=}$ should
 be used. Default parameters have a key disadvantage: the default value is
 hard-coded at the callee, and cannot be context dependent. Implicit arguments, a
@@ -54,7 +54,7 @@ dependent.
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[mathescape]
-def compare(x: Int, y: Int,
+def compare(x: Int, y: Int)(
     implicit comparator:
     Int => Int => Boolean): Boolean =
   comparator(x)(y)
@@ -69,7 +69,7 @@ compare(17, 12)
 \end{minipage}
 
 In this example $\texttt{compare(3, 4)}$ is rewritten as above, but
-$\texttt{compare(17, 12)}$ becomes $\texttt{compare(17, 12, >)}$, i.e.~a
+$\texttt{compare(17, 12)}$ becomes $\texttt{compare(17, 12)(>)}$, i.e.~a
 different implicit argument is synthesised. The disambiguation between several
 providers of implicit arguments happens at compile-time using type and scope
 information. Programs where elided arguments cannot be disambiguated at
@@ -80,17 +80,19 @@ compile-time are rejected as ill-formed. Hence type-safety is not compromised.
 DOT is a calculus intended as a step towards a theoretical foundation for the
 programming language Scala and its type system \cite{AMO12}. DOT models a
 restricted subset of Scala -- the base-calculus includes Scala's key features
-from a type theory perspective, such as path-dependency and abstract type
-members. Omitted are features of Scala that are less important from this
-perspective, such as traits, classes and inheritance. We now look briefly at two
-important features of DOT.
+from a type theory perspective, such as path-dependency, abstract type members
+and a subtyping hierarchy with maximal type $\top$ and minimal type $\bot$.
+Omitted are features of Scala that are less important from this perspective,
+such as traits, classes and inheritance. We now look briefly at two important
+features of DOT.
 
 \paragraph{Abstract Type Members}
 
 Abstract type members are a feature of Scala that allow for generic programming.
-A trait may declare an abstract type member, and define methods over that type.
-Below is a trait \texttt{A} with an abstract type member \texttt{B}. The trait
-also contains a method member \texttt{consumeB} that consumes a value of type
+In Scala, a trait, class or object may declare an abstract type member. The
+trait, class or object may then declare or define methods over that type. Below
+is a trait \texttt{A} with an abstract type member \texttt{B}. The trait also
+contains a method member \texttt{consumeB} that consumes a value of type
 \texttt{B}.
 
 \begin{minipage}{\linewidth}
@@ -116,13 +118,15 @@ object C extends A {
 \end{lstlisting}
 \end{minipage}
 
-\noindent Like Scala, DOT also includes abstract type members. We write
-$\TDEC{A}{S}{S'}$ to denote an object with a type member $A$, whose lower bound
-is $S$ and upper bound is $S'$. Scala's syntax \texttt{type T = U} is equivalent
-to DOT's $\TDEC{T}{U}{U}$. We can define a completely abstract type member by
-using $\bot$ and $\top$ as lower and upper bounds respectively. Conversely we
-can define a fully specified type member by using a single specified type as
-both the lower and upper bound.
+\noindent Like Scala, DOT also includes abstract type members, and thus the
+above pattern is possible. We write $\TDEC{A}{S}{S'}$ to denote an object with a
+type member $A$, whose lower bound is $S$ and upper bound is $S'$. Scala's
+syntax \texttt{type T = U} is then equivalent to DOT's $\TDEC{T}{U}{U}$ - we let
+\texttt{U} be the upper and lower bound. In DOT we can define a completely
+abstract type member (equivalent to just \texttt{type T} in Scala) by using
+$\bot$ and $\top$ as lower and upper bounds respectively. Conversely we can
+define a fully specified type member by using a single specified type as both
+the lower and upper bound.
 
 \paragraph{Path-dependent Types}
 Path-dependent types are a restricted form of dependent types \cite{AGORS16}.
@@ -154,20 +158,28 @@ We can rewrite this in DOT as below, with an additional parameter used to pass t
 
 \subsection{Dependent object types with Implicit Functions (DIF)}
 
-The type safety of implicit functions in Scala has been evidenced by the
-type-safe integration of implicit functions into lambda calculus \cite{OBLB18},
-but this evidence could be further strengthened by their type-safe integration
-into DOT, a calculus much more closely related to Scala. In the remainder of
-this paper, we do exactly this -- we present DIF, a type-safe integration of
-implicit functions into DOT. We demonstrate that the type class patter, a
-typical use case of implicit functions in Scala, can be translated typably into
-DIF. DIF is shown to be type-safe by translation into the DOT calculus of
-\cite{AGORS16}. Combined with Hindley-Damas-Milner style parametric polymorphism
-recovered in DOT via path-dependent types, implicit functions can be used to
-recover ad-hoc polymorphism in DOT via the type class pattern.
+The type safety of implicit functions in Scala and its compiler known as
+\emph{Dotty}, has been evidenced by the type-safe integration of implicit
+functions into lambda calculus \cite{OBLB18}. This evidence could be further
+strengthened by their type-safe integration into DOT, the calculus on which the
+Dotty compiler is based. In the remainder of this paper, we present DIF, a
+type-safe integration of implicit functions into DOT. We demonstrate that the
+type class pattern, a typical use case of implicit functions in Scala, which
+also leverages abstract type members and path-dependent types, can be translated
+typably into DIF. DIF is shown to be type-safe by translation into the DOT
+calculus presented in \cite{AGORS16}. Combined with Hindley-Damas-Milner style
+parametric polymorphism recovered in DOT via path-dependent types, implicit
+functions can be used to recover ad-hoc polymorphism in DOT via the type class
+pattern.
+
+Implicits are widely used in Scala... \TODO{Talk about why this is important to
+the Scala community, use in Akka etc}
 
 \paragraph{Type classes} Type classes \cite{K88, WB89} are a mechanism to allow
-ad-hoc polymorphism in languages with parametric polymorphism. \TODO{more}
+ad-hoc polymorphism in languages with parametric polymorphism. Parametrically
+polymorphic type variables may be \emph{constrained}, such that they can only be
+instantiated by types over which a user-defined set of functions exist.
+\TODOTHIS
 
 \paragraph{Example} The type class pattern \cite{OBLB18} can be implemented in
 DIF, and maps more closely to the type class pattern as is used in Scala. The
