@@ -194,7 +194,37 @@ we might want to write \texttt{print 1}, \texttt{print True} and \texttt{print
 \texttt{Show} type class, \texttt{print} takes an \texttt{a} and returns
 \texttt{IO ()} (in Haskell, \texttt{()} is the unit type and the type
 constructor \texttt{IO} represents a type obtained as a result of performing
-IO).
+IO). The definition of the \texttt{Show} type class itself is given below:
+\begin{lstlisting}[mathescape]
+    class Show a where
+        show :: a -> String
+\end{lstlisting}
+
+\noindent This tells us that a type \texttt{a} is in the \texttt{Show} type
+class when there exists a function \texttt{show} of type \texttt{a -> String}.
+We can then declare such a function for a given type, for example \texttt{Bool},
+as below:
+\begin{lstlisting}[mathescape]
+    instance Show Bool where
+        show b = if b then "True" else "False"
+\end{lstlisting}
+
+\noindent And for \texttt{Int}, assuming a function \texttt{intToString :: Int
+-> String} that converts an \texttt{Int} to its \texttt{String} representation:
+\begin{lstlisting}[mathescape]
+    instance Show Int where
+        show i = intToString i
+\end{lstlisting}
+
+\noindent We can also declare type constructors to be in a type class when their
+argument types are also in the type class. For example, we can declare that
+tuples of type \texttt{(a, b)} for all \texttt{a}, \texttt{b} are in
+\texttt{Show} when \texttt{a} and \texttt{b} are in \texttt{Show} thusly:
+\begin{lstlisting}[mathescape]
+    instance (Show a, Show b) => Show (a, b) where
+        show (a, b) = "(" ++ show a ++ ", " ++
+                                 show b ++ ")"
+\end{lstlisting}
 
 \TODO{More on Type classes}
 
