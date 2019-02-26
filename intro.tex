@@ -138,9 +138,11 @@ the \texttt{Show} type class, as above. The definition is as follows:
 Type classes are implemented by via a technique known as \emph{dictionary
 passing}. Function definitions whose type contains a type class constrained type
 variable are adapted to take an additional parameter for each such type
-variable. That additional parameter is known as a \emph{dictionary}, it is a set
-that will contain the type class function implementations for the type that
-instantiates the type class constrained type variable. Call sites for those
+variable. That additional parameter is known as a \emph{dictionary}, it is a
+tuple containing the type class function implementations for the type that
+instantiates the type class constrained type variable. When a type class
+declares just a single function, such as with \texttt{Show}, the dictionary is
+just a single function rather than a tuple of functions. Call sites for those
 function definitions are then augmented to pass the dictionary of the
 appropriate type - the compiler decides what the appropriate type is based on
 the parameter passed at the call site.
