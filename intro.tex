@@ -205,7 +205,8 @@ polymorphism as below:
 \end{lstlisting}
 \end{minipage}
 
-We can rewrite this in DOT as below, with an additional parameter used to pass the type of the parameter x:
+We can rewrite this in DOT as below, with an additional parameter used to pass
+the type of the parameter x:
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[mathescape]
@@ -214,14 +215,14 @@ We can rewrite this in DOT as below, with an additional parameter used to pass t
 \end{lstlisting}
 \end{minipage}
 
-\subsection{Dependent object types with Implicit Functions (DIF)}
-The type safety of implicit functions in Scala and its compiler known as
-\emph{Dotty}, has been evidenced by the type-safe integration of implicit
-functions into lambda calculus \cite{OBLB18}. This evidence could be further
-strengthened by their type-safe integration into DOT, the calculus on which the
-Dotty compiler is based. In the remainder of this paper, we present DIF, a
-type-safe integration of implicit functions into DOT. We demonstrate that the
-type class pattern, a typical use case of implicit functions in Scala, which
+\subsection{Dependent object types with Implicit Functions (DIF)} The type
+safety of implicit functions in Scala and its compiler known as \emph{Dotty},
+has been evidenced by the type-safe integration of implicit functions into
+lambda calculus \cite{OBLB18}. This evidence could be further strengthened by
+their type-safe integration into DOT, the calculus on which the Dotty compiler
+is based. In the remainder of this paper, we present DIF, a type-safe
+integration of implicit functions into DOT. We demonstrate that the type class
+pattern \cite{OMO10}, a typical use case of implicit functions in Scala, which
 also leverages abstract type members and path-dependent types, can be translated
 typably into DIF. DIF is shown to be type-safe by translation into the DOT
 calculus presented in \cite{AGORS16}. Combined with Hindley-Damas-Milner style
