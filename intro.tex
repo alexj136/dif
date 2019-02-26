@@ -74,8 +74,68 @@ providers of implicit arguments happens at compile-time using type and scope
 information. Programs where elided arguments cannot be disambiguated at
 compile-time are rejected as ill-formed. Hence type-safety is not compromised.
 
-\subsection{Dependent Object Types (DOT)}
+\subsection{Type classes}
+Type classes \cite{K88, WB89} are a mechanism to allow ad-hoc polymorphism in
+languages with parametric polymorphism. Parametrically polymorphic type
+variables may be \emph{constrained}, such that they can only be instantiated by
+types over which a user-defined set of functions exist. Further functions can
+then be defined over all types for which the set of functions are defined. A
+typical example of a type class is \texttt{Show}. Note that for this example we
+use Haskell-style listings, as Haskell is the most well-known language with type
+classes. In a single program, we might want to use a function \texttt{print} to
+print values over many different types, for example we might want to write
+\texttt{print 1}, \texttt{print True} and \texttt{print [1, 2]} in the same
+program. To acheive this with type classes, we give \texttt{print} the following
+signature:
+\begin{lstlisting}[mathescape]
+    print :: Show a => a -> IO ()
+\end{lstlisting}
 
+\noindent This signature tells us that where \texttt{a} is a type in the
+\texttt{Show} type class, \texttt{print} takes an \texttt{a} and returns
+\texttt{IO ()} (in Haskell, \texttt{()} is the unit type and the type
+constructor \texttt{IO} represents a type obtained as a result of performing
+IO). The definition of the \texttt{Show} type class itself is given below:
+\begin{lstlisting}[mathescape]
+    class Show a where
+        show :: a -> String
+\end{lstlisting}
+
+\noindent We call this a \emph{class definition}. It tells us that a type
+\texttt{a} is in the \texttt{Show} type class when there exists a function
+\texttt{show} of type \texttt{a -> String}. We can then define a function for a
+given type, for example \texttt{Bool}, as below, in an \emph{instance
+definition}:
+\begin{lstlisting}[mathescape]
+    instance Show Bool where
+        show b = if b then "True" else "False"
+\end{lstlisting}
+
+\noindent And for \texttt{Int}, assuming a function \texttt{intToString :: Int
+-> String} that converts an \texttt{Int} to its \texttt{String} representation:
+\begin{lstlisting}[mathescape]
+    instance Show Int where
+        show i = intToString i
+\end{lstlisting}
+
+\noindent We can also declare type constructors to be in a type class when their
+argument types are also in the type class. For example, we can declare that
+tuples of type \texttt{(a, b)} for all \texttt{a}, \texttt{b} are in
+\texttt{Show} when \texttt{a} and \texttt{b} are in \texttt{Show} thusly:
+\begin{lstlisting}[mathescape]
+    instance (Show a, Show b) => Show (a, b) where
+        show (a, b) = "(" ++ show a ++ ", " ++
+                                 show b ++ ")"
+\end{lstlisting}
+
+\noindent With these instance definitions at hand, we can give a definition for
+\texttt{print}, which will satisfy the type checker for arguments of any type in
+the \texttt{Show} type class, as above. The definition is as follows:
+\begin{lstlisting}[mathescape]
+    print a = putStrLn (show a)
+\end{lstlisting}
+
+\subsection{Dependent Object Types (DOT)}
 DOT is a calculus intended as a step towards a theoretical foundation for the
 programming language Scala and its type system \cite{AMO12}. DOT models a
 restricted subset of Scala -- the base-calculus includes Scala's key features
@@ -86,7 +146,6 @@ such as traits, classes and inheritance. We now look briefly at two important
 features of DOT.
 
 \paragraph{Abstract Type Members}
-
 Abstract type members are a feature of Scala that allow for generic programming.
 In Scala, a trait, class or object may declare an abstract type member. The
 trait, class or object may then declare or define methods over that type. Below
@@ -156,7 +215,6 @@ We can rewrite this in DOT as below, with an additional parameter used to pass t
 \end{minipage}
 
 \subsection{Dependent object types with Implicit Functions (DIF)}
-
 The type safety of implicit functions in Scala and its compiler known as
 \emph{Dotty}, has been evidenced by the type-safe integration of implicit
 functions into lambda calculus \cite{OBLB18}. This evidence could be further
@@ -173,60 +231,6 @@ pattern.
 
 Implicits are widely used in Scala... \TODO{Talk about why this is important to
 the Scala community, use in Akka etc}
-
-\paragraph{Type classes} Type classes \cite{K88, WB89} are a mechanism to allow
-ad-hoc polymorphism in languages with parametric polymorphism. Parametrically
-polymorphic type variables may be \emph{constrained}, such that they can only be
-instantiated by types over which a user-defined set of functions exist. Further
-functions can then be defined over all types for which the set of functions are
-defined. A typical example of a type class is \texttt{Show}. Note that for this
-example we use Haskell-style listings, as Haskell is the most well-known
-language with type classes. In a single program, we might want to use a
-function \texttt{print} to print values over many different types, for example
-we might want to write \texttt{print 1}, \texttt{print True} and \texttt{print
-[1, 2]} in the same program. To acheive this with type classes, we give
-\texttt{print} the following signature:
-\begin{lstlisting}[mathescape]
-    print :: Show a => a -> IO ()
-\end{lstlisting}
-
-\noindent This signature tells us that where \texttt{a} is a type in the
-\texttt{Show} type class, \texttt{print} takes an \texttt{a} and returns
-\texttt{IO ()} (in Haskell, \texttt{()} is the unit type and the type
-constructor \texttt{IO} represents a type obtained as a result of performing
-IO). The definition of the \texttt{Show} type class itself is given below:
-\begin{lstlisting}[mathescape]
-    class Show a where
-        show :: a -> String
-\end{lstlisting}
-
-\noindent This tells us that a type \texttt{a} is in the \texttt{Show} type
-class when there exists a function \texttt{show} of type \texttt{a -> String}.
-We can then declare such a function for a given type, for example \texttt{Bool},
-as below:
-\begin{lstlisting}[mathescape]
-    instance Show Bool where
-        show b = if b then "True" else "False"
-\end{lstlisting}
-
-\noindent And for \texttt{Int}, assuming a function \texttt{intToString :: Int
--> String} that converts an \texttt{Int} to its \texttt{String} representation:
-\begin{lstlisting}[mathescape]
-    instance Show Int where
-        show i = intToString i
-\end{lstlisting}
-
-\noindent We can also declare type constructors to be in a type class when their
-argument types are also in the type class. For example, we can declare that
-tuples of type \texttt{(a, b)} for all \texttt{a}, \texttt{b} are in
-\texttt{Show} when \texttt{a} and \texttt{b} are in \texttt{Show} thusly:
-\begin{lstlisting}[mathescape]
-    instance (Show a, Show b) => Show (a, b) where
-        show (a, b) = "(" ++ show a ++ ", " ++
-                                 show b ++ ")"
-\end{lstlisting}
-
-\TODO{More on Type classes}
 
 \paragraph{Example} The type class pattern \cite{OBLB18} can be implemented in
 DIF, and maps more closely to the type class pattern as is used in Scala. The
