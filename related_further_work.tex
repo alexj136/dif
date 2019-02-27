@@ -1,5 +1,29 @@
 \section{Related and Further Work}
 
-Other papers on DOT are \cite{ARO14, AR17, AR16}. Our implicits paper is \cite{JB18}.
+Our best effort has gone into ensuring the correctness of our pen-and-paper
+soundness proof for DIF, and given similar soundness results and the success of
+Scala, it seems likely that our soundness theorem holds in truth. However, a
+mechanised proof would give a higher level of confidence in this result.
 
-\TODO{Further work - type inference and its decidability, principal types/typings}
+It is known that type assignment and subtyping are undecidable in DOT
+\cite{AR16} since DOT can encode system $F_{<:}$. DOT has no principal types. As
+DIF is a superset of DOT, these properties hold for DIF transitively. DOT does,
+however, have a local type inference procedure \cite{PT00}. It follows that such
+a procedure should also exist for DIF, especially since local type inference is
+used to great effect in Scala, a language with implicits.
+
+It is widely thought that there is a correspondence between implicits and type
+classes - it is easily seen that the dictionary passing of type classes is
+simulated with an implicit parameter. It would be interesting to establish this
+correspondence formally. One can envision a translation $t_{c \rightarrow i}$
+from type classes to implicits, and given the established results of type
+classes to lambda calculus $t_{c \rightarrow l}$ \cite{WB89} and implicits to
+lambda calculus $t_{i \rightarrow l}$ \cite{OBLB18}, it seems that it should be
+possible to establish $t_{c \rightarrow i} \cdot t_{i \rightarrow l} \equiv t_{c
+\rightarrow l}$. for some notion of $\equiv$.
+
+Implicit program constructs for session-typed concurrency have been studied in
+\cite{JB18}. While Scala concurrency libraries leverage implicits, it is unclear
+whether their usage is orthogonal to concurrency, or whether there are deeper
+connections between the two concepts that can be further studied in theory. This
+is a topic for further study.

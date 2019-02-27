@@ -166,14 +166,14 @@ dictionary:
 are then rewritten as \texttt{print showBoolDict b}.
 
 \subsection{Dependent Object Types (DOT)}
-DOT is a calculus intended as a step towards a theoretical foundation for the
-programming language Scala and its type system \cite{AMO12}. DOT models a
-restricted subset of Scala -- the base-calculus includes Scala's key features
-from a type theory perspective, such as path-dependency, abstract type members
-and a subtyping hierarchy with maximal type $\top$ and minimal type $\bot$.
-Omitted are features of Scala that are less important from this perspective,
-such as traits, classes and inheritance. We now look briefly at two important
-features of DOT.
+DOT \cite{AMO12, ARO14, AR16, AGORS16, AR17} is a calculus intended as a step
+towards a theoretical foundation for the programming language Scala and its type
+system. DOT models a restricted subset of Scala -- the base-calculus includes
+Scala's key features from a type theory perspective, such as path-dependency,
+abstract type members and a subtyping hierarchy with maximal type $\top$ and
+minimal type $\bot$. Omitted are features of Scala that are less important from
+this perspective, such as traits, classes and inheritance. We now look briefly
+at two important features of DOT.
 
 \paragraph{Abstract Type Members}
 Abstract type members are a feature of Scala that allow for generic programming.
