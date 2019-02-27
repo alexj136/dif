@@ -248,22 +248,24 @@ polymorphic \texttt{id} in DOT is given below:
 \end{minipage}
 
 \subsection{Dependent object types with Implicit Functions (DIF)}
-Implicits are widely used in Scala. The \emph{Dotty} Scala compiler \cite{O17},
-written in Scala, contains at more than 5000 occurrences of the
-\texttt{implicit} keyword. Akka \cite{H12}, a popular Scala library for
-Actor-based concurrency, uses implicits at the core of its API. Therefore it is
-of importance to the Scala community to have a solid theoretical foundation for
-the correctness of Scala's implicit language constructs. Indeed the safety of
-implicit functions in Scala has been evidenced by the type-safe integration of
-implicit functions into lambda calculus \cite{OBLB18}. This evidence could be
-further strengthened by their type-safe integration into DOT, the calculus on
-which the Dotty compiler is based. In the remainder of this paper, we present
-DIF, a type-safe integration of implicit functions into DOT. DIF is shown to be
-type-safe by translation into the DOT calculus presented in \cite{AGORS16}. We
-demonstrate that the type class pattern \cite{OMO10}, a typical use case of
-implicit functions in Scala, can be translated typably into DIF, which recovers
-ad-hoc polymorphism in DOT via the use of path-dependent types and abstract type
-members to simulate Hindley-Damas-Milner parametric polymorphism.
+Implicits are widely used in Scala. They are valuable to programmers as a
+mechanism for passing context without excessive verbosity. The \emph{Dotty}
+Scala compiler \cite{O17}, written in Scala, contains at more than 5000
+occurrences of the \texttt{implicit} keyword. Akka \cite{H12}, a popular Scala
+library for Actor-based concurrency, uses implicits at the core of its API.
+Therefore it is of importance to the Scala community to have a solid theoretical
+foundation for the correctness of Scala's implicit language constructs. Indeed
+the safety of implicit functions in Scala has been evidenced by the type-safe
+integration of implicit functions into lambda calculus \cite{OBLB18}. This
+evidence could be further strengthened by their type-safe integration into DOT,
+the calculus on which the Dotty compiler is based. In the remainder of this
+paper, we present DIF, a type-safe integration of implicit functions into DOT.
+DIF is shown to be type-safe by translation into the DOT calculus presented in
+\cite{AGORS16}. We demonstrate that the type class pattern \cite{OMO10}, a
+typical use case of implicit functions in Scala, can be translated typably into
+DIF, which recovers ad-hoc polymorphism in DOT via the use of path-dependent
+types and abstract type members to simulate Hindley-Damas-Milner parametric
+polymorphism.
 
 \paragraph{Example} The type class pattern \cite{OBLB18} in DIF maps closely to
 the type class pattern as is used in Scala. The example leverages DOT's
