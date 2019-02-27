@@ -1,16 +1,13 @@
 \section{Related and Further Work}
 
-Our best effort has gone into ensuring the correctness of our pen-and-paper
-soundness proof for DIF, and given similar soundness results and the success of
-Scala, it seems likely that our soundness theorem holds in truth. However, a
-mechanised proof would give a higher level of confidence in this result.
-
 It is known that type assignment and subtyping are undecidable in DOT
-\cite{AR16} since DOT can encode system $F_{<:}$. DOT has no principal types. As
-DIF is a superset of DOT, these properties hold for DIF transitively. DOT does,
-however, have a local type inference procedure \cite{PT00}. It follows that such
-a procedure should also exist for DIF, especially since local type inference is
-used to great effect in Scala, a language with implicits.
+\cite{AR16} since DOT can encode system $F_{<:}$. As DIF is a superset of DOT,
+these properties hold for DIF transitively. DOT does, however, have a local type
+inference procedure \cite{PT00}. It follows that such a procedure should also
+exist for DIF, especially since local type inference is used to great effect in
+Scala, a language with implicits. DOT has no principal types, and it is
+therefore likely that DIF also lacks principal types, although this remains to
+be shown.
 
 It is widely thought that there is a correspondence between implicits and type
 classes - it is easily seen that the dictionary passing of type classes is

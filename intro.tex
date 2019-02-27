@@ -225,18 +225,20 @@ only permitted operation on those objects.
 Path-dependent types with function arrows can be used to recover
 Hindley-Damas-Milner style polymorphism despite the absence of type variables,
 via the passing of an object with a type member \cite{AGORS16}. Consider the
-function \texttt{id} in an ML-like language with Hindley-Damas-Milner
-polymorphism as below:
+function \texttt{id} in a Haskell-like language:
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[mathescape]
-    id : $\forall$a. a $\rightarrow$ a
+    id :: a $\rightarrow$ a
     id x = x
 \end{lstlisting}
 \end{minipage}
 
-We can rewrite this in DOT as below, with an additional parameter used to pass
-the type of the parameter x:
+We can rewrite this in DOT, with an additional parameter used to pass
+the type of the parameter x. In DOT, $\forall(y: T)T'$ is the type of a
+path-dependent function, and $\lambda(y: T)t$ is a function literal, where $y$
+is a variable, $T$, $T'$ are types and $t$ is a term. The encoding of a
+polymorphic \texttt{id} in DOT is given below:
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[mathescape]
