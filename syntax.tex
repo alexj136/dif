@@ -24,6 +24,14 @@ grammar of types.
     \label{figure_grammar}
 \end{figure*}
 
+We employ the following abbreviations in examples:
+
+\[\begin{array}{r l}
+    \forall(y: T, z: U) &= \forall(y: T)\forall(z: U) \\[3mm]
+    \lambda(y: T, z: U) &= \lambda(y: T)\lambda(z: U) \\[3mm]
+    \{d\ \texttt{\textbackslash n}\ d'\} &= \{d\} \wedge \{d'\}
+\end{array}\]
+
 We do not define a semantics of DIF directly. Instead we define a type-based
 translation from DIF programs to DOT programs, and the meaning of a DIF program
 is therefore given by its typed translation into a DOT program. This
