@@ -24,14 +24,41 @@ grammar of types.
     \label{figure_grammar}
 \end{figure*}
 
+\subsection{Abbreviations}
 We employ the following abbreviations in examples:
 
-\[\begin{array}{r l}
-    \forall(y: T, z: U) &= \forall(y: T)\forall(z: U) \\[3mm]
-    \lambda(y: T, z: U) &= \lambda(y: T)\lambda(z: U) \\[3mm]
-    \{d \quad d'\} &= \{d\} \wedge \{d'\}
-\end{array}\]
+\noindent -- We encode multiple argument function (types) as multiple single
+function (types):
+\begin{align*}
+    \forall(y: T, z: U) &\equiv \forall(y: T)\forall(z: U) \\
+    \lambda(y: T, z: U) &\equiv \lambda(y: T)\lambda(z: U) \\
+\end{align*}
+\noindent -- We group intersection contents together inside $\{$ curly brackets
+$\}$:
+\begin{align*}
+    \{d \quad d'\} &\equiv \{d\} \wedge \{d'\} \\
+\end{align*}
+\noindent -- We allow terms in application and selection by encoding them as
+let-bindings:
+\begin{align*}
+    t\ t' &\equiv \LET{x}{t}{x\ t'} \\
+    x\ t &\equiv \LET{y}{t}{x\ y} \\
+    t.a &\equiv \LET{x}{t}{x.a}
+\end{align*}
+\noindent -- We abbreviate type bounds thusly:
+\begin{align*}
+    A <: T &\equiv A: \bot..T & A = T &\equiv A: T..T \\
+    A >: T &\equiv A: T..\top & A &\equiv A: \bot..\top
+\end{align*}
+\noindent -- We encode type ascription as application:
+\begin{align*}
+    t: T &\equiv (\ABS{x}{T}{x})t \\
+    \LET{x: T}{t}{t'} &\equiv \LET{x}{t: T}{t'}
+\end{align*}
+\noindent -- Finally we omit types in new-bindings if the type of the definition
+is explicit, writing $\OBJ{x}{T}{d}$ as $\nu(x)d$.
 
+\subsection{Semantics}
 We do not define a semantics of DIF directly. Instead we define a type-based
 translation from DIF programs to DOT programs, and the meaning of a DIF program
 is therefore given by its typed translation into a DOT program. This
