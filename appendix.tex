@@ -799,24 +799,21 @@
 
 
 $full = \LET{\texttt{ord\_package}}{
-    \OBJ{\texttt{ord\_p}}{\TODOTHIS}{
-    \{\texttt{Ord} = \REC{\texttt{self}}{\{A: \bot..\top; \texttt{compare}:
-    \DFUN{x}{\texttt{self}.A}{\DFUN{y}{\texttt{self}.A}{\BOOL}}
+    \nu(\texttt{ord\_p})
+    \{\texttt{Ord} = \REC{\texttt{self}}{\{A; \texttt{compare}:
+        \forall(x: \texttt{self}.A, y: \texttt{self}.A)\BOOL
     \}} ; \\
-    \texttt{comp}: \DFUN{t}{\TDEC{A}{\bot}{\top}}{\DFUN{x}{t.A}{
-        \DFUN{y}{t.A}{\IFUN{ev}{\texttt{ord\_p.Ord}\wedge
-            \TDEC{A}{\bot}{\top}}{\BOOL}}}} = \\
-        \ABS{t}{\TDEC{A}{\bot}{\top}}{\ABS{x}{t.A}{\ABS{y}{t.A}{
-            \IMP.\texttt{compare}(x)(y)}}}
-    \}} \\
+    \texttt{comp}: \forall(ty: \{A\}, x: ty.A,
+        y: ty.A)\IFUN{ev}{\texttt{ord\_p.Ord}\wedge\{A\}}{\BOOL} = \\
+        \lambda(ty: \{A\}, x: ty.A, y: ty.A) \IMP.\texttt{compare}(x)(y)
+    \} \\
 }{
-    \LET{\IMP: \texttt{ord\_package.Ord}\wedge\TDEC{A}{\bot}{\INT}}{
-        \OBJ{\texttt{self}}{\TODOTHIS}{
+    \LET{\IMP: \texttt{ord\_package.Ord}\wedge\{A = \INT\}}{
+        \nu(\texttt{self})
             \DEF{A}{\INT};
-            \texttt{compare}: \DFUN{x}{\texttt{self}.A}{
-                    \DFUN{y}{\texttt{self}.A}{\BOOL}} =
-                \ABS{x}{\texttt{self}.A}{\ABS{y}{\texttt{self}.A}{x < y}}
-        }
+            \texttt{compare}: \forall(x: \texttt{self}.A,
+                    y: \texttt{self}.A)\BOOL =
+                \lambda(x: \texttt{self}.A, y: \texttt{self}.A)x < y
     }{
         \texttt{ord\_package.comp}(1, 2)
     }
@@ -825,7 +822,7 @@ $full = \LET{\texttt{ord\_package}}{
     \item We define $full_T$ to be the term we expect to be obtained by the
         translation of $full$:
 
-    $full_T = \TODOTHIS \texttt{full translated term}$
+$full_T = \TODOTHIS$
 
     \item Clearly we expect $full$ to have type $\BOOL$, and therefore our proof goal is
     the judgement $\TJ{}{full}{\BOOL}{full_T}$.

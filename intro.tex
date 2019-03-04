@@ -314,13 +314,13 @@ that \texttt{A} is restricted to \texttt{Int}, and provide a definition of
 \begin{lstlisting}[mathescape,numbers=left]
     let ord_package = $\nu$(ord_p) {
         Ord = $\mu$(self: {
-            A: $\bot$..$\top$
+            A
             compare: $\forall$(x: self.A, y: self.A)Boolean
         })
-        comp: $\forall$(t: {A: $\bot$..$\top$})$\forall$(x: t.A, y: t.A)$\forall$$\IMP$(ev: ord_p.Ord$\wedge${A: $\bot$..$\top$})Boolean =
-            $\lambda$(t: {A: $\bot$..$\top$})$\lambda$(x: t.A, y: t.A)$\IMP$.compare(x, y)
+        comp: $\forall$(ty: {A}, x: ty.A, y: ty.A)$\forall$$\IMP$(ev: ord_p.Ord$\wedge${A})Boolean =
+            $\lambda$(ty: {A}, x: ty.A, y: ty.A)$\IMP$.compare(x, y)
     } in
-    let $\IMP$: ord_package.Ord$\wedge${A: Int..Int} = $\nu$(self: {
+    let $\IMP$: ord_package.Ord$\wedge${A = Int} = $\nu$(self: {
             A = Int
             compare: $\forall$(x: self.A, y: self.A)Boolean =
                 $\lambda$(x: self.A, y: self.A) x < y
