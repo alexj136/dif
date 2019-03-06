@@ -9,10 +9,11 @@ Scala, a language with implicits. DOT has no principal types, and it is
 therefore likely that DIF also lacks principal types, although this remains to
 be shown.
 
-It is widely thought that there is a correspondence between implicits and type
+It is well-known that there is a correspondence between implicits and type
 classes - it is easily seen that the dictionary passing of type classes is
-simulated with an implicit parameter. It would be interesting to establish this
-correspondence formally. One can envision a translation $t_{c \rightarrow i}$
+simulated with an implicit parameter. This has been observed in particular by
+\cite{OMO10} and \cite{OSCLYW12}. It would be interesting to establish this
+correspondence formally -- one can envision a translation $t_{c \rightarrow i}$
 from type classes to implicits, and given the established results of type
 classes to lambda calculus $t_{c \rightarrow l}$ \cite{WB89} and implicits to
 lambda calculus $t_{i \rightarrow l}$ \cite{OBLB18}, it seems that it should be
