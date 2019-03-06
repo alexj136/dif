@@ -81,9 +81,9 @@ variables may be \emph{constrained}, such that they can only be instantiated by
 types over which a user-defined set of functions exist. Further functions can
 then be defined over all types for which the set of functions are defined. A
 typical example of a type class is \texttt{Show}. Note that for this example we
-use Haskell-style listings, as Haskell is the most well-known language with type
-classes. In a single program, we might want to use a function \texttt{print} to
-print values over many different types, for example we might want to write
+use Haskell-style code, as Haskell is the most well-known language with type
+classes. In a program, we might want to use a function \texttt{print} to print
+values over many different types, for example we might want to write
 \texttt{print 1}, \texttt{print True} and \texttt{print [1, 2]} in the same
 program. To acheive this with type classes, we give \texttt{print} the following
 signature:
@@ -135,17 +135,17 @@ the \texttt{Show} type class, as above. The definition is as follows:
     print a = putStrLn (show a)
 \end{lstlisting}
 
-Type classes are implemented by via a technique known as \emph{dictionary
-passing}. Function definitions whose type contains a type class constrained type
-variable are adapted to take an additional parameter for each such type
-variable. That additional parameter is known as a \emph{dictionary}, it is a
-tuple containing the type class function implementations for the type that
-instantiates the type class constrained type variable. When a type class
-declares just a single function, such as with \texttt{Show}, the dictionary is
-just a single function rather than a tuple of functions. Call sites for those
-function definitions are then augmented to pass the dictionary of the
-appropriate type - the compiler decides what the appropriate type is based on
-the parameter passed at the call site.
+Type classes are usually implemented by via a technique known as
+\emph{dictionary passing} \cite{K14}. Function definitions whose type contains
+a type class constrained type variable are adapted to take an additional
+parameter for each such type variable. That additional parameter is known as a
+\emph{dictionary}, and is a tuple containing the type class function
+implementations for the type that instantiates the type class constrained type
+variable. When a type class declares just a single function, such as with
+\texttt{Show}, the dictionary is just a single function rather than a tuple of
+functions. Call sites for those function definitions are augmented to pass
+the dictionary of appropriate type - the compiler decides what the
+appropriate type is based on the parameter passed at the call site.
 
 In the case of the \texttt{Show} type class above, we would expect the
 \texttt{Bool} instance definition to be translated into the following
@@ -166,14 +166,14 @@ dictionary:
 are then rewritten as \texttt{print showBoolDict b}.
 
 \subsection{Dependent Object Types (DOT)}
-DOT \cite{AMO12, ARO14, AR16, AGORS16, AR17} is a calculus intended as a step
-towards a theoretical foundation for the programming language Scala and its type
-system. DOT models a restricted subset of Scala -- the base-calculus includes
-Scala's key features from a type theory perspective, such as path-dependency,
-abstract type members and a subtyping hierarchy with maximal type $\top$ and
-minimal type $\bot$. Omitted are features of Scala that are less important from
-this perspective, such as traits, classes and inheritance. We now look briefly
-at two important features of DOT.
+DOT \cite{AMO12, ARO14, AR16, AGORS16, AR17} is a foundational calculus
+intended as a step towards a theoretical foundation for the programming
+language Scala and its type system. DOT models a restricted subset of Scala --
+the base-calculus includes Scala's key features from a type theory perspective,
+such as path-dependency, abstract type members and a subtyping hierarchy with
+maximal type $\top$ and minimal type $\bot$. Omitted are features of Scala such
+as traits, classes and inheritance. We now look briefly at two important
+features of DOT.
 
 \paragraph{Abstract Type Members}
 Abstract type members are a feature of Scala that allow for generic programming.
