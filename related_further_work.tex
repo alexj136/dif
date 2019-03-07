@@ -18,7 +18,13 @@ from type classes to implicits, and given the established results of type
 classes to lambda calculus $t_{c \rightarrow l}$ \cite{WB89} and implicits to
 lambda calculus $t_{i \rightarrow l}$ \cite{OBLB18}, it seems that it should be
 possible to establish $t_{c \rightarrow i} \cdot t_{i \rightarrow l} \equiv t_{c
-\rightarrow l}$. for some notion of $\equiv$.
+\rightarrow l}$ for some notion of $\equiv$.
+
+It has not been investigated whether implicits can be used to encode type
+classes. One can envison another translation $t_{i \rightarrow c}$ from
+implicits to type classes, and it should then be expected that $t_{i
+\rightarrow c} \cdot t_{c \rightarrow i} \equiv t_{c \rightarrow i} \cdot t_{i
+\rightarrow c} \equiv \mathtt{id}$, again for some $\equiv$.
 
 Implicit program constructs for session-typed concurrency have been studied in
 \cite{JB18}. While Scala concurrency libraries leverage implicits, it is unclear

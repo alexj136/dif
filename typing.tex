@@ -81,18 +81,18 @@ rule \RULE{Bind-Ex} leaves explicit variable bindings unchanged.
 Figure \ref{figure_typing_rules_terms} gives the binding rules for DIF terms.
 Most rules are identical to their corresponding rules in DOT (specifically in
 \cite{AGORS16}), when ignoring the translation part of typing judgements
-($\leadsto \HAT{t}$). The typing rules with differ slightly from their DOT
+($\leadsto \HAT{t}$). The typing rules differ slightly from their DOT
 counterparts in that they have binding judgements in their premises. The rules
 \RULE{Var-Ex}, \RULE{All-Ex-I} and \RULE{All-Ex-E} are analogous to the rules
 \RULET{Var}, \RULET{All-I} and \RULET{All-E} respectively. The rule
 \RULE{All-Im-I} types introduction of implicit functions, introducing an
 (explicit) abstraction to the translation. The rule \RULE{All-Im-E} types
 implicit function elimination, inserting an implicit variable of suitable type
-as an argument to the implicit function. Finally \RULE{Var-Im} types the
-implicit query, replacing them with a chosen implicit variable in the
-translation. This rule also performs \emph{disambiguation}, where more than one
-implicit variable is of suitable type. Disambiguation follows the same process
-as Scala (as specified in \cite{OBLB18}). We prefer more deeply nested implicit
+as an argument to the implicit function. Finally \RULE{Var-Im} types implicit
+query, replacing $\IMP$ with a chosen implicit variable in the translation.
+This rule also performs \emph{disambiguation}, whenever more than one implicit
+variable is of suitable type. Disambiguation follows the same process as Scala
+(as specified in \cite{OBLB18}). We prefer more deeply nested implicit
 variables over less deeply nested ones, and implicit variables with more
 specific types over ones with more general types. Where we have a choice
 between two variables, one of which is more deeply nested and the other a more
@@ -118,7 +118,9 @@ Figure \ref{figure_subtyping_rules} gives the subtyping rules for DIF terms and
 definitions. These are yet again very similar to the subtyping rules in DOT.
 The exception is the rule \RULE{All-<:-All-Im}, which makes explicit functions
 a subtype of implicit functions. This allows the passing of arguments
-explicitly to an implicit function, which is an important aspect of implicit functions in Scala.
+explicitly to an implicit function, which is an important aspect of implicit
+functions in Scala, as it allows overriding as necessary any implicit variable
+the compiler would otherwise insert.
 
 \begin{figure*}[h]
     \input{figure_subtyping_rules}
