@@ -5,12 +5,22 @@
 
     \RULE{Refl} \quad \SJ{\Gamma}{S}{S} \qquad
 
+    \RULE{And$_1$-<:} \quad \SJ{\Gamma}{\AGG{S}{U}}{S} \\[2mm]
+
     \RULE{Trans} \quad \inference{
         \SJ{\Gamma}{S}{U} \quad
         \SJ{\Gamma}{U}{R}
     }{
         \SJ{\Gamma}{S}{R}
-    } \\[4mm]
+    } \qquad
+
+    \RULE{Fld-<:-Fld} \quad \inference{
+        \SJ{\Gamma}{S}{U}
+    }{
+        \SJ{\Gamma}{\FDEC{a}{S}}{\FDEC{a}{U}}
+    } \qquad
+
+    \RULE{And$_2$-<:} \quad \SJ{\Gamma}{\AGG{S}{U}}{U} \\[4mm]
 
     \RULE{<:-And} \quad \inference{
         \SJ{\Gamma}{S}{U} \quad
@@ -43,16 +53,6 @@
         \SJ{\Gamma}{U_1}{U_2} \quad
     }{
         \SJ{\Gamma}{\TDEC{A}{S_1}{U_1}}{\TDEC{A}{S_2}{U_2}}
-    } \\[4mm]
-
-    \RULE{And$_1$-<:} \quad \SJ{\Gamma}{\AGG{S}{U}}{S} \qquad
-
-    \RULE{And$_2$-<:} \quad \SJ{\Gamma}{\AGG{S}{U}}{U} \qquad
-
-    \RULE{Fld-<:-Fld} \quad \inference{
-        \SJ{\Gamma}{S}{U}
-    }{
-        \SJ{\Gamma}{\FDEC{a}{S}}{\FDEC{a}{U}}
     } \\[4mm]
 
     \RULE{All-<:-All-Im} \quad \inference{
