@@ -14,20 +14,16 @@
     \begin{itemize}
         \item \textbf{Case} \RULE{Top}: $\SJ{\Gamma}{S}{\top}$
         \begin{itemize}
-            \item To show: $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{\top}}$
-            \begin{itemize}
-                \item Or by definition \ref{translation}:
-                    $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\top}$
-            \end{itemize}
+            \item To show: $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{\top}}$, or
+                by definition \ref{translation}:
+                $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\top}$
             \item The goal follows from \RULET{Top}.
         \end{itemize}
         \item \textbf{Case} \RULE{Bot}: $\SJ{\Gamma}{\bot}{S}$
         \begin{itemize}
-            \item To show: $\SJT{\TRANS{\Gamma}}{\TRANS{\bot}}{\TRANS{S}}$
-            \begin{itemize}
-                \item Or by definition \ref{translation}:
-                    $\SJT{\TRANS{\Gamma}}{\bot}{\TRANS{S}}$
-            \end{itemize}
+            \item To show: $\SJT{\TRANS{\Gamma}}{\TRANS{\bot}}{\TRANS{S}}$, or
+                by definition \ref{translation}:
+                $\SJT{\TRANS{\Gamma}}{\bot}{\TRANS{S}}$
             \item The goal follows from \RULET{Bot}.
         \end{itemize}
         \item \textbf{Case} \RULE{Refl}: $\SJ{\Gamma}{S}{S}$
@@ -40,16 +36,10 @@
             \item To show: $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{R}}$
             \item By inversion of \RULE{Trans}:
             \begin{itemize}
-                \item $\SJ{\Gamma}{S}{U}$
-                \begin{itemize}
-                    \item Then by induction:
-                        $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{U}}$
-                \end{itemize}
-                \item $\SJ{\Gamma}{U}{R}$
-                \begin{itemize}
-                    \item Then by induction:
-                        $\SJT{\TRANS{\Gamma}}{\TRANS{U}}{\TRANS{R}}$
-                \end{itemize}
+                \item $\SJ{\Gamma}{S}{U}$, then by induction:
+                    $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{U}}$
+                \item $\SJ{\Gamma}{U}{R}$, then by induction:
+                    $\SJT{\TRANS{\Gamma}}{\TRANS{U}}{\TRANS{R}}$
             \end{itemize}
             \item The goal then follows from \RULET{Trans}.
         \end{itemize}
@@ -63,16 +53,10 @@
             \end{itemize}
             \item By inversion of \RULE{<:-And}:
             \begin{itemize}
-                \item $\SJ{\Gamma}{S}{U}$
-                \begin{itemize}
-                    \item Then by induction:
-                        $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{U}}$
-                \end{itemize}
-                \item $\SJ{\Gamma}{S}{R}$
-                \begin{itemize}
-                    \item Then by induction:
-                        $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{R}}$
-                \end{itemize}
+                \item $\SJ{\Gamma}{S}{U}$, then by induction:
+                    $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{U}}$
+                \item $\SJ{\Gamma}{S}{R}$, then by induction:
+                    $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{R}}$
             \end{itemize}
             \item The goal then holds by \RULET{<:-And}.
         \end{itemize}
@@ -122,11 +106,8 @@
             \end{itemize}
             \item By inversion of \RULE{All-<:-All-Ex}:
             \begin{itemize}
-                \item $\SJ{\Gamma}{S_2}{S_1}$
-                \begin{itemize}
-                    \item Then by induction:
-                        $\SJT{\TRANS{\Gamma}}{\TRANS{S_2}}{\TRANS{S_1}}$
-                \end{itemize}
+                \item $\SJ{\Gamma}{S_2}{S_1}$, then by induction:
+                    $\SJT{\TRANS{\Gamma}}{\TRANS{S_2}}{\TRANS{S_1}}$
                 \item $\SJ{\Gamma, x: S_2}{U_1}{U_2}$
                 \begin{itemize}
                     \item Then by induction: $\SJT{\TRANS{(\Gamma, x: S_2)}}
@@ -150,16 +131,10 @@
             \end{itemize}
             \item By inversion of \RULE{Typ-<:-Typ}:
             \begin{itemize}
-                \item $\SJ{\Gamma}{S_2}{S_1}$
-                \begin{itemize}
-                    \item Then by induction:
-                        $\SJT{\TRANS{\Gamma}}{\TRANS{S_2}}{\TRANS{S_1}}$
-                \end{itemize}
-                \item $\SJ{\Gamma}{U_1}{U_2}$
-                \begin{itemize}
-                    \item Then by induction:
-                        $\SJT{\TRANS{\Gamma}}{\TRANS{U_1}}{\TRANS{U_2}}$
-                \end{itemize}
+                \item $\SJ{\Gamma}{S_2}{S_1}$, then by induction:
+                    $\SJT{\TRANS{\Gamma}}{\TRANS{S_2}}{\TRANS{S_1}}$
+                \item $\SJ{\Gamma}{U_1}{U_2}$, then by induction:
+                    $\SJT{\TRANS{\Gamma}}{\TRANS{U_1}}{\TRANS{U_2}}$
             \end{itemize}
             \item The goal then follows from \RULET{Typ-<:-Typ}.
         \end{itemize}
@@ -212,11 +187,8 @@
             \end{itemize}
             \item By inversion of \RULE{All-<:-All-Im}:
             \begin{itemize}
-                \item $\SJ{\Gamma}{S_2}{S_1}$
-                \begin{itemize}
-                    \item Then by induction:
-                        $\SJ{\TRANS{\Gamma}}{\TRANS{S_2}}{\TRANS{S_1}}$
-                \end{itemize}
+                \item $\SJ{\Gamma}{S_2}{S_1}$, then by induction:
+                    $\SJ{\TRANS{\Gamma}}{\TRANS{S_2}}{\TRANS{S_1}}$
                 \item $\SJ{\Gamma, x: S_2}{U_1}{U_2}$
                 \begin{itemize}
                     \item Then by induction: $\SJ{\TRANS{(\Gamma, x: S_2)}}
@@ -231,6 +203,8 @@
     \end{itemize}
 \end{proof}
 
+\vspace{-3mm}
+
 \begin{LEMMA}[Preservation of free variables under type translation]
     \label{pres_fv}
     For all $S$, $\FV{S} = \FV{\TRANS{S}}$.
@@ -239,6 +213,8 @@
 \begin{proof}
     Immediate from definition \ref{translation}.
 \end{proof}
+
+\vspace{-3mm}
 
 \begin{LEMMA}[Commutativity of type translation and name substitution]
     \label{comm_trans_sub}
@@ -430,6 +406,8 @@
     \end{itemize}
 \end{proof}
 
+\vspace{-3mm}
+
 \begin{THEOREM}[Type-preserving translation of DIF terms]
     \label{tp_terms}
     If $\TJ{\Gamma}{t}{S}{\HAT{t}}$ then
@@ -464,16 +442,10 @@
         \begin{itemize}
             \item By inversion of \RULE{Sub}:
             \begin{itemize}
-                \item $\TJ{\Gamma}{t}{S}{\HAT{t}}$
-                \begin{itemize}
-                    \item And by induction:
-                        $\TJT{\TRANS{\Gamma}}{\HAT{t}}{\TRANS{S}}$
-                \end{itemize}
-                \item $\SJ{\Gamma}{S}{S'}$
-                \begin{itemize}
-                    \item And by lemma \ref{pres_subtyping}:
-                        $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{S'}}$
-                \end{itemize}
+                \item $\TJ{\Gamma}{t}{S}{\HAT{t}}$, and by induction:
+                    $\TJT{\TRANS{\Gamma}}{\HAT{t}}{\TRANS{S}}$
+                \item $\SJ{\Gamma}{S}{S'}$, and by lemma \ref{pres_subtyping}:
+                    $\SJT{\TRANS{\Gamma}}{\TRANS{S}}{\TRANS{S'}}$
             \end{itemize}
             \item The goal then follows from \RULET{Sub}.
         \end{itemize}
@@ -489,10 +461,7 @@
             \end{itemize}
             \item By inversion of \RULE{All-Ex-I}:
             \begin{itemize}
-                \item $x \leadsto u$
-                \begin{itemize}
-                    \item Then either $x = u$ or $u\ \text{fresh}$
-                \end{itemize}
+                \item $x \leadsto u$, then either $x = u$ or $u\ \text{fresh}$
                 \item $\TJ{\Gamma, u: S}{t}{U}{\HAT{t}}$
                 \begin{itemize}
                     \item Then by induction:
@@ -544,11 +513,8 @@
             \item By inversion of \RULE{LET}:
             \begin{itemize}
                 \item $x \leadsto u$
-                \item $\TJ{\Gamma}{t}{S}{\HAT{t}}$
-                \begin{itemize}
-                    \item Then by induction:
-                        $\TJT{\TRANS{\Gamma}}{\HAT{t}}{\TRANS{S}}$
-                \end{itemize}
+                \item $\TJ{\Gamma}{t}{S}{\HAT{t}}$, then by induction:
+                    $\TJT{\TRANS{\Gamma}}{\HAT{t}}{\TRANS{S}}$
                 \item $\TJ{\Gamma, u: S}{t'}{U}{\HAT{t'}}$
                 \begin{itemize}
                     \item Then by induction:
@@ -557,10 +523,8 @@
                         $\TJT{\TRANS{\Gamma}, u: \TRANS{S}}
                         {\HAT{t'}}{\TRANS{U}}$
                 \end{itemize}
-                \item $x \notin \FV{U}$
-                \begin{itemize}
-                    \item Then by lemma \ref{pres_fv}: $x \notin \FV{\TRANS{U}}$
-                \end{itemize}
+                \item $x \notin \FV{U}$, then by lemma \ref{pres_fv}: $x \notin
+                    \FV{\TRANS{U}}$
             \end{itemize}
             \item The goal then follows from \RULET{Let}.
         \end{itemize}
@@ -574,16 +538,10 @@
             \end{itemize}
             \item By inversion of \RULE{And-I}:
             \begin{itemize}
-                \item $\TJ{\Gamma}{x}{S}{\HAT{x}}$
-                \begin{itemize}
-                    \item Then by induction: 
-                        $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\TRANS{S}}$
-                \end{itemize}
-                \item $\TJ{\Gamma}{x}{U}{\HAT{x}}$
-                \begin{itemize}
-                    \item Then by induction: 
-                        $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\TRANS{U}}$
-                \end{itemize}
+                \item $\TJ{\Gamma}{x}{S}{\HAT{x}}$, then by induction:
+                    $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\TRANS{S}}$
+                \item $\TJ{\Gamma}{x}{U}{\HAT{x}}$, then by induction:
+                    $\TJT{\TRANS{\Gamma}}{\HAT{x}}{\TRANS{U}}$
             \end{itemize}
             \item The goal then follows from \RULET{And-I}.
         \end{itemize}
@@ -672,10 +630,8 @@
                     \item And by definition \ref{translation}:
                         $\TJT{\TRANS{\Gamma}, u: \TRANS{S}}{\HAT{t}}{\TRANS{U}}$
                 \end{itemize}
-                \item $u \notin \FV{S}$
-                \begin{itemize}
-                    \item Then by lemma \ref{pres_fv}: $u \notin \FV{\TRANS{S}}$
-                \end{itemize}
+                \item $u \notin \FV{S}$, then by lemma \ref{pres_fv}: $u \notin
+                    \FV{\TRANS{S}}$
             \end{itemize}
             \item The goal then follows from \RULET{All-I}.
         \end{itemize}
@@ -708,6 +664,8 @@
         \end{itemize}
     \end{itemize}
 \end{proof}
+
+\vspace{-3mm}
 
 \begin{THEOREM}[Type and domain-preserving translation of DIF definitions]
     \label{tp_defs}
