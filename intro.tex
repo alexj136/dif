@@ -12,13 +12,12 @@ problem:
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[mathescape]
 def compare(x: Int, y: Int)(comparator:
-    Int => Int => Boolean): Boolean =
-  comparator(x)(y)
+    Int => Int => Boolean):
+    Boolean = comparator(x)(y)
 ...
 compare(3, 4)(<=)
 ...
 compare(17, 12)(<=)
-...
 \end{lstlisting}
 \end{minipage}
 
@@ -31,13 +30,12 @@ default value, to be used whenever an invocation does not supply an argument:
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[mathescape]
 def compare(x: Int, y: Int)(comparator:
-    Int => Int => Boolean = <=): Boolean =
-  comparator(x)(y)
+    Int => Int => Boolean = <=):
+    Boolean = comparator(x)(y)
 ...
 compare(3, 4)
 ...
 compare(17, 12)
-...
 \end{lstlisting}
 \end{minipage}
 
@@ -54,16 +52,15 @@ values, allowing the latter to be context dependent.
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[mathescape]
-def compare(x: Int, y: Int)(implicit comparator:
-    Int => Int => Boolean): Boolean =
-  comparator(x)(y)
+def compare(x: Int, y: Int)(implicit
+    comparator: Int => Int => Boolean):
+    Boolean = comparator(x)(y)
 ...
 implicit val cmp = <=
 compare(3, 4)
 ...
 implicit val cmp = >
 compare(17, 12)
-...
 \end{lstlisting}
 \end{minipage}
 
@@ -108,7 +105,8 @@ given type, for example \texttt{Bool}, as below, in an \emph{instance
 definition}:
 \begin{lstlisting}[mathescape]
     instance Show Bool where
-        show b = if b then "True" else "False"
+        show b = if b then "True"
+            else "False"
 \end{lstlisting}
 
 \noindent And for \texttt{Int}, assuming a function \texttt{intToString :: Int
@@ -123,9 +121,10 @@ argument types are also in the type class. For example, we can declare that
 tuples of type \texttt{(a, b)} for all \texttt{a}, \texttt{b} are in
 \texttt{Show} when \texttt{a} and \texttt{b} are in \texttt{Show} thusly:
 \begin{lstlisting}[mathescape]
-    instance (Show a, Show b) => Show (a, b) where
-        show (a, b) = "(" ++ show a ++ ", " ++
-                                 show b ++ ")"
+    instance (Show a, Show b) =>
+            Show (a, b) where
+        show (a, b) = "(" ++ show a ++
+            ", " ++ show b ++ ")"
 \end{lstlisting}
 
 \noindent With these instance definitions at hand, we can give a definition for
@@ -288,7 +287,7 @@ the instance declaration across lines 9-12. We assign the instance to the
 implicit variable so that it can be passed implicitly to calls to \texttt{comp},
 and leverage intersection types to make it a subtype of \texttt{Ord}. We specify
 that \texttt{A} is restricted to \texttt{Int}, and provide a definition of
-\texttt{compare}. Line 15 shows an example call.
+\texttt{compare}. Line 14 shows an example call.
 
 \begin{figure*}[h]
 \begin{lstlisting}[mathescape,numbers=left]
@@ -318,8 +317,7 @@ that \texttt{A} is restricted to \texttt{Int}, and provide a definition of
     let $\IMP$: ord_package.Ord$\wedge${A = Int} = $\nu$(self: {
             A = Int
             compare: $\forall$(x: self.A, y: self.A)Boolean = $\lambda$(x: self.A, y: self.A) x < y
-        })
-    in
+        }) in
     ...
     ord_package.comp({A}, 1, 2)
 \end{lstlisting}
