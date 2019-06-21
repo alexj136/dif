@@ -152,7 +152,8 @@ dictionary:
 \begin{lstlisting}[mathescape]
     showBoolDict :: Bool -> String
     showBoolDict = show where
-        show b = if b then "True" else "False"
+        show b = if b then "True"
+            else "False"
 \end{lstlisting}
 
 \noindent The \texttt{print} function is then translated to the following:
