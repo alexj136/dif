@@ -1,0 +1,13 @@
+#!/bin/bash
+case $@ in
+
+    "")         pdflatex -halt-on-error main.tex ;;
+
+    "clean")    rm -f *.aux *.log *.bbl *.blg *.pdf *.nav *.snm *.toc *.out *.vrb;;
+
+    "watch")    ls *.tex listings/* ../macros.tex | entr ./build
+                reset ;;
+
+    *)          echo "Error. Usage: ./build [ watch | clean ]?"
+
+esac

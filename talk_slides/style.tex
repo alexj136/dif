@@ -1,0 +1,103 @@
+\usepackage[utf8]{inputenc}
+
+\usepackage{xcolor}
+\usepackage{xspace}
+\definecolor{mediumgray}{HTML}{888888}
+\definecolor{dimgray}{HTML}{BBBBBB}
+\definecolor{brightred}{HTML}{FF5555}
+\definecolor{codehighlightcolor}{HTML}{AF5FD7}
+
+
+\setbeamercolor{background canvas}{bg=black}
+\setbeamercolor{normal text}{fg=white,bg=white}
+\setbeamercolor{palette primary}{use=structure,fg=white,bg=white}
+\setbeamercolor{palette secondary}{use=structure,fg=red,bg=white}
+\setbeamercolor{palette tertiary}{use=structure,fg=green,bg=white}
+\setbeamercolor{palette quaternary}{use=structure,fg=green,bg=white}
+
+\usepackage{setspace}
+\setstretch{1.5}
+
+\usepackage{etoolbox}
+\usepackage{pgfpages}
+
+\setbeamertemplate{note page}[mynotes]
+
+\usepackage[T1]{fontenc}
+\usepackage[sfdefault,scaled=.85]{FiraSans}
+\usepackage{newtxsf}
+
+\usepackage{FiraMono}
+
+\usepackage{array}
+\usepackage{booktabs}
+
+\beamertemplatenavigationsymbolsempty
+
+\setbeamersize{text margin left=30pt,text margin right=30pt}
+\setbeamercolor{structure}{fg=white}
+\setbeamertemplate{frametitle}{\vspace{20pt}\insertframetitle}
+\setbeamerfont{frametitle}{size=\fontsize{14pt}{14pt},series=\bfseries}
+\setbeamerfont{title}{size=\fontsize{32pt}{32pt},family=\textrm,series=\bfseries}
+\setbeamerfont{subtitle}{size=\fontsize{16pt}{16pt}}
+\setbeamerfont{author}{size=\fontsize{10pt}{10pt}}
+\setbeamerfont{date}{size=\fontsize{10pt}{10pt}}
+\setbeamertemplate{footline}{
+  \hspace{0.25cm}
+  \color{mediumgray}{
+    \insertframenumber}
+  \hfill
+  \color{mediumgray}{
+    \href{https://alexj136.github.io}{alexj136.github.io}}
+  \hspace{0.25cm}
+  \vspace{0.25cm}
+}
+\setbeamertemplate{items}[circle]
+
+\newcommand\Small{\fontsize{5}{5}\selectfont}
+
+\usepackage{listings}
+\lstset{
+  columns=fixed,
+  basewidth=.6em,
+  basicstyle=\linespread{1.2}\ttfamily,
+  commentstyle=\color{gray}\textit,
+  keywordstyle=\ttfamily,
+  stringstyle=\color{codehighlightcolor},
+  numberstyle=\color{codehighlightcolor},
+  showstringspaces=false,
+  aboveskip=0pt,
+  belowskip=0pt,
+	mathescape=false,
+	escapechar=\@
+}
+
+\newcommand{\singletitle}[1]{
+  \begin{center}
+    \vfill\vfill
+    \fontsize{20pt}{20pt}\textbf{#1}
+    \vfill\vfill
+  \end{center}}
+
+\newcommand{\singletext}[1]{
+  \begin{center}
+    \vfill\vfill
+    \fontsize{16pt}{16pt}\textit{#1}
+    \vfill\vfill
+  \end{center}}
+
+\newcommand{\singlesubheading}[1]{\singletext{\textbf{#1}}}
+
+\newcommand{\notelist}[1]{
+  \note{
+    \begin{itemize}
+    \setlength\itemsep{2pt}
+    \setstretch{0}#1
+    \end{itemize}
+  }}
+
+% Alex's imports
+\usepackage{semantic} % for \inference
+\usepackage{units} % for \nicefrac and therefore \pisub
+\usepackage{changepage} % for changepage environment
+\definecolor{grey}{RGB}{150,150,150}
