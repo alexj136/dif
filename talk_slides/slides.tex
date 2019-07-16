@@ -3,33 +3,24 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{In this talk, we ...}
+    \frametitle{Introduction}
     \begin{itemize}
         \pause
-        \item Discuss background work
+        \item Background
         \begin{itemize}
-            \pause
-            \item DOT \TODOTHIS
-            \pause
-            \item Implicits in Scala and the calculus SI of lambda + implicit
-                functions \\
-                \textcolor{grey}{\emph{Simplicitly, Biboudis et al, POPL'18}}
+            \item DOT \hfill \textcolor{grey}{\emph{Amin, Moors, Odersky, 2012}}
+            \item Implicits in Scala \hfill \textcolor{grey}{\emph{Odersky,
+                Blanvillain et al, 2018}}
+            \item Type classes \hfill \textcolor{grey}{\emph{Hall, Hammond et
+                al, 1996}}
+            \item Type classes via implicits \hfill
+                \textcolor{grey}{\emph{Oliveira, Moors, Odersky, 2010}}
         \end{itemize}
-    \end{itemize}
-\end{frame}
-
-\begin{frame}
-    \frametitle{In this talk, we ...}
-    \begin{itemize}
-        \item Introduce our calculus IM of session-typed concurrency with
-            implicits
         \pause
-        \item In particular, we address the open question: Can implicits be
-            generalised from sequential computation to concurrent computation?
+        \item Our calculus DIF that combines DOT with implicits - theory and
+            applications
         \pause
-        \item Show some applications of implicits in a concurrent setting
-        \pause
-        \item Breifly discuss some possible further work
+        \item Related and further work
     \end{itemize}
 \end{frame}
 
@@ -38,15 +29,35 @@
 \end{frame}
 
 \begin{frame}
+    \frametitle{Dependent Object Types (DOT)}
+    \begin{itemize}
+        \pause
+        \item Foundational calculus for scala
+        \begin{itemize}
+            \pause
+            \item Soundness result for (the core of) Scala's type system
+        \end{itemize}
+        \pause
+        \item Very limited subset of Scala
+        \begin{itemize}
+            \pause
+            \item Abstract type members, path dependent types
+        \end{itemize}
+        \pause
+        \item Scope to expand DOT's coverage of Scala\pause, specifically...
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
     \frametitle{Implicits}
     \begin{itemize}
+        \pause
         \item A mechanism for improving program readability
         \pause
         \item Generalisation of \textbf{default parameters}:
         \begin{itemize}
             \pause
-            \item specify a default parameter that we can omit at call sites if
-                we like
+            \item specify a default parameter that we can omit at call sites
             \pause
             \item \texttt{def f(x:Int, y:Float = 0.01) = ...}
             \pause
@@ -101,52 +112,145 @@
     \end{overprint}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Implicits and generic programming}
-    \TODOTHIS
+\begin{frame}[fragile]
+    \frametitle{Implicits}
+    \begin{itemize}
+        \item Really useful for passing context \\
+        \begin{overprint}
+        \onslide<2>
+        \begin{lstlisting}[mathescape]
+    def a(i: A, z: Context): C = ...
+    def b(j: B, z: Context): C = ...
+    val ctx: Context = ...
+    a(i1, ctx) + b(j1, ctx) + a(i2, ctx)
+        \end{lstlisting}
+        \onslide<3>
+        \begin{lstlisting}[mathescape]
+    def a(i: A, implicit z: Context): C = ...
+    def b(j: B, implicit z: Context): C = ...
+    implicit val ctx: Context = ...
+    a(i1) + b(j1) + a(i2)
+        \end{lstlisting}
+        \end{overprint}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Type classes}
+    \begin{itemize}
+        \pause
+        \item Ad-hoc polymorphism (\emph{overloading}) for Haskell \\
+        \pause
+        \begin{lstlisting}[mathescape]
+    print :: Show a => a -> IO ()@\pause@
+    class Show a where
+        show :: a -> String@\pause@
+    instance Show Int where
+        show i = intToString i
+    instance Show Bool where
+        show b = if b then "True" else "False"@\pause@
+    print a = putStrLn (show a)
+        \end{lstlisting}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Type classes - implementation}
+        \begin{lstlisting}[mathescape]
+    type Show a = (a -> String)
+    print :: Show a -> a -> IO ()@\pause@
+    show 1
+    show True@\pause@
+    show intToString 1
+    show (\b -> if b then "True"
+                     else "False") True@\pause@
+        \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Type classes via implicits}
+    \begin{itemize}
+        \pause
+        \item The parameter the compiler inserts is an implicit parameter!
+        \pause
+        \begin{lstlisting}[mathescape]
+    implicit def intShow(x: Int): String =
+        x.toString
+    implicit def showBool(b: Bool): String =
+        if(b) "true" else "false"
+    def print[A](a: A, implicit show:
+        A => String): Unit = println(show(a))
+    print(1)
+    print(true)
+        \end{lstlisting}
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Soundness}
+    \frametitle{The calculus DIF}
     \begin{itemize}
-        \pause
-        \item A translation from DIF programs to DOT programs
-        \pause
+        \pause \item Soundness via a translation from DIF programs to DOT
+            programs
         \begin{itemize}
-            \item This follows the approach of the SI calculus, which gives a
-                translation from lambda with implicit functions to System-F as
-                a basis for Scala's implicits.
+            \pause \item This follows the approach of the SI calculus, which
+                gives a translation from lambda with implicit functions to
+                System-F as a basis for Scala's implicits.
         \end{itemize}
-        \pause
-        \item A typable IM program has a LAST translation that is runtime-safe
-            (by LAST's definition)
+        \pause \item A typable DIF program always translates to a typable DOT
+            program
+        \pause \item Type classes possible in DIF via implicits
     \end{itemize}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Ambiguity} \TODOTHIS
+    \frametitle{Ambiguity}
     \begin{itemize}
-        \item Unlike SI we disambiguate according to Dotty's rules (nesting
-            depth and type specificity)
-        \item Scala implicits are not coherent
-        \item \emph{depth} and \emph{spec} functions - no correctness proof as
-            no formal specification for Scala's disambiguation
+        \pause \item Scala: two criteria
+        \begin{itemize}
+            \pause \item More deeply nested variable: +1 point
+            \pause \item More specific type: +1 point
+            \pause \item If two variables tie, don't compile
+        \end{itemize}
+        \pause \item Haskell: reject all ambiguous programs
+        \begin{itemize}
+            \pause \item $\equiv$ one instance for each type class and type
+        \end{itemize}
+        \pause \item DIF: follow Scala's rules
+        \begin{itemize}
+            \pause \item No correctness proof for ambiguity resolution as
+                Scala's solution is not formalised
+        \end{itemize}
     \end{itemize}
 \end{frame}
 
 \begin{frame}
-    \frametitle{Coherence} \TODOTHIS
+    \frametitle{Related work - coherence}
     \begin{itemize}
-        \item Calculi coherent when there is exactly one way of translating out
-            implicits
-        \item COCHIS - theory of coherent implicits \TODO{cite}
-        \item Coherence arguably not desirable in practice
-        \item Scala implicits are not coherent
-        \item DIF exists in the middle ground between theory (prefering
+        \pause \item Calculi coherent when there is exactly one way of
+            translating out implicits
+        \pause \item COCHIS - theory of coherent implicits \\
+            \textcolor{grey}{\emph{Schrijvers, Oliveira, Wadler, 2017}}
+        \pause \item Coherence arguably not desirable in practice
+        \pause \item Scala implicits are not coherent
+        \pause \item DIF exists in the middle ground between theory (prefering
             coherence) and practice (prefering (limited) ambiguity)
     \end{itemize}
 \end{frame}
 
 \begin{frame}
-\singletitle{\textbackslash end\{talk\}}
+    \frametitle{Further work}
+    \begin{itemize}
+        \pause \item Formal correspondence between type classes and implicits
+        \begin{itemize}
+            \pause \item Type classes a special case of implicits
+        \end{itemize}
+        \pause \item Type inference for DIF
+        \begin{itemize}
+            \pause \item Requires type inference for DOT
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \singletitle{Thank you}
 \end{frame}
