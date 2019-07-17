@@ -8,7 +8,8 @@
         \pause
         \item Background
         \begin{itemize}
-            \item DOT \hfill \textcolor{grey}{\emph{Amin, Moors, Odersky, 2012}}
+            \item DOT - foundations for Scala \hfill
+                \textcolor{grey}{\emph{Amin, Moors, Odersky, 2012}}
             \item Implicits in Scala \hfill \textcolor{grey}{\emph{Odersky,
                 Blanvillain et al, 2018}}
             \item Type classes \hfill \textcolor{grey}{\emph{Hall, Hammond et
@@ -18,7 +19,7 @@
         \end{itemize}
         \pause
         \item Our calculus DIF that combines DOT with implicits - theory and
-            applications
+            application
         \pause
         \item Related and further work
     \end{itemize}
@@ -149,6 +150,8 @@
         show i = intToString i
     instance Show Bool where
         show b = if b then "True" else "False"@\pause@
+    show 1
+    show True@\pause@
     print a = putStrLn (show a)
         \end{lstlisting}
     \end{itemize}
@@ -156,14 +159,18 @@
 
 \begin{frame}[fragile]
     \frametitle{Type classes - implementation}
+    \pause
         \begin{lstlisting}[mathescape]
-    type Show a = (a -> String)
+    type Show a = (a -> String)@\pause@
     print :: Show a -> a -> IO ()@\pause@
-    show 1
-    show True@\pause@
-    show intToString 1
-    show (\b -> if b then "True"
-                     else "False") True@\pause@
+    show :: Show a -> a -> String@\pause@
+    showInt :: Show Int
+    showInt x = intToString x
+    showBool :: Show Bool
+    showBool b = if b then "True" else "False"@\pause@
+    show showInt 1
+    show showBool True@\pause@
+    print showFn a = putStrLn (show showFn a)
         \end{lstlisting}
 \end{frame}
 
@@ -173,8 +180,10 @@
         \pause
         \item The parameter the compiler inserts is an implicit parameter!
         \pause
+        \item Common Scala idiom
+        \pause
         \begin{lstlisting}[mathescape]
-    implicit def intShow(x: Int): String =
+    implicit def showInt(x: Int): String =
         x.toString
     implicit def showBool(b: Bool): String =
         if(b) "true" else "false"
@@ -187,18 +196,22 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{The calculus DIF}
+    \singletitle{Our work}
+\end{frame}
+
+\begin{frame}
+    \frametitle{The calculus DIF (DOT with Implicit Functions)}
     \begin{itemize}
         \pause \item Soundness via a translation from DIF programs to DOT
             programs
         \begin{itemize}
-            \pause \item This follows the approach of the SI calculus, which
-                gives a translation from lambda with implicit functions to
-                System-F as a basis for Scala's implicits.
+            \pause \item This follows the approach we have seen - implicit
+                parameters become normal parameters, we figure out which
+                implicit variable to insert
         \end{itemize}
         \pause \item A typable DIF program always translates to a typable DOT
             program
-        \pause \item Type classes possible in DIF via implicits
+        \pause \item `Type classes via implicits' pattern stable in DIF
     \end{itemize}
 \end{frame}
 
@@ -226,12 +239,14 @@
 \begin{frame}
     \frametitle{Related work - coherence}
     \begin{itemize}
-        \pause \item Calculi coherent when there is exactly one way of
-            translating out implicits
         \pause \item COCHIS - theory of coherent implicits \\
             \textcolor{grey}{\emph{Schrijvers, Oliveira, Wadler, 2017}}
+        \pause \item Language/calculus coherent when there is exactly one way of
+            translating out implicits
+        \begin{itemize}
+            \pause \item Haskell coherent, Scala incoherent
+        \end{itemize}
         \pause \item Coherence arguably not desirable in practice
-        \pause \item Scala implicits are not coherent
         \pause \item DIF exists in the middle ground between theory (prefering
             coherence) and practice (prefering (limited) ambiguity)
     \end{itemize}
@@ -240,6 +255,7 @@
 \begin{frame}
     \frametitle{Further work}
     \begin{itemize}
+        \pause \item Middle ground between coherence and flexibility
         \pause \item Formal correspondence between type classes and implicits
         \begin{itemize}
             \pause \item Type classes a special case of implicits
@@ -253,4 +269,9 @@
 
 \begin{frame}
     \singletitle{Thank you}
+    \begin{itemize}
+        \item Submitting my thesis in a few weeks
+        \item Looking for relevant dev work in London/Brighton/Remote
+        \item Contact details available at \texttt{alexjeffery.net}
+    \end{itemize}
 \end{frame}
